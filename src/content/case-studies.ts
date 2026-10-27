@@ -3,6 +3,8 @@ import ariaAssetDark from "../../assets/screenshots/aria/asset-management-dark.p
 import ariaAssetLight from "../../assets/screenshots/aria/asset-management.png";
 import ariaInventoryDark from "../../assets/screenshots/aria/inventory-management-dark.png";
 import ariaInventoryLight from "../../assets/screenshots/aria/inventory-management.png";
+import blinkqlDark from "../../assets/screenshots/blinkql/workbench-dark.png";
+import blinkqlLight from "../../assets/screenshots/blinkql/workbench.png";
 import jmAnalyze from "../../assets/screenshots/job-matcher/analyze.png";
 import jmMatches from "../../assets/screenshots/job-matcher/matches.png";
 import overnightDark from "../../assets/screenshots/workclock/overnight-shift-dark.svg";
@@ -255,6 +257,16 @@ export const caseStudies: CaseStudy[] = [
         "Ran 13 experiments, each with a hypothesis and a published before-and-after write-up: reading cells straight from Arrow instead of building row objects, virtualising the grid, streaming the first rows, cancelling superseded queries, caching the engine, and loading the editor and charts on demand.",
         "Rejected two ideas the numbers didn’t support: a multithreaded engine, faster on some aggregations but blocked by extension, file-access and crash issues; and a canvas-rendered grid, which didn’t fix the drag scrolling it was meant to fix and cost memory and accessibility.",
         "Shipped the workbench around the engine: schema-aware SQL autocomplete, one-click data profiling, charts with downsampling done in SQL, remote Parquet over HTTP range requests, files kept in the browser’s private storage between visits, exports, and offline support.",
+      ],
+      figures: [
+        {
+          kind: "image",
+          src: blinkqlLight,
+          darkSrc: blinkqlDark,
+          alt: "The Blinkql workbench: an imported file, orders_2026 (CSV, 6 columns, 37.2 MB), a SQL query that totals orders and revenue by region and category, and its result of 30 rows in under a second, led by North and Electronics.",
+          caption:
+            "A GROUP BY over a million-row CSV of online-shop orders, run entirely in the browser. Sample data.",
+        },
       ],
     },
     outcome: {
