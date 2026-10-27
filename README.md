@@ -4,7 +4,7 @@ Personal website of Karthik Parameshwara, a software engineer. It is built for r
 reading paths: a fast skim (role, experience, stack, availability, resume, contact in under 10
 seconds) and a deeper story with project case studies.
 
-> Status: **in development**. The live domain still redirects to LinkedIn until launch.
+> Live at **[karthik.nz](https://karthik.nz)**.
 
 ## Tech stack
 
@@ -12,10 +12,11 @@ seconds) and a deeper story with project case studies.
 | --------------- | ------------------------------------------------------------------------------------- |
 | Framework       | [Next.js](https://nextjs.org) 16, App Router, TypeScript (strict)                     |
 | Styling         | [Tailwind CSS](https://tailwindcss.com) v4, tokens defined in CSS                     |
-| UI primitives   | [Base UI](https://base-ui.com) (headless, accessible), added in Phase 3               |
+| UI primitives   | [Base UI](https://base-ui.com) (headless, accessible)                                 |
 | Package manager | [Bun](https://bun.sh) (Next.js itself runs on Node)                                   |
 | Quality         | ESLint (flat config, `eslint-config-next`) and Prettier (with Tailwind class sorting) |
 | Hosting         | Vercel (Hobby tier), domain on Cloudflare DNS                                         |
+| Analytics       | Cloudflare Web Analytics (cookie-free), production only                               |
 
 The reasoning behind each choice is in [`docs/decisions/`](docs/decisions/).
 
@@ -30,8 +31,9 @@ bun run dev
 
 Then open http://localhost:3000.
 
-No environment variables are needed yet. If any are added, they will be documented in
-`.env.example`; copy it to `.env.local`.
+No environment variables are needed for local development. The only one,
+`NEXT_PUBLIC_CF_BEACON_TOKEN` (analytics), is documented in `.env.example` and set in Vercel for
+production.
 
 ## Scripts
 
@@ -51,12 +53,14 @@ No environment variables are needed yet. If any are added, they will be document
 
 ## Deployment
 
-- Vercel builds from the `main` branch. Vercel detects `bun.lock` and installs with Bun.
-- The domain `karthik.nz` is managed in Cloudflare. DNS records for Vercel are **DNS-only (grey
-  cloud)**.
+- Every push to `main` deploys to production on Vercel. Vercel detects `bun.lock` and installs
+  with Bun.
+- `karthik.nz` is the primary domain; `www.karthik.nz` redirects to it.
+- The domain is managed in Cloudflare. The records pointing at Vercel are **DNS-only (grey
+  cloud)**: Vercel serves the site and issues the HTTPS certificate.
+- `NEXT_PUBLIC_` variables are fixed at build time: after changing one in Vercel, redeploy.
 - `workclock.karthik.nz` points to a separate GitHub Pages project. **Do not modify its DNS
   record.**
-- A step-by-step deployment guide will be added in Phase 6.
 
 ## Folder structure
 
@@ -67,11 +71,12 @@ No environment variables are needed yet. If any are added, they will be document
 │   ├── research/         # Profile research (local only, gitignored)
 │   ├── content/          # Story and messaging drafts (local only, gitignored)
 │   └── design/           # Design system docs
-├── assets/               # Font, monogram and photo sources (see assets/README.md)
-├── scripts/              # Repo tooling: wiki sync, brand asset build
+├── assets/               # Font, monogram, photo and screenshot sources (see assets/README.md)
+├── scripts/              # Repo tooling: wiki sync, brand asset build, resume redaction
 ├── src/
-│   ├── app/              # Next.js App Router: routes, layout, global CSS, icons, OG image
-│   ├── components/       # ui/ (buttons, links) and site/ (header, facts row, …)
+│   ├── app/              # Next.js App Router: routes, layout, global CSS, icons, OG images
+│   ├── components/       # ui/, site/ (header, footer, …), home/ sections, case-study/
+│   ├── content/          # Case-study content
 │   └── lib/              # Site facts, helpers, OG image renderer
 ├── public/               # Static files served as-is
 ├── CLAUDE.md             # Conventions for AI-assisted sessions
