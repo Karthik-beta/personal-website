@@ -47,11 +47,16 @@ const projects: Project[] = [
   },
   {
     title: "Blinkql",
+    href: "/work/blinkql",
     years: "2026",
     summary:
       "An in-browser SQL workbench: open a CSV, Parquet or JSON file and query it on your own machine, with no upload. Early, built in the open with a public roadmap and its first outside contributors.",
     stack: ["TypeScript", "React", "DuckDB-WASM", "Apache Arrow"],
-    links: [{ href: gh("Blinkql"), label: "Code on GitHub" }],
+    links: [
+      { href: "/work/blinkql", label: "Read the case study" },
+      { href: "https://blinkql.karthik.nz", label: "Try Blinkql" },
+      { href: gh("Blinkql"), label: "Code on GitHub" },
+    ],
   },
   {
     title: "Pivotr's outreach tools",
@@ -76,8 +81,7 @@ export function Work() {
               Selected work
             </h2>
             <p className="text-muted">
-              The first three have full case studies: the problem, what I did, and how it turned
-              out.
+              The first four have full case studies: the problem, what I did, and how it turned out.
             </p>
           </div>
         </MarginGrid>
