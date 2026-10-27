@@ -1,16 +1,17 @@
 import { cn } from "@/lib/cn";
+import { monogramLetters, monogramRadius, monogramSide, monogramViewBox } from "./monogram-paths";
 
-/** Interim "KP" monogram set in the site typeface. Replaced by the Phase 4 asset. */
+/** "KP" monogram, outlined from Instrument Sans (see scripts/build-brand.py). Decorative. */
 export function Monogram({ className }: { className?: string }) {
   return (
-    <span
-      aria-hidden
-      className={cn(
-        "inline-flex size-6 items-center justify-center rounded-[0.3rem] bg-accent text-[0.6875rem] leading-none font-bold tracking-[-0.02em] text-on-accent stretch-display",
-        className,
-      )}
-    >
-      KP
-    </span>
+    <svg aria-hidden viewBox={monogramViewBox} className={cn("size-6 shrink-0", className)}>
+      <rect
+        width={monogramSide}
+        height={monogramSide}
+        rx={monogramRadius}
+        className="fill-accent"
+      />
+      <path d={monogramLetters} className="fill-on-accent" />
+    </svg>
   );
 }
