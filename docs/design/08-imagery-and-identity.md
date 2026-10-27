@@ -1,0 +1,89 @@
+# 08: Imagery and identity
+
+- Status: Draft for approval
+- Decision record: [ADR 0011](../decisions/0011-icons-identity-analytics.md)
+- Assets are produced in Phase 4 (Canva). This doc is their brief.
+
+## Backgrounds and textures
+
+**None.** The page is flat `paper`. The only coloured area is the `band` behind the local time.
+No gradients, noise, grids, dot patterns or blobs. The typography is the visual.
+
+## Illustrations
+
+**None.** Illustrations would compete with the headline and push the site towards the template
+look.
+
+## Photo of Karthik
+
+- **One photo, small, in About only.** Not in the hero.
+- Size: 160 × 160 px on desktop, 128 × 128 px on phones; delivered at 2× for sharp screens.
+- Crop: head and shoulders, square, 8 px radius (not a circle, to match the rest of the UI).
+- Natural colour, no filters or duotone. A plain, uncluttered background is best.
+- Alt text: "Karthik Parameshwara" (the name is enough; the photo carries no other information).
+- Format: AVIF/WebP via `next/image`; the source file kept in `assets/photo/`.
+- `TODO(karthik)`: photo to be provided.
+
+## Project screenshots
+
+- Real screenshots of the actual products only (Aria, Job Matcher, workclock docs/playground). No
+  mock device frames.
+- Shown in a Figure ([07](07-components.md)), at most 2–3 per case study, each with a caption
+  that says what it shows.
+- Any customer data in screenshots must be fake or removed.
+
+## Icons
+
+- **UI icons:** [Lucide](https://lucide.dev) (ISC licence), imported per icon as inline SVG
+  (`lucide-react`), so there are no external requests. 18 px, 1.75 stroke, `currentColor`.
+- **Used icons only:** download, mail, copy, check, external-link, sun, moon, menu, x,
+  arrow-left (back link).
+- **Brand marks:** GitHub, LinkedIn, X as inline SVG from [Simple Icons](https://simpleicons.org)
+  (CC0), single colour `currentColor`, same 18 px size.
+- Icons always sit next to a text label, except the theme toggle and menu button, which have an
+  `aria-label`.
+
+## Monogram
+
+- **"KP"** in Instrument Sans, weight 700, width 78, tight spacing (−0.02 em).
+- Colours: `on-accent` white letters on an `accent` ultramarine square with an 8 px (scaled)
+  radius. Single-colour versions in `ink` and white also exist.
+- Used in: favicon, nav (24 px, next to the name), OG image.
+- Must stay legible at 16 × 16 px. Test at that size before approving.
+
+## Favicon set
+
+| File                     | Size       | Notes                             |
+| ------------------------ | ---------- | --------------------------------- |
+| `src/app/icon.svg`       | vector     | Primary favicon (modern browsers) |
+| `src/app/favicon.ico`    | 16, 32, 48 | Legacy fallback                   |
+| `src/app/apple-icon.png` | 180 × 180  | iOS home screen (no transparency) |
+
+Next.js picks these files up automatically from `src/app/`.
+
+## Open Graph image (link previews)
+
+What shows up when the site is shared on LinkedIn, Slack, WhatsApp or X.
+
+- **1200 × 630 px**, PNG, under 300 KB.
+- `paper` background. KP monogram top-left. Name in `ink` (weight 600). Headline in the display
+  style (narrowed). One line at the bottom on the `band`: "Bengaluru, India. Available now."
+- Safe area: keep text 64 px from every edge (some apps crop).
+- One per page: home (above), and one per case study (title + one-line summary instead of the
+  headline).
+- Text in the image is also in the page's `og:title` and `og:description`. The image is never the
+  only place information appears.
+
+## Asset folder structure
+
+```text
+assets/                    # Source files (not served), all rights reserved
+├── brand/                 # Monogram source exports (SVG/PNG), Canva links in README
+├── og/                    # OG image exports
+└── photo/                 # Original photo
+public/                    # Served as-is
+└── resume.pdf             # The downloadable resume
+src/app/                   # icon.svg, favicon.ico, apple-icon.png, opengraph-image.png
+```
+
+Documented in `assets/README.md` in Phase 4.

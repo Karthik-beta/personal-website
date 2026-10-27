@@ -16,6 +16,9 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0006: Docs mirrored to the GitHub wiki](decisions/0006-docs-wiki-mirror.md)
 - [0007: Private docs stay local only](decisions/0007-private-docs-local-only.md)
 - [0008: Private docs mirrored to Notion](decisions/0008-private-docs-notion.md)
+- [0009: Visual direction "Working hours"](decisions/0009-visual-direction-working-hours.md)
+- [0010: Site structure and navigation](decisions/0010-site-structure-and-navigation.md)
+- [0011: Icons, monogram and analytics](decisions/0011-icons-identity-analytics.md)
 
 ## Research (local only, gitignored)
 
@@ -28,17 +31,17 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 
 ## Design system (Phase 3)
 
-1. `design/01-principles.md`
-2. `design/02-typography.md`
-3. `design/03-color.md`
-4. `design/04-theme.md`
-5. `design/05-layout-grid-spacing.md`
-6. `design/06-navigation-and-sections.md`
-7. `design/07-components.md`
-8. `design/08-imagery-and-identity.md`
-9. `design/09-motion-and-interactions.md`
-10. `design/10-accessibility.md`
-11. `design/11-performance-and-seo.md`
-12. `design/12-polish-checklist.md`
+Read in order; each builds on the previous ones.
 
-Docs that are not written yet are listed without links. Links are added as each doc lands.
+1. [Principles](design/01-principles.md): what guides every decision
+2. [Typography](design/02-typography.md): Instrument Sans, type scale, loading
+3. [Colour](design/03-color.md): tokens, light/dark, measured contrast for every pair
+4. [Theme](design/04-theme.md): the "Working hours" direction and what we avoid
+5. [Layout, grid and spacing](design/05-layout-grid-spacing.md): time margin, spacing scale, breakpoints
+6. [Navigation and sections](design/06-navigation-and-sections.md): site map, nav, page structure
+7. [Components](design/07-components.md): every component and its states
+8. [Imagery and identity](design/08-imagery-and-identity.md): photo, icons, monogram, favicon, OG image
+9. [Motion and interactions](design/09-motion-and-interactions.md): durations, easing, reduced motion
+10. [Accessibility](design/10-accessibility.md): WCAG 2.2 AA rules
+11. [Performance and SEO](design/11-performance-and-seo.md): targets, metadata, JSON-LD, analytics
+12. [Polish checklist](design/12-polish-checklist.md): before launch
