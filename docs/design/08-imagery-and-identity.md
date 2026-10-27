@@ -53,8 +53,11 @@ look.
   real glyphs so no font is needed to display it.
 - Proportions: letters' cap height is 46% of the square; corner radius is 20% of the side.
 - Colours: white letters on an ultramarine square. Single-colour versions in `ink` and white also
-  exist. In the site's nav it uses the theme tokens (`accent` / `on-accent`), so in dark mode it
-  follows the lighter dark-theme accent like the buttons.
+  exist.
+- **In the nav it uses the text colour** (`ink` square, `paper` letters), not the accent (changed
+  2026-10-27). With an accent square the header had two bright blocks, the monogram and the Resume
+  button, pulling the eye away from the headline; now the Resume button is the nav's only accent.
+  The favicon and OG images keep the accent version, and the shape still ties them together.
 - Used in: favicon, nav (24 px, next to the name), OG image.
 - **16 px version:** letters enlarged to 58% and rendered with font hinting so strokes snap to
   pixels. At the standard proportions the "K" blurred at 16 px.

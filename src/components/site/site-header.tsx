@@ -60,7 +60,7 @@ export function SiteHeader() {
           aria-label={`${site.name}, home`}
           className="mr-auto flex min-h-11 items-center gap-2 text-sm font-semibold"
         >
-          <Monogram />
+          <Monogram tone="ink" />
           <span aria-hidden className="hidden sm:inline">
             {site.name}
           </span>
