@@ -63,9 +63,11 @@ hover state (not interactive).
 
 ## Local time
 
-`<p>` on a `band` background, 6 × 10 px padding, 6 px radius, `text-xs`/`text-sm` with tabular
-numbers. Contains a `<time datetime="…">`. Not announced by screen readers on update (no live
-region), because constant announcements would be noise.
+`<p>` on a `band` background, 6 × 10 px padding, 6 px radius, `text-xs` with tabular numbers. The
+HTML holds a static fallback ("Based in Bengaluru, India"); a tiny inline script swaps in the live
+time before first paint, and React updates it every 30 s. No `<time>` element: the value changes
+constantly, so a machine-readable timestamp adds nothing. Not announced by screen readers on update
+(no live region), because constant announcements would be noise.
 
 ## Time margin row (chapter)
 

@@ -60,8 +60,9 @@ review.
 - Order: name (small, 600 weight) → headline (display) → facts row → local-time band → actions.
 - **Facts row:** four labelled pairs as a definition list (Role, Experience, Availability,
   Where). Labels are `muted` `text-xs`, sentence case.
-- **Local time:** "It's 14:20 on Tuesday in Bengaluru", rendered on the server (so it's never
-  empty) and updated every 30 s in the browser.
+- **Local time:** "It's 14:20 on Tuesday in Bengaluru". The page is static, so the server can't
+  know the time: the HTML carries "Based in Bengaluru, India", an inline script swaps in the live
+  time before first paint (never empty, never wrong), and it updates every 30 s.
 - **Actions:** Download resume (primary button), then Email me, GitHub, LinkedIn as links with
   icons.
 
