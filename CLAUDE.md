@@ -117,7 +117,13 @@ website"). Keep it in step when facts or preferences change.
 - [x] Phase 3: Design system docs and `/styleguide`
 - [x] Phase 4: Assets (generated in code from the real font, ADR 0012; Canva for the photo)
 - [x] Phase 5: Build
-- [ ] Phase 6: Deploy (guided): live at https://karthik.nz on Vercel since 2026-10-27 (apex
+- [x] Phase 6: Deploy (guided): live at https://karthik.nz on Vercel since 2026-10-27 (apex
       primary, www redirects; Cloudflare records DNS-only; LinkedIn rule removed; workclock
-      untouched). Lighthouse target set to 90, real-visitor Web Vitals decide further work.
-      Left: confirm analytics data arrives, mirror doc 11 to the wiki, close the phase.
+      untouched). Cloudflare Web Analytics receiving visits. Lighthouse target set to 90;
+      real-visitor Web Vitals decide further work.
+
+## After launch
+
+- Pushes to `main` deploy to production automatically (Vercel Git integration).
+- `NEXT_PUBLIC_` variables are fixed at build time: after changing one in Vercel, redeploy.
+- Verify any DNS change with a lookup of karthik.nz, www and workclock.karthik.nz.
