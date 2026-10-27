@@ -25,7 +25,8 @@ look.
 - Alt text: "Karthik Parameshwara" (the name is enough; the photo carries no other information).
 - Format: AVIF/WebP via `next/image`; the source file kept in `assets/photo/`.
 - Touch-ups (crop, light clean-up) in Canva. Background removal may not be available on Canva Free.
-- `TODO(karthik)`: photo to be provided.
+- Provided 2026-10-27: `assets/photo/karthik-parameshwara-square.jpg` (see `assets/README.md`).
+- The favicon stays the monogram (decided 2026-10-27): a face is unrecognisable at 16 px.
 
 ## Project screenshots
 

@@ -18,7 +18,9 @@ assets/
 │   ├── monogram-ink.svg                # Ink letters, transparent background
 │   ├── monogram-white.svg              # White letters, transparent background
 │   └── monogram-512.png                # Raster, for profile pictures
-└── photo/                              # Karthik's photo: original + processed (Phase 5)
+└── photo/
+    ├── karthik-parameshwara-portrait.jpg  # 864 × 1080 (4:5), master
+    └── karthik-parameshwara-square.jpg    # 640 × 640 head and shoulders, used in About
 ```
 
 ## Generated files
@@ -42,6 +44,13 @@ regenerates:
 | `src/components/site/monogram-paths.ts` | The `<Monogram>` component in the nav                       |
 
 Never edit generated files by hand; change the script and re-run it.
+
+## Photo
+
+Provided by Karthik. Cropped (bottom trimmed; square head-and-shoulders version), renamed,
+and saved as JPEG with author, copyright and description in the EXIF metadata. The site serves it
+through `next/image`, which re-encodes it (AVIF/WebP) and strips metadata. Favicons stay the
+monogram: a face is unrecognisable at 16 px.
 
 ## Link-preview (Open Graph) images
 
