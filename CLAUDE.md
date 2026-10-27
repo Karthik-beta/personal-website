@@ -83,12 +83,38 @@ file fully before doing anything in this repo.
 - Sync with `bun run wiki:sync` (dry run, shows the diff). Push with `bun run wiki:sync -- --push`
   **only after Karthik approves that phase's docs**.
 
+## Where things live
+
+- **Site facts** (name, email, links, description): `src/lib/site.ts`. Change facts there only.
+- **Home sections:** `src/components/home/` (hero, chapters, work, about, contact, JSON-LD).
+- **Case studies:** content in `src/content/case-studies.ts`; one static route per study in
+  `src/app/work/<slug>/` (not a `[slug]` route: with Cache Components it can't return a real 404).
+- **Shared UI:** `src/components/ui/` (button, text link, container), `src/components/site/`.
+- **Link-preview images:** `src/lib/og.tsx`, used by each `opengraph-image.tsx`.
+- **Brand assets:** `bun run brand` regenerates the monogram, favicons and font instances from
+  `assets/fonts` (see `assets/README.md`). Never edit generated files by hand.
+- **Resume:** `python -I scripts/prepare-resume.py <resume.pdf>` writes `public/resume.pdf` with
+  phone numbers removed by true redaction. Always run new resumes through it.
+
+## Open items (content from Karthik)
+
+- About paragraph (placeholder in `src/components/home/about.tsx`, tagged `TODO(karthik)`).
+- Aria screenshots from the demo, demo data only (placeholders in `src/content/case-studies.ts`).
+- Updated resume (co-founder title, September 2026 end date, new projects, full name, no phone).
+- Run `grep -rn "TODO(karthik)" src` before launch; it must return nothing.
+
+## Memory
+
+Durable context about Karthik and this project is also kept in Karthik's Notion Memory (About page
+plus memories "Career and job search", "Working style with Claude" and "karthik.nz personal
+website"). Keep it in step when facts or preferences change.
+
 ## Phase status
 
 - [x] Phase 0: Repo setup
 - [x] Phase 1: Research
 - [x] Phase 2: Interview (story and positioning)
 - [x] Phase 3: Design system docs and `/styleguide`
-- [ ] Phase 4: Assets (Canva)
+- [x] Phase 4: Assets (generated in code from the real font, ADR 0012; Canva for the photo)
 - [x] Phase 5: Build
-- [ ] Phase 6: Deploy (guided)
+- [ ] Phase 6: Deploy (guided): repo and wiki pushed 2026-10-27; Vercel and Cloudflare next
