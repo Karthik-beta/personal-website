@@ -11,12 +11,13 @@
 | `/work/aria`        | Case study: Aria (Pivotr)                     | Yes                       |
 | `/work/job-matcher` | Case study: AI Job Resume Matcher             | Yes                       |
 | `/work/workclock`   | Case study: workclock                         | Yes                       |
+| `/work/blinkql`     | Case study: Blinkql (added 2026-10-27)        | Yes                       |
 | `/resume.pdf`       | Resume download (static file)                 | Yes                       |
 | `/styleguide`       | Design tokens and components                  | **No** (`noindex`)        |
 | `/404`              | Not found page                                | No                        |
 
 Each case study has its own URL, so Karthik can paste a direct link into an application or
-email. Shorter projects (Pivotr's internal tools, Blinkql) appear on the home page only.
+email. Shorter projects (Pivotr's internal tools) appear on the home page only.
 
 ## Navigation bar
 
