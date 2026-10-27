@@ -83,7 +83,7 @@ file fully before doing anything in this repo.
 
 - [x] Phase 0: Repo setup
 - [x] Phase 1: Research
-- [ ] Phase 2: Interview (story and positioning)
+- [x] Phase 2: Interview (story and positioning)
 - [ ] Phase 3: Design system docs and `/styleguide`
 - [ ] Phase 4: Assets (Canva)
 - [ ] Phase 5: Build
