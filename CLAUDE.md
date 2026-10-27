@@ -98,10 +98,10 @@ file fully before doing anything in this repo.
 
 ## Open items (content from Karthik)
 
-- About paragraph (placeholder in `src/components/home/about.tsx`, tagged `TODO(karthik)`).
-- Aria screenshots from the demo, demo data only (placeholders in `src/content/case-studies.ts`).
 - Updated resume (co-founder title, September 2026 end date, new projects, full name, no phone).
-- Run `grep -rn "TODO(karthik)" src` before launch; it must return nothing.
+- `grep -rn "TODO(karthik)" src` must return nothing (it does as of 2026-10-27).
+- Aria screenshots come from Aria's production demo (`aria-local.cmd`), never `next dev`. Its demo
+  data names real companies in sales and customer screens: capture only the dashboards.
 
 ## Memory
 
