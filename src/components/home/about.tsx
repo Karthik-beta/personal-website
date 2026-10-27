@@ -33,9 +33,14 @@ export function About() {
                 className="size-32 rounded-control sm:size-40"
               />
               <div className="grid max-w-[60ch] content-start gap-6">
-                {/* TODO(karthik): About paragraph, written by Karthik. Replace this placeholder. */}
-                <p className="rounded-control border border-dashed border-rule-strong p-4 text-sm text-muted">
-                  Placeholder: Karthik&rsquo;s own About paragraph goes here.
+                <p>
+                  I started building in college, around 2020, because I wanted to earn some money:
+                  first Fiesta Styles, a fashion dropshipping store on Wix, then a movies and shows
+                  website on WordPress. That&rsquo;s when I found I liked building software, and my
+                  marketing jobs had given me ideas I needed deeper technical knowledge to build.
+                  Now I talk to users before I write code, keep designs simple, make them hard to
+                  break, and stay with what I ship after launch. Outside work, I build side
+                  projects, still play football and go running regularly.
                 </p>
                 <dl className="grid gap-3">
                   {details.map((item) => (
