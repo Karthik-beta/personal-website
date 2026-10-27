@@ -1,4 +1,8 @@
 import type { StaticImageData } from "next/image";
+import ariaAssetDark from "../../assets/screenshots/aria/asset-management-dark.png";
+import ariaAssetLight from "../../assets/screenshots/aria/asset-management.png";
+import ariaInventoryDark from "../../assets/screenshots/aria/inventory-management-dark.png";
+import ariaInventoryLight from "../../assets/screenshots/aria/inventory-management.png";
 import jmAnalyze from "../../assets/screenshots/job-matcher/analyze.png";
 import jmMatches from "../../assets/screenshots/job-matcher/matches.png";
 import overnightDark from "../../assets/screenshots/workclock/overnight-shift-dark.svg";
@@ -73,14 +77,21 @@ export const caseStudies: CaseStudy[] = [
         "Built inventory proofs of concept around prospective customers’ real workflows.",
       ],
       figures: [
-        // TODO(karthik): replace with real screenshots from the demo (demo data only).
         {
-          kind: "placeholder",
-          label: "Screenshot to come: Aria’s Asset Management module (demo data)",
+          kind: "image",
+          src: ariaAssetLight,
+          darkSrc: ariaAssetDark,
+          alt: "Aria’s Asset Dashboard: summary cards for total asset value (₹58 lakh), active assets (11), maintenance due (3) and pending adjustments (1), a monthly depreciation trend chart, and a donut chart of 14 assets by status.",
+          caption:
+            "The Asset Management dashboard: asset value, depreciation, maintenance and status on one screen. Demo data.",
         },
         {
-          kind: "placeholder",
-          label: "Screenshot to come: Aria’s Inventory Management module (demo data)",
+          kind: "image",
+          src: ariaInventoryLight,
+          darkSrc: ariaInventoryDark,
+          alt: "Aria’s Inventory Dashboard: summary cards for total stock value (₹39.6 lakh), active items (38), low-stock alerts (22) and pending material requests (1), a chart of inbound and outbound stock over the last 30 days, and a bar chart of stock by warehouse.",
+          caption:
+            "The Inventory Management dashboard: stock value, reorder alerts and stock movements across warehouses. Demo data.",
         },
       ],
     },
