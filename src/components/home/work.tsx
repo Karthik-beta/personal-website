@@ -25,7 +25,7 @@ const projects: Project[] = [
     href: "/work/job-matcher",
     years: "2026",
     summary:
-      "A self-hosted tool that watches the job boards you follow, filters listings by location and experience, and scores each one against your resume with an LLM. Runs are queued, idempotent and budget-aware.",
+      "A self-hosted tool that watches the job boards I follow, filters listings by location and experience, and scores each one against my resume with an LLM. Runs are queued, idempotent and budget-aware.",
     stack: ["TypeScript", "Bun", "NestJS", "Next.js", "Effect", "PostgreSQL", "BullMQ", "Docker"],
     links: [
       { href: "/work/job-matcher", label: "Read the case study" },
