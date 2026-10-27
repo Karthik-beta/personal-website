@@ -7,8 +7,9 @@ import { useState } from "react";
 import { buttonClasses } from "@/components/ui/button";
 import { sections } from "@/lib/site";
 
-export function MobileMenu() {
-  const [open, setOpen] = useState(false);
+/** Loaded on demand by <MobileMenu>; opens immediately on first mount. */
+export default function MobileMenuDialog() {
+  const [open, setOpen] = useState(true);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
