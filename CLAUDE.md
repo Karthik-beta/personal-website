@@ -53,6 +53,7 @@ file fully before doing anything in this repo.
 | [0009](docs/decisions/0009-visual-direction-working-hours.md) | Visual direction "Working hours": Instrument Sans, ultramarine accent, light default + dark, local-time line |
 | [0010](docs/decisions/0010-site-structure-and-navigation.md)  | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                        |
 | [0011](docs/decisions/0011-icons-identity-analytics.md)       | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
+| [0012](docs/decisions/0012-assets-generated-in-code.md)       | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
 
 ## Conventions
 

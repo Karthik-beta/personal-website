@@ -1,8 +1,10 @@
 # 08: Imagery and identity
 
 - Status: Approved (2026-10-27)
-- Decision record: [ADR 0011](../decisions/0011-icons-identity-analytics.md)
-- Assets are produced in Phase 4 (Canva). This doc is their brief.
+- Decision records: [ADR 0011](../decisions/0011-icons-identity-analytics.md),
+  [ADR 0012](../decisions/0012-assets-generated-in-code.md)
+- Monogram, favicons and OG images are generated in code from the real font (`bun run brand`).
+  Canva is used for the photo. See `assets/README.md`.
 
 ## Backgrounds and textures
 
@@ -22,6 +24,7 @@ look.
 - Natural colour, no filters or duotone. A plain, uncluttered background is best.
 - Alt text: "Karthik Parameshwara" (the name is enough; the photo carries no other information).
 - Format: AVIF/WebP via `next/image`; the source file kept in `assets/photo/`.
+- Touch-ups (crop, light clean-up) in Canva. Background removal may not be available on Canva Free.
 - `TODO(karthik)`: photo to be provided.
 
 ## Project screenshots
@@ -45,11 +48,15 @@ look.
 
 ## Monogram
 
-- **"KP"** in Instrument Sans, weight 700, width 78, tight spacing (−0.02 em).
-- Colours: `on-accent` white letters on an `accent` ultramarine square with an 8 px (scaled)
-  radius. Single-colour versions in `ink` and white also exist.
+- **"KP"** in Instrument Sans, weight 700, width 78, tight spacing (−0.02 em), outlined from the
+  real glyphs so no font is needed to display it.
+- Proportions: letters' cap height is 46% of the square; corner radius is 20% of the side.
+- Colours: white letters on an ultramarine square. Single-colour versions in `ink` and white also
+  exist. In the site's nav it uses the theme tokens (`accent` / `on-accent`), so in dark mode it
+  follows the lighter dark-theme accent like the buttons.
 - Used in: favicon, nav (24 px, next to the name), OG image.
-- Must stay legible at 16 × 16 px. Test at that size before approving.
+- **16 px version:** letters enlarged to 58% and rendered with font hinting so strokes snap to
+  pixels. At the standard proportions the "K" blurred at 16 px.
 
 ## Favicon set
 
@@ -71,19 +78,22 @@ What shows up when the site is shared on LinkedIn, Slack, WhatsApp or X.
 - Safe area: keep text 64 px from every edge (some apps crop).
 - One per page: home (above), and one per case study (title + one-line summary instead of the
   headline).
+- Headline line breaks are balanced (`textWrap: balance`), so no single word sits alone.
 - Text in the image is also in the page's `og:title` and `og:description`. The image is never the
   only place information appears.
+- Rendered at build time by `src/app/opengraph-image.tsx` via the shared `renderOgImage()` in
+  `src/lib/og.tsx`. Home image: ~60 KB.
 
 ## Asset folder structure
 
 ```text
-assets/                    # Source files (not served), all rights reserved
-├── brand/                 # Monogram source exports (SVG/PNG), Canva links in README
-├── og/                    # OG image exports
-└── photo/                 # Original photo
+assets/                    # Source files (not served)
+├── fonts/                 # Instrument Sans variable font + OFL licence; static/ is generated
+├── brand/                 # Generated monogram (SVG variants, 512 px PNG)
+└── photo/                 # Original and processed photo (Phase 5)
 public/                    # Served as-is
-└── resume.pdf             # The downloadable resume
-src/app/                   # icon.svg, favicon.ico, apple-icon.png, opengraph-image.png
+└── resume.pdf             # The downloadable resume (Phase 5)
+src/app/                   # Generated icon.svg, favicon.ico, apple-icon.png; opengraph-image.tsx
 ```
 
-Documented in `assets/README.md` in Phase 4.
+Full details: `assets/README.md`.

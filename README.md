@@ -35,18 +35,19 @@ No environment variables are needed yet. If any are added, they will be document
 
 ## Scripts
 
-| Command                | What it does                                                             |
-| ---------------------- | ------------------------------------------------------------------------ |
-| `bun run dev`          | Start the dev server                                                     |
-| `bun run build`        | Production build                                                         |
-| `bun run start`        | Serve the production build                                               |
-| `bun run lint`         | Lint with ESLint                                                         |
-| `bun run lint:fix`     | Lint and auto-fix                                                        |
-| `bun run format`       | Format everything with Prettier                                          |
-| `bun run format:check` | Check formatting without writing                                         |
-| `bun run typecheck`    | Generate Next.js route types, then run `tsc --noEmit`                    |
-| `bun run check`        | Lint, typecheck and format check together                                |
-| `bun run wiki:sync`    | Preview mirroring public docs to the GitHub wiki (`-- --push` publishes) |
+| Command                | What it does                                                                              |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| `bun run dev`          | Start the dev server                                                                      |
+| `bun run build`        | Production build                                                                          |
+| `bun run start`        | Serve the production build                                                                |
+| `bun run lint`         | Lint with ESLint                                                                          |
+| `bun run lint:fix`     | Lint and auto-fix                                                                         |
+| `bun run format`       | Format everything with Prettier                                                           |
+| `bun run format:check` | Check formatting without writing                                                          |
+| `bun run typecheck`    | Generate Next.js route types, then run `tsc --noEmit`                                     |
+| `bun run check`        | Lint, typecheck and format check together                                                 |
+| `bun run wiki:sync`    | Preview mirroring public docs to the GitHub wiki (`-- --push` publishes)                  |
+| `bun run brand`        | Regenerate monogram, favicons and font instances (needs Python with fontTools and Pillow) |
 
 ## Deployment
 
@@ -66,9 +67,12 @@ No environment variables are needed yet. If any are added, they will be document
 │   ├── research/         # Profile research (local only, gitignored)
 │   ├── content/          # Story and messaging drafts (local only, gitignored)
 │   └── design/           # Design system docs
-├── scripts/              # Repo tooling (e.g. wiki sync)
+├── assets/               # Font, monogram and photo sources (see assets/README.md)
+├── scripts/              # Repo tooling: wiki sync, brand asset build
 ├── src/
-│   └── app/              # Next.js App Router: routes, layout, global CSS
+│   ├── app/              # Next.js App Router: routes, layout, global CSS, icons, OG image
+│   ├── components/       # ui/ (buttons, links) and site/ (header, facts row, …)
+│   └── lib/              # Site facts, helpers, OG image renderer
 ├── public/               # Static files served as-is
 ├── CLAUDE.md             # Conventions for AI-assisted sessions
 └── AGENTS.md             # Next.js agent rules (managed by Next.js)

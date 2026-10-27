@@ -19,6 +19,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0009: Visual direction "Working hours"](decisions/0009-visual-direction-working-hours.md)
 - [0010: Site structure and navigation](decisions/0010-site-structure-and-navigation.md)
 - [0011: Icons, monogram and analytics](decisions/0011-icons-identity-analytics.md)
+- [0012: Brand assets generated in code](decisions/0012-assets-generated-in-code.md)
 
 ## Research (local only, gitignored)
 
