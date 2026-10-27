@@ -15,6 +15,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0005: License](decisions/0005-license.md)
 - [0006: Docs mirrored to the GitHub wiki](decisions/0006-docs-wiki-mirror.md)
 - [0007: Private docs stay local only](decisions/0007-private-docs-local-only.md)
+- [0008: Private docs mirrored to Notion](decisions/0008-private-docs-notion.md)
 
 ## Research (local only, gitignored)
 

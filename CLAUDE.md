@@ -47,6 +47,7 @@ file fully before doing anything in this repo.
 | [0005](docs/decisions/0005-license.md)                 | MIT for code; content, personal info and branding all rights reserved                           |
 | [0006](docs/decisions/0006-docs-wiki-mirror.md)        | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end |
 | [0007](docs/decisions/0007-private-docs-local-only.md) | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published   |
+| [0008](docs/decisions/0008-private-docs-notion.md)     | Private docs and personal inputs are mirrored to a private Notion project                       |
 
 ## Conventions
 
@@ -70,6 +71,9 @@ file fully before doing anything in this repo.
 - Only `docs/design/` and `docs/decisions/` are public on the wiki.
 - `docs/research/` and `docs/content/` are **gitignored and local only** (ADR 0007). Never commit,
   sync or quote them anywhere public. Only final, approved wording goes into the site itself.
+- Private docs are mirrored to Notion (ADR 0008): the private page **"karthik.nz: Personal website
+  (private)"**, with Research, Content and Personal sub-pages. Whenever a private doc changes,
+  update its Notion page in the same session. Never put Notion links in this repo.
 - Sync with `bun run wiki:sync` (dry run, shows the diff). Push with `bun run wiki:sync -- --push`
   **only after Karthik approves that phase's docs**.
 
