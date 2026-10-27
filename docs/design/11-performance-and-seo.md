@@ -55,6 +55,24 @@ machine's CPU, which was busy with other work. Blocking time varied by up to 0.8
 of the same page. **The performance target is re-checked with PageSpeed Insights on the live site
 in Phase 6**, and any further work is decided then.
 
+Live site, https://karthik.nz on Vercel, same Lighthouse settings (2026-10-27). PageSpeed Insights
+itself could not be run that day (the anonymous API quota was used up), so these are local
+Lighthouse runs against the production URL. Home was run three times:
+
+| Page                | Perf  | Accessibility | Best practices | SEO | LCP       | TBT        | CLS | JS     |
+| ------------------- | ----- | ------------- | -------------- | --- | --------- | ---------- | --- | ------ |
+| `/`                 | 84–91 | 100           | 96\*           | 100 | 2.3–2.9 s | 220–400 ms | 0   | 153 KB |
+| `/work/aria`        | 90    | 100           | 96\*           | 100 | 2.7 s     | 260 ms     | 0   | 159 KB |
+| `/work/job-matcher` | 92    | 100           | 96\*           | 100 | 2.7 s     | 210 ms     | 0   | 159 KB |
+| `/work/workclock`   | 88    | 100           | 96\*           | 100 | 2.7 s     | 270 ms     | 0   | 159 KB |
+
+\* The test machine's DNS blocks `static.cloudflareinsights.com`, so the analytics script failed
+to load and logged a console error. That is a property of the test machine, not of the site.
+
+The LCP element is the headline paragraph (text, as planned). On the real network it painted
+about 0.5 s after the request started (0.16 s to first byte plus 0.31 s render delay); the 2.3–2.9 s
+figures come from Lighthouse's simulated slow phone.
+
 ## How we get there
 
 - **Static pages.** Every page is pre-rendered at build time and served from Vercel's CDN. No
