@@ -152,10 +152,6 @@ export function CaseStudyPage({ slug }: { slug: Slug }) {
 
         <MarginGrid className="border-t border-rule pt-8">
           <div className="grid max-w-[65ch] gap-6">
-            <p className="text-lg">
-              <span className="text-muted">What this shows: </span>
-              {study.shows}
-            </p>
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm">
               <Link
                 href={`/work/${next.slug}`}

@@ -34,8 +34,6 @@ export type CaseStudy = {
   problem: CaseSection;
   work: CaseSection;
   outcome: CaseSection;
-  /** Which of the four things to remember this case proves. */
-  shows: string;
 };
 
 const gh = (repo: string) => `https://github.com/Karthik-beta/${repo}`;
@@ -92,7 +90,6 @@ export const caseStudies: CaseStudy[] = [
         "Pivotr continues, and Aria is still in use by its customers.",
       ],
     },
-    shows: "Ships to production, and owns things end to end.",
   },
   {
     slug: "job-matcher",
@@ -154,7 +151,6 @@ export const caseStudies: CaseStudy[] = [
         "I use it regularly in my own job hunt. It saves me screening every listing by hand, and it has surfaced roles I went on to apply for.",
       ],
     },
-    shows: "Cares about craft: failure, cost and testing designed in from the start.",
   },
   {
     slug: "workclock",
@@ -210,7 +206,6 @@ export const caseStudies: CaseStudy[] = [
         "It’s pre-1.0, so the API may still change in a minor release.",
       ],
     },
-    shows: "Cares about craft: correctness first, then speed.",
   },
 ];
 
