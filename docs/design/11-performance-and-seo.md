@@ -1,6 +1,6 @@
 # 11: Performance and SEO
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Decision record (analytics): [ADR 0011](../decisions/0011-icons-identity-analytics.md)
 
 ## Targets

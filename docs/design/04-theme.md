@@ -1,6 +1,6 @@
 # 04: Theme and visual direction
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Decision record: [ADR 0009](../decisions/0009-visual-direction-working-hours.md)
 
 ## Direction: "Working hours"

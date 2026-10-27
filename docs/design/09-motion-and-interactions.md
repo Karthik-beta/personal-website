@@ -1,6 +1,6 @@
 # 09: Motion and interactions
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 
 ## Principles
 

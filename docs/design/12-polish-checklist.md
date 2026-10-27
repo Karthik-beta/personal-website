@@ -1,6 +1,6 @@
 # 12: Pre-launch polish checklist
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Run in full before launch, and the relevant parts before any major change.
 
 ## Content and facts

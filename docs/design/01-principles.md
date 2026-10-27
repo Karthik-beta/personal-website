@@ -1,6 +1,6 @@
 # 01: Design principles
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Applies to: every page, component and asset on karthik.nz
 
 These principles come from two things: who visits the site and what Karthik's story is.

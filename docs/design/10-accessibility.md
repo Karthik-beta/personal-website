@@ -1,6 +1,6 @@
 # 10: Accessibility
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Target: **WCAG 2.2 level AA** on every page, in both themes, at every width down to 320 px.
 
 Accessibility is part of the evidence: a hiring manager who checks the site with a keyboard or a

@@ -1,6 +1,6 @@
 # 05: Layout, grid and spacing
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 
 ## The grid: a time margin plus a reading column
 

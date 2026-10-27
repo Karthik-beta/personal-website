@@ -1,6 +1,6 @@
 # 06: Navigation and sections
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Decision record: [ADR 0010](../decisions/0010-site-structure-and-navigation.md)
 
 ## Site map

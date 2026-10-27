@@ -1,6 +1,6 @@
 # 08: Imagery and identity
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Decision record: [ADR 0011](../decisions/0011-icons-identity-analytics.md)
 - Assets are produced in Phase 4 (Canva). This doc is their brief.
 

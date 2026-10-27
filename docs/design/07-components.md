@@ -1,6 +1,6 @@
 # 07: Components
 
-- Status: Draft for approval
+- Status: Approved (2026-10-27)
 - Primitives: [Base UI](https://base-ui.com) (`@base-ui/react`) for interactive pieces that need
   focus management (ADR 0004). Everything else is plain semantic HTML styled with Tailwind.
 
