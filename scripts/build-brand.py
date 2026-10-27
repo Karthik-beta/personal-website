@@ -50,7 +50,9 @@ TRACKING = -0.02  # em
 def build_instances():
     STATIC.mkdir(parents=True, exist_ok=True)
     for name, (width, weight) in INSTANCES.items():
-        font = instantiateVariableFont(TTFont(VARIABLE), {"wdth": width, "wght": weight})
+        # recalcTimestamp=False keeps the output byte-identical between runs.
+        source = TTFont(VARIABLE, recalcTimestamp=False)
+        font = instantiateVariableFont(source, {"wdth": width, "wght": weight})
         font.save(STATIC / f"{name}.ttf")
     return STATIC / "InstrumentSans-W78-Bold.ttf"
 
