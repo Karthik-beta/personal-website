@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Sample image">
+  <rect width="1200" height="675" fill="#e9ecf1"/>
+  <rect x="0" y="0" width="1200" height="56" fill="#dfe3ea"/>
+  <rect x="40" y="20" width="160" height="16" rx="4" fill="#c4cad3"/>
+  <rect x="40" y="96" width="260" height="539" rx="8" fill="#dfe3ea"/>
+  <rect x="340" y="96" width="820" height="72" rx="8" fill="#dfe3ea"/>
+  <rect x="340" y="192" width="820" height="443" rx="8" fill="#dfe3ea"/>
+  <text x="750" y="425" font-family="system-ui, sans-serif" font-size="28" fill="#7d8693" text-anchor="middle">Sample image: real product screenshots replace this</text>
+</svg>
