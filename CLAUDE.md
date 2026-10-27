@@ -40,16 +40,19 @@ file fully before doing anything in this repo.
 
 ## Approved decisions
 
-| ADR                                                    | Decision                                                                                        |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| [0001](docs/decisions/0001-framework-and-hosting.md)   | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                            |
-| [0002](docs/decisions/0002-styling-tailwind.md)        | Tailwind CSS v4, design tokens in `src/app/globals.css`                                         |
-| [0003](docs/decisions/0003-package-manager-bun.md)     | Bun as package manager and script runner; Next.js runs on Node                                  |
-| [0004](docs/decisions/0004-ui-primitives-base-ui.md)   | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3             |
-| [0005](docs/decisions/0005-license.md)                 | MIT for code; content, personal info and branding all rights reserved                           |
-| [0006](docs/decisions/0006-docs-wiki-mirror.md)        | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end |
-| [0007](docs/decisions/0007-private-docs-local-only.md) | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published   |
-| [0008](docs/decisions/0008-private-docs-notion.md)     | Private docs and personal inputs are mirrored to a private Notion project                       |
+| ADR                                                           | Decision                                                                                                     |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [0001](docs/decisions/0001-framework-and-hosting.md)          | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                                         |
+| [0002](docs/decisions/0002-styling-tailwind.md)               | Tailwind CSS v4, design tokens in `src/app/globals.css`                                                      |
+| [0003](docs/decisions/0003-package-manager-bun.md)            | Bun as package manager and script runner; Next.js runs on Node                                               |
+| [0004](docs/decisions/0004-ui-primitives-base-ui.md)          | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3                          |
+| [0005](docs/decisions/0005-license.md)                        | MIT for code; content, personal info and branding all rights reserved                                        |
+| [0006](docs/decisions/0006-docs-wiki-mirror.md)               | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end              |
+| [0007](docs/decisions/0007-private-docs-local-only.md)        | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published                |
+| [0008](docs/decisions/0008-private-docs-notion.md)            | Private docs and personal inputs are mirrored to a private Notion project                                    |
+| [0009](docs/decisions/0009-visual-direction-working-hours.md) | Visual direction "Working hours": Instrument Sans, ultramarine accent, light default + dark, local-time line |
+| [0010](docs/decisions/0010-site-structure-and-navigation.md)  | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                        |
+| [0011](docs/decisions/0011-icons-identity-analytics.md)       | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
 
 ## Conventions
 
