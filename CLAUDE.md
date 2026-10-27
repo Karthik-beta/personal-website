@@ -38,14 +38,15 @@ file fully before doing anything in this repo.
 
 ## Approved decisions
 
-| ADR                                                  | Decision                                                                                        |
-| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [0001](docs/decisions/0001-framework-and-hosting.md) | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                            |
-| [0002](docs/decisions/0002-styling-tailwind.md)      | Tailwind CSS v4, design tokens in `src/app/globals.css`                                         |
-| [0003](docs/decisions/0003-package-manager-bun.md)   | Bun as package manager and script runner; Next.js runs on Node                                  |
-| [0004](docs/decisions/0004-ui-primitives-base-ui.md) | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3             |
-| [0005](docs/decisions/0005-license.md)               | MIT for code; content, personal info and branding all rights reserved                           |
-| [0006](docs/decisions/0006-docs-wiki-mirror.md)      | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end |
+| ADR                                                    | Decision                                                                                        |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| [0001](docs/decisions/0001-framework-and-hosting.md)   | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                            |
+| [0002](docs/decisions/0002-styling-tailwind.md)        | Tailwind CSS v4, design tokens in `src/app/globals.css`                                         |
+| [0003](docs/decisions/0003-package-manager-bun.md)     | Bun as package manager and script runner; Next.js runs on Node                                  |
+| [0004](docs/decisions/0004-ui-primitives-base-ui.md)   | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3             |
+| [0005](docs/decisions/0005-license.md)                 | MIT for code; content, personal info and branding all rights reserved                           |
+| [0006](docs/decisions/0006-docs-wiki-mirror.md)        | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end |
+| [0007](docs/decisions/0007-private-docs-local-only.md) | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published   |
 
 ## Conventions
 
@@ -66,8 +67,9 @@ file fully before doing anything in this repo.
 ## Docs and wiki
 
 - `docs/` is the single source of truth. Index: `docs/README.md`.
-- Only `docs/design/` and `docs/decisions/` are public on the wiki. `docs/research/` and
-  `docs/content/` are **never** synced.
+- Only `docs/design/` and `docs/decisions/` are public on the wiki.
+- `docs/research/` and `docs/content/` are **gitignored and local only** (ADR 0007). Never commit,
+  sync or quote them anywhere public. Only final, approved wording goes into the site itself.
 - Sync with `bun run wiki:sync` (dry run, shows the diff). Push with `bun run wiki:sync -- --push`
   **only after Karthik approves that phase's docs**.
 

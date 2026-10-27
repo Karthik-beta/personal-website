@@ -63,8 +63,8 @@ No environment variables are needed yet. If any are added, they will be document
 .
 ├── docs/                 # Project documentation (source of truth)
 │   ├── decisions/        # ADRs: one file per approved decision
-│   ├── research/         # Profile research (private working notes)
-│   ├── content/          # Story and messaging
+│   ├── research/         # Profile research (local only, gitignored)
+│   ├── content/          # Story and messaging drafts (local only, gitignored)
 │   └── design/           # Design system docs
 ├── scripts/              # Repo tooling (e.g. wiki sync)
 ├── src/

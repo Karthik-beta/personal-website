@@ -14,12 +14,13 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0004: Base UI for UI primitives](decisions/0004-ui-primitives-base-ui.md)
 - [0005: License](decisions/0005-license.md)
 - [0006: Docs mirrored to the GitHub wiki](decisions/0006-docs-wiki-mirror.md)
+- [0007: Private docs stay local only](decisions/0007-private-docs-local-only.md)
 
-## Research (private, not on the wiki)
+## Research (local only, gitignored)
 
 - `research/profile-summary.md`: skills, timeline, top projects, gaps (Phase 1)
 
-## Content (private, not on the wiki)
+## Content (local only, gitignored)
 
 - `content/story.md`: narrative outline, section by section (Phase 2)
 - `content/messaging.md`: headlines, pitch, tone, words to use and avoid (Phase 2)
