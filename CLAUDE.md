@@ -82,7 +82,7 @@ file fully before doing anything in this repo.
 ## Phase status
 
 - [x] Phase 0: Repo setup
-- [ ] Phase 1: Research
+- [x] Phase 1: Research
 - [ ] Phase 2: Interview (story and positioning)
 - [ ] Phase 3: Design system docs and `/styleguide`
 - [ ] Phase 4: Assets (Canva)
