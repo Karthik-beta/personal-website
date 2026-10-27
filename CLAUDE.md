@@ -90,5 +90,5 @@ file fully before doing anything in this repo.
 - [x] Phase 2: Interview (story and positioning)
 - [x] Phase 3: Design system docs and `/styleguide`
 - [ ] Phase 4: Assets (Canva)
-- [ ] Phase 5: Build
+- [x] Phase 5: Build
 - [ ] Phase 6: Deploy (guided)
