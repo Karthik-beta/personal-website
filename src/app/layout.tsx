@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans } from "next/font/google";
+import { Analytics } from "@/components/site/analytics";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { SkipLink } from "@/components/site/skip-link";
@@ -13,11 +14,29 @@ const instrumentSans = Instrument_Sans({
   variable: "--font-instrument",
 });
 
-// Placeholder metadata. Real description, Open Graph and JSON-LD come in Phase 5.
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: site.name, template: `%s | ${site.name}` },
-  description: "TODO(karthik): site description",
+  title: { default: site.title, template: `%s | ${site.name}` },
+  description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: site.name,
+    url: "/",
+    title: site.title,
+    description: site.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: site.x,
+    title: site.title,
+    description: site.description,
+  },
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {
@@ -41,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );

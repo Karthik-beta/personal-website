@@ -1,7 +1,11 @@
 // Confirmed facts only (see docs/content, local). Change here, not in components.
 export const site = {
   name: "Karthik Parameshwara",
+  title: "Karthik Parameshwara | Software engineer",
+  description:
+    "Full-stack software engineer (backend-leaning) with 3+ years shipping enterprise software. Co-founded Pivotr. Available now in Bengaluru or remote in India.",
   url: "https://karthik.nz",
+  x: "@K4rthik__",
   email: "karthikparam10@gmail.com",
   resume: "/resume.pdf",
   repo: "https://github.com/Karthik-beta/personal-website",

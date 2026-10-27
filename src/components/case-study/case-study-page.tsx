@@ -8,17 +8,33 @@ import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { caseStudies, getCaseStudy, type CaseSection, type Slug } from "@/content/case-studies";
 import { ogSize, renderOgImage } from "@/lib/og";
+import { site } from "@/lib/site";
 
 // Each case study has its own static route folder (src/app/work/<slug>/), so an unknown
 // /work/… URL matches no route and returns a real 404.
 
 export function caseStudyMetadata(slug: Slug): Metadata {
   const study = getCaseStudy(slug);
+  const url = `/work/${study.slug}`;
+  // openGraph and twitter replace the layout's objects rather than merging, so repeat the shared fields.
   return {
     title: study.title,
     description: study.summary,
-    alternates: { canonical: `/work/${study.slug}` },
-    openGraph: { type: "article", title: study.title, description: study.summary },
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      locale: "en_GB",
+      siteName: site.name,
+      url,
+      title: `${study.title} | ${site.name}`,
+      description: study.summary,
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: site.x,
+      title: `${study.title} | ${site.name}`,
+      description: study.summary,
+    },
   };
 }
 
