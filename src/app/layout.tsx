@@ -51,7 +51,14 @@ const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t===
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-GB" className={instrumentSans.variable} suppressHydrationWarning>
+    // data-scroll-behavior: Next.js turns smooth scrolling off while it changes page, so a link
+    // from a case study to /#work jumps straight there instead of scrolling the whole home page.
+    <html
+      lang="en-GB"
+      className={instrumentSans.variable}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
