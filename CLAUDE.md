@@ -127,3 +127,10 @@ website"). Keep it in step when facts or preferences change.
 - Pushes to `main` deploy to production automatically (Vercel Git integration).
 - `NEXT_PUBLIC_` variables are fixed at build time: after changing one in Vercel, redeploy.
 - Verify any DNS change with a lookup of karthik.nz, www and workclock.karthik.nz.
+- **Show before pushing:** for visible changes, show Karthik light and dark screenshots from a
+  production build and commit locally; push only on an explicit yes, then verify on the live site.
+- **Measure speed on a production build** (`bun run build && bun run start`) with a headless
+  browser. Prefetching never runs in `next dev`, and Claude's in-app browser pane doesn't prefetch
+  either, so navigation there looks slower than it is.
+- **Screenshots:** demo or generated data only. Positioning applies to visuals too: no factory,
+  OEE or manufacturing content in images or captions, even where a project's own docs use it.
