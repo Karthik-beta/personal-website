@@ -1,20 +1,32 @@
 import Link from "next/link";
 import { TextLink } from "@/components/ui/text-link";
+import { cn } from "@/lib/cn";
 
 type ProjectEntryProps = {
   title: string;
   /** Case-study page, if the project has one. */
   href?: string;
-  when: React.ReactNode;
+  /** Shown beside the title. Omit when the dates sit in a time margin instead. */
+  when?: React.ReactNode;
   summary: React.ReactNode;
   stack: string[];
   links?: { href: string; label: string }[];
+  /** Draw the separating rule and vertical padding (off when a parent row provides them). */
+  framed?: boolean;
 };
 
 /** A row in the Work list. Deliberately not a card. */
-export function ProjectEntry({ title, href, when, summary, stack, links = [] }: ProjectEntryProps) {
+export function ProjectEntry({
+  title,
+  href,
+  when,
+  summary,
+  stack,
+  links = [],
+  framed = true,
+}: ProjectEntryProps) {
   return (
-    <article className="grid gap-2 border-t border-rule py-6">
+    <article className={cn("grid gap-2", framed && "border-t border-rule py-6")}>
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
         <h3 className="text-xl font-semibold stretch-title">
           {href ? (
@@ -25,7 +37,7 @@ export function ProjectEntry({ title, href, when, summary, stack, links = [] }: 
             title
           )}
         </h3>
-        <p className="text-xs text-muted tabular-nums">{when}</p>
+        {when && <p className="text-xs text-muted tabular-nums">{when}</p>}
       </div>
       <p className="max-w-[65ch]">{summary}</p>
       <p className="text-xs text-muted">{stack.join(", ")}</p>
