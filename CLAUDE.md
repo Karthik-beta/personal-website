@@ -7,12 +7,14 @@ file fully before doing anything in this repo.
 
 ## Who this is for
 
-- Owner: Karthik. ~3 years as a software engineer; co-founded a startup for the past year and left
-  in September 2026.
+- Owner: **Karthik Parameshwara** (use this name on the site). 3+ years as a software engineer;
+  co-founded Pivotr (product: Aria ERP) from June 2025 and left in September 2026.
 - Position Karthik as a **generalist builder**. Never as a manufacturing, factory or industrial
-  person, even where the work history touches that domain. Mentioning enterprise software is fine.
-- Pronouns: not stated yet. Refer to Karthik by name, or use they/them, until Karthik says
-  otherwise.
+  person, even where the work history touches that domain (the Getin work was MES/HRMS: translate
+  it into transferable skills). Mentioning enterprise software is fine.
+- **No pronouns**, on the site or in docs. Refer to Karthik by name.
+- Facts about Karthik come only from `docs/research/profile-summary.md` (local) or from Karthik
+  directly.
 - Audience: recruiters, hiring managers and engineering managers first; engineers browsing GitHub
   second.
 - Two reading paths: a **skim path** (role, experience, stack, availability, resume, contact in

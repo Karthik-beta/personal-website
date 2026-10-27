@@ -1,6 +1,6 @@
 # karthik.nz
 
-Personal website of Karthik, a software engineer. It is built for recruiters and hiring managers, with two
+Personal website of Karthik Parameshwara, a software engineer. It is built for recruiters and hiring managers, with two
 reading paths: a fast skim (role, experience, stack, availability, resume, contact in under 10
 seconds) and a deeper story with project case studies.
 
