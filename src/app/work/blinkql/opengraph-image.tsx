@@ -1,6 +1,10 @@
-import { caseStudyOgImage, caseStudyOgSize } from "@/components/case-study/case-study-page";
+import {
+  caseStudyOgAlt,
+  caseStudyOgImage,
+  caseStudyOgSize,
+} from "@/components/case-study/case-study-page";
 
-export const alt = "Case study by Karthik Parameshwara";
+export const alt = caseStudyOgAlt("blinkql");
 export const size = caseStudyOgSize;
 export const contentType = "image/png";
 
