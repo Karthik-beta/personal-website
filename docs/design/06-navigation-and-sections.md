@@ -12,7 +12,7 @@
 | `/work/job-matcher` | Case study: AI Job Resume Matcher             | Yes                       |
 | `/work/workclock`   | Case study: workclock                         | Yes                       |
 | `/work/blinkql`     | Case study: Blinkql (added 2026-10-27)        | Yes                       |
-| `/resume.pdf`       | Resume download (static file)                 | Yes                       |
+| `/resume.pdf`       | Resume (static file, opens in a new tab)      | Yes                       |
 | `/styleguide`       | Design tokens and components                  | **No** (`noindex`)        |
 | `/404`              | Not found page                                | No                        |
 
@@ -64,7 +64,7 @@ review.
 - **Local time:** "It's 14:20 on Tuesday in Bengaluru". The page is static, so the server can't
   know the time: the HTML carries "Based in Bengaluru, India", an inline script swaps in the live
   time before first paint (never empty, never wrong), and it updates every 30 s.
-- **Actions:** Download resume (primary button), then Email me, GitHub, LinkedIn as links with
+- **Actions:** View resume (primary button, opens the PDF in a new tab; ADR 0014), then Email me, GitHub, LinkedIn as links with
   icons.
 
 ## Case-study page structure

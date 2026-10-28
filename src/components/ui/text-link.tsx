@@ -48,7 +48,18 @@ export function TextLink({
     );
   }
 
-  if (href.startsWith("mailto:") || href.endsWith(".pdf")) {
+  if (href.endsWith(".pdf")) {
+    // PDFs open in the browser's viewer in a new tab, so the site stays open (ADR 0014).
+    return (
+      <a href={href} target="_blank" rel="noopener" className={classes} {...props}>
+        {icon}
+        {children}
+        <span className="sr-only"> (PDF, opens in a new tab)</span>
+      </a>
+    );
+  }
+
+  if (href.startsWith("mailto:")) {
     return (
       <a href={href} className={classes} {...props}>
         {icon}

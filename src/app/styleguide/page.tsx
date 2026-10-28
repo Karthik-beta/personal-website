@@ -1,4 +1,4 @@
-import { Download, Mail } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import type { Metadata } from "next";
 import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons/brand";
 import { CopyEmail } from "@/components/site/copy-email";
@@ -386,7 +386,7 @@ export default function StyleguidePage() {
                         className={buttonClasses(variant)}
                       >
                         {variant === "primary" && (
-                          <Download aria-hidden size={18} strokeWidth={1.75} />
+                          <FileText aria-hidden size={18} strokeWidth={1.75} />
                         )}
                         {stateLabels[state]}
                       </span>
@@ -397,7 +397,7 @@ export default function StyleguidePage() {
             </ThemePair>
             <div className="flex flex-wrap items-center gap-3">
               <Button>
-                <Download aria-hidden size={18} strokeWidth={1.75} />
+                <FileText aria-hidden size={18} strokeWidth={1.75} />
                 Live primary
               </Button>
               <Button variant="quiet">Live quiet</Button>

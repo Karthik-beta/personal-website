@@ -55,6 +55,7 @@ file fully before doing anything in this repo.
 | [0011](docs/decisions/0011-icons-identity-analytics.md)       | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
 | [0012](docs/decisions/0012-assets-generated-in-code.md)       | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
 | [0013](docs/decisions/0013-search-and-security-headers.md)    | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                |
+| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)        | Resume links open the PDF in a new tab, labelled "View resume" / "Resume"                                    |
 
 ## Conventions
 
@@ -97,12 +98,14 @@ file fully before doing anything in this repo.
 - **Link-preview images:** `src/lib/og.tsx`, used by each `opengraph-image.tsx`.
 - **Brand assets:** `bun run brand` regenerates the monogram, favicons and font instances from
   `assets/fonts` (see `assets/README.md`). Never edit generated files by hand.
-- **Resume:** `python -I scripts/prepare-resume.py <resume.pdf>` writes `public/resume.pdf` with
-  phone numbers removed by true redaction. Always run new resumes through it.
+- **Resume:** the source is the general resume in the Job Hunt app (`Job Hunt/App`). Render
+  it without the phone with `uv run jobhunt master --web <pdf>` there, then run
+  `python -I scripts/prepare-resume.py <pdf>`. That script writes `public/resume.pdf`, cleans
+  the metadata, redacts any phone number left and checks none remains. Always run new resumes
+  through it. Resume links open in a new tab (ADR 0014).
 
 ## Open items (content from Karthik)
 
-- Updated resume (co-founder title, September 2026 end date, new projects, full name, no phone).
 - `grep -rn "TODO(karthik)" src` must return nothing (it does as of 2026-10-27).
 - Aria screenshots come from Aria's production demo (`aria-local.cmd`), never `next dev`. Its demo
   data names real companies in sales and customer screens: capture only the dashboards.

@@ -115,7 +115,7 @@ export const typeScale = [
     weight: 500,
     stretch: "100%",
     className: "text-sm font-medium",
-    sample: "Download resume",
+    sample: "View resume",
   },
   {
     token: "xs",

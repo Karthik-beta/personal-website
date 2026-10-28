@@ -1,4 +1,4 @@
-import { Download, Mail } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/brand";
 import { FactsRow } from "@/components/site/facts-row";
 import { LocalTime } from "@/components/site/local-time";
@@ -56,10 +56,15 @@ export function Hero() {
               <LocalTime />
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a href={site.resume} className={buttonClasses("primary")}>
-                <Download {...iconProps} />
-                Download resume
-                <span className="sr-only"> (PDF)</span>
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noopener"
+                className={buttonClasses("primary")}
+              >
+                <FileText {...iconProps} />
+                View resume
+                <span className="sr-only"> (PDF, opens in a new tab)</span>
               </a>
               <TextLink href={`mailto:${site.email}`} kind="action" icon={<Mail {...iconProps} />}>
                 Email me

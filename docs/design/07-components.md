@@ -12,10 +12,10 @@ same everywhere: a 2 px `accent` outline with a 3 px offset, shown only for keyb
 
 Only two kinds. The site has very few actions, so there's no need for more.
 
-| Variant     | Look                                                            | Use                                      |
-| ----------- | --------------------------------------------------------------- | ---------------------------------------- |
-| **Primary** | `accent` fill, `on-accent` text, 8 px radius                    | Download resume (one per screen at most) |
-| **Quiet**   | Transparent, `ink` text, 1 px `rule-strong` border, 8 px radius | Theme toggle, Menu, Copy email           |
+| Variant     | Look                                                            | Use                                  |
+| ----------- | --------------------------------------------------------------- | ------------------------------------ |
+| **Primary** | `accent` fill, `on-accent` text, 8 px radius                    | View resume (one per screen at most) |
+| **Quiet**   | Transparent, `ink` text, 1 px `rule-strong` border, 8 px radius | Theme toggle, Menu, Copy email       |
 
 | State          | Primary                                    | Quiet                            |
 | -------------- | ------------------------------------------ | -------------------------------- |

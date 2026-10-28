@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { FileText } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons/brand";
 import { CopyEmail } from "@/components/site/copy-email";
 import { buttonClasses } from "@/components/ui/button";
@@ -23,10 +23,15 @@ export function Contact() {
             </div>
             <CopyEmail email={site.email} />
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a href={site.resume} className={buttonClasses("primary")}>
-                <Download aria-hidden size={18} strokeWidth={1.75} />
-                Download resume
-                <span className="sr-only"> (PDF)</span>
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noopener"
+                className={buttonClasses("primary")}
+              >
+                <FileText aria-hidden size={18} strokeWidth={1.75} />
+                View resume
+                <span className="sr-only"> (PDF, opens in a new tab)</span>
               </a>
               <TextLink href={site.links.linkedin} kind="action" icon={<LinkedInIcon />}>
                 LinkedIn

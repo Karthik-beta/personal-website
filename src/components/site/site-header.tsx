@@ -1,6 +1,6 @@
 "use client";
 
-import { Download } from "lucide-react";
+import { FileText } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -83,10 +83,10 @@ export function SiteHeader() {
           </ul>
         </nav>
         <ThemeToggle />
-        <a href={site.resume} className={buttonClasses("primary")}>
-          <Download aria-hidden size={18} strokeWidth={1.75} />
+        <a href={site.resume} target="_blank" rel="noopener" className={buttonClasses("primary")}>
+          <FileText aria-hidden size={18} strokeWidth={1.75} />
           Resume
-          <span className="sr-only"> (PDF)</span>
+          <span className="sr-only"> (PDF, opens in a new tab)</span>
         </a>
         <MobileMenu />
       </div>

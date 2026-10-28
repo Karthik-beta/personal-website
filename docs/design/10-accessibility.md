@@ -66,7 +66,7 @@ screen reader should find it just as good.
 
 - Link text makes sense on its own ("Read the Aria case study", not "click here").
 - External links say so: an icon plus visually hidden "(opens in a new tab)".
-- The resume link says it's a PDF: "Download resume (PDF)".
+- The resume link says it's a PDF and opens a new tab: "View resume (PDF, opens in a new tab)".
 
 ## Motion
 

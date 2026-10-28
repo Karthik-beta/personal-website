@@ -21,6 +21,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0011: Icons, monogram and analytics](decisions/0011-icons-identity-analytics.md)
 - [0012: Brand assets generated in code](decisions/0012-assets-generated-in-code.md)
 - [0013: Search visibility and security headers](decisions/0013-search-and-security-headers.md)
+- [0014: The resume opens in a new tab](decisions/0014-resume-opens-in-new-tab.md)
 
 ## Research (local only, gitignored)
 
