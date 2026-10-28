@@ -3,12 +3,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarginGrid } from "@/components/home/margin-grid";
 import { Figure, FigurePlaceholder } from "@/components/site/figure";
+import { JsonLd } from "@/components/site/json-ld";
 import { MetaList } from "@/components/site/meta-list";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { caseStudies, getCaseStudy, type CaseSection, type Slug } from "@/content/case-studies";
 import { ogSize, renderOgImage } from "@/lib/og";
 import { site } from "@/lib/site";
+import { caseStudyStructuredData } from "@/lib/structured-data";
 
 // Each case study has its own static route folder (src/app/work/<slug>/), so an unknown
 // /work/… URL matches no route and returns a real 404.
@@ -39,6 +41,12 @@ export function caseStudyMetadata(slug: Slug): Metadata {
 }
 
 export const caseStudyOgSize = ogSize;
+
+/** Describes what the preview image shows: the project title and its summary. */
+export function caseStudyOgAlt(slug: Slug) {
+  const study = getCaseStudy(slug);
+  return `${study.title}, a case study by ${site.name}. ${study.summary}`;
+}
 
 export function caseStudyOgImage(slug: Slug) {
   const study = getCaseStudy(slug);
@@ -93,6 +101,7 @@ export function CaseStudyPage({ slug }: { slug: Slug }) {
 
   return (
     <main id="content" className="pt-8 pb-16 lg:pt-12 lg:pb-24">
+      <JsonLd data={caseStudyStructuredData(study)} />
       <Container className="grid gap-10 md:gap-12">
         <MarginGrid>
           <TextLink

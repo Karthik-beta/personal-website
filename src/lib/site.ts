@@ -10,6 +10,10 @@ export const site = {
   resume: "/resume.pdf",
   repo: "https://github.com/Karthik-beta/personal-website",
   copyrightYear: 2026,
+  // ISO dates for search engines (sitemap, structured data). Bump `updated` when the home page's
+  // content changes in a way a reader would notice, not for code or styling changes.
+  published: "2026-10-27",
+  updated: "2026-10-28",
   links: {
     github: "https://github.com/Karthik-beta",
     linkedin: "https://www.linkedin.com/in/karthik-paramesh",

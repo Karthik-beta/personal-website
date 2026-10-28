@@ -35,6 +35,9 @@ export type CaseStudy = {
   summary: string;
   role: string;
   when: { label: string; from: string; to?: string };
+  /** ISO dates for search engines: when this page went live, and its last real content change. */
+  published: string;
+  updated: string;
   stack: string[];
   links: { href: string; label: string }[];
   problem: CaseSection;
@@ -52,6 +55,8 @@ export const caseStudies: CaseStudy[] = [
       "Core asset and inventory modules, and the platform beneath them, for Pivotr’s modular B2B ERP. Built as the company’s only engineer and taken through 12 customer deployments.",
     role: "Co-founder and the only engineer, Pivotr",
     when: { label: "June 2025 – September 2026", from: "2025-06", to: "2026-09" },
+    published: "2026-10-27",
+    updated: "2026-10-27",
     stack: [
       "TypeScript",
       "NestJS",
@@ -111,6 +116,8 @@ export const caseStudies: CaseStudy[] = [
       "A self-hosted tool that watches the job boards I follow and scores every new listing against my resume. I use it in my own job hunt.",
     role: "Sole developer",
     when: { label: "October 2026", from: "2026-10" },
+    published: "2026-10-27",
+    updated: "2026-10-27",
     stack: [
       "TypeScript",
       "Bun",
@@ -172,6 +179,8 @@ export const caseStudies: CaseStudy[] = [
       "A maintained, correct replacement for an unmaintained business-time library, with one Rust core shared by Rust, Python and JavaScript.",
     role: "Author and maintainer",
     when: { label: "October 2026", from: "2026-10" },
+    published: "2026-10-27",
+    updated: "2026-10-27",
     stack: ["Rust", "jiff", "Python (PyO3)", "WebAssembly", "TypeScript"],
     links: [
       { href: "https://workclock.karthik.nz/docs/", label: "Read the docs" },
@@ -229,6 +238,8 @@ export const caseStudies: CaseStudy[] = [
       "An in-browser SQL workbench that queries CSV, Parquet and JSON files on your own machine, with no upload. Every performance change is benchmarked and published.",
     role: "Creator and maintainer",
     when: { label: "October 2026 – now", from: "2026-10" },
+    published: "2026-10-27",
+    updated: "2026-10-27",
     stack: [
       "TypeScript",
       "React",
