@@ -138,3 +138,12 @@ website"). Keep it in step when facts or preferences change.
   either, so navigation there looks slower than it is.
 - **Screenshots:** demo or generated data only. Positioning applies to visuals too: no factory,
   OEE or manufacturing content in images or captions, even where a project's own docs use it.
+- **Search engines:** Google Search Console (Domain property for karthik.nz) and Bing Webmaster
+  Tools are set up. Keep the `google-site-verification` TXT record in Cloudflare. Claude can't
+  see the reports, so ask Karthik for screenshots.
+- **Structured-data dates** are sent as full date-times with the Bengaluru offset; Google flags
+  bare dates. Check new markup in Search Console, not only validator.schema.org.
+- **New project subdomains** (`<project>.karthik.nz`) need no new Search Console property. Before
+  launch: canonical, link-preview URLs and sitemap use the subdomain; the `*.vercel.app` address
+  redirects to it (308); karthik.nz links to it; its sitemap is submitted in Search Console and
+  Bing.
