@@ -64,7 +64,7 @@ export function Chapters() {
             </Quote>
             <p>
               I started teaching myself to program in 2021 and finished a degree in mechanical
-              engineering in 2022.
+              engineering at MVJ College of Engineering in 2022.
             </p>
           </Chapter>
         </TimeRow>
