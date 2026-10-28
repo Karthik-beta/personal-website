@@ -26,6 +26,10 @@ const person = {
   sameAs: [site.links.github, site.links.linkedin, site.links.x],
 };
 
+// Google wants full date-times with a time zone (a bare date is flagged as invalid). The source
+// dates are days, so send the start of that day in Bengaluru.
+const dateTime = (date: string) => `${date}T00:00:00+05:30`;
+
 // Everywhere else refers to the person by @id instead of repeating the details.
 const personRef = { "@type": "Person", "@id": personId, name: site.name, url: site.url };
 
@@ -49,8 +53,8 @@ export function homeStructuredData() {
         name: site.title,
         isPartOf: { "@id": websiteId },
         inLanguage: "en-GB",
-        dateCreated: site.published,
-        dateModified: site.updated,
+        dateCreated: dateTime(site.published),
+        dateModified: dateTime(site.updated),
         mainEntity: person,
       },
     ],
@@ -71,8 +75,8 @@ export function caseStudyStructuredData(study: CaseStudy) {
         headline: study.title,
         description: study.summary,
         image: `${url}/opengraph-image`,
-        datePublished: study.published,
-        dateModified: study.updated,
+        datePublished: dateTime(study.published),
+        dateModified: dateTime(study.updated),
         inLanguage: "en-GB",
         author: personRef,
         publisher: personRef,
