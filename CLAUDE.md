@@ -98,7 +98,9 @@ file fully before doing anything in this repo.
 - **Link-preview images:** `src/lib/og.tsx`, used by each `opengraph-image.tsx`. The image URL's
   `?hash` comes only from the route file's text, so after changing how an image looks, bump the
   "Look v" comment in every `opengraph-image.tsx`, then re-inspect the URLs in LinkedIn's Post
-  Inspector. Otherwise LinkedIn keeps its cached copy.
+  Inspector. Otherwise LinkedIn keeps its cached copy. A link already on the LinkedIn profile can
+  keep a broken thumbnail even then: re-add it with `?v=2` on the end (LinkedIn fetches it fresh
+  and stores the canonical URL).
 - **Brand assets:** `bun run brand` regenerates the monogram, favicons and font instances from
   `assets/fonts` (see `assets/README.md`). Never edit generated files by hand.
 - **Resume:** the source is the general resume in the Job Hunt app (`Job Hunt/App`). Render
