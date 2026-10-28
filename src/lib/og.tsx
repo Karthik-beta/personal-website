@@ -1,6 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import {
+  monogramLetters,
+  monogramRadius,
+  monogramSide,
+  monogramViewBox,
+} from "@/components/site/monogram-paths";
 
 // Link-preview images (docs/design/08-imagery-and-identity.md). Rendered at build time from
 // the static font instances made by scripts/build-brand.py. Light theme tokens only.
@@ -10,14 +16,15 @@ const colors = { paper: "#f5f6f8", band: "#e3e7f5", ink: "#15191f", muted: "#596
 
 const asset = (path: string) => readFile(join(process.cwd(), "assets", path));
 
-const [regular, semibold, narrow, monogram] = await Promise.all([
+const [regular, semibold, narrow] = await Promise.all([
   asset("fonts/static/InstrumentSans-Regular.ttf"),
   asset("fonts/static/InstrumentSans-SemiBold.ttf"),
   asset("fonts/static/InstrumentSans-W78-SemiBold.ttf"),
-  asset("brand/monogram.svg"),
 ]);
 
-const monogramSrc = `data:image/svg+xml;base64,${monogram.toString("base64")}`;
+// The text-colour monogram, matching the nav's <Monogram tone="ink" />.
+const monogramSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${monogramViewBox}"><rect width="${monogramSide}" height="${monogramSide}" rx="${monogramRadius}" fill="${colors.ink}"/><path fill="${colors.paper}" d="${monogramLetters}"/></svg>`;
+const monogramSrc = `data:image/svg+xml;base64,${Buffer.from(monogramSvg).toString("base64")}`;
 
 type OgImageProps = {
   /** The large narrowed line: the headline on home, the project title on a case study. */

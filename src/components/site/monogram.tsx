@@ -2,9 +2,9 @@ import { cn } from "@/lib/cn";
 import { monogramLetters, monogramRadius, monogramSide, monogramViewBox } from "./monogram-paths";
 
 const tones = {
-  /** White letters on the accent square: the brand version (favicon, link previews). */
+  /** White letters on the accent square: the brand version (favicon). */
   accent: { square: "fill-accent", letters: "fill-on-accent" },
-  /** Text colour, so the nav's only accent is the Resume button (docs/design/08). */
+  /** Text colour: the nav (its only accent is the Resume button) and link previews (docs/design/08). */
   ink: { square: "fill-ink", letters: "fill-paper" },
 } as const;
 

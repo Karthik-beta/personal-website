@@ -57,7 +57,9 @@ look.
 - **In the nav it uses the text colour** (`ink` square, `paper` letters), not the accent (changed
   2026-10-27). With an accent square the header had two bright blocks, the monogram and the Resume
   button, pulling the eye away from the headline; now the Resume button is the nav's only accent.
-  The favicon and OG images keep the accent version, and the shape still ties them together.
+  The favicon keeps the accent version, and the shape still ties them together.
+- **OG images use the text-colour version too** (changed 2026-10-28), so a link preview shows the
+  same mark a visitor then sees in the nav.
 - Used in: favicon, nav (24 px, next to the name), OG image.
 - **16 px version:** letters enlarged to 58% and rendered with font hinting so strokes snap to
   pixels. At the standard proportions the "K" blurred at 16 px.
@@ -77,7 +79,7 @@ Next.js picks these files up automatically from `src/app/`.
 What shows up when the site is shared on LinkedIn, Slack, WhatsApp or X.
 
 - **1200 × 630 px**, PNG, under 300 KB.
-- `paper` background. KP monogram top-left. Name in `ink` (weight 600). Headline in the display
+- `paper` background. KP monogram (text-colour version) top-left. Name in `ink` (weight 600). Headline in the display
   style (narrowed). One line at the bottom on the `band`: "Bengaluru, India. Available now."
 - Safe area: keep text 64 px from every edge (some apps crop).
 - One per page: home (above), and one per case study (title + one-line summary instead of the
