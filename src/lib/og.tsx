@@ -10,6 +10,8 @@ import {
 
 // Link-preview images (docs/design/08-imagery-and-identity.md). Rendered at build time from
 // the static font instances made by scripts/build-brand.py. Light theme tokens only.
+// After changing how the images look, bump "Look v" in every opengraph-image.tsx so the
+// image URLs change; otherwise LinkedIn and others keep showing their cached copy.
 export const ogSize = { width: 1200, height: 630 };
 
 const colors = { paper: "#f5f6f8", band: "#e3e7f5", ink: "#15191f", muted: "#59626e" };

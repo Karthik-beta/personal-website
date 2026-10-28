@@ -95,7 +95,10 @@ file fully before doing anything in this repo.
 - **Case studies:** content in `src/content/case-studies.ts`; one static route per study in
   `src/app/work/<slug>/` (not a `[slug]` route: with Cache Components it can't return a real 404).
 - **Shared UI:** `src/components/ui/` (button, text link, container), `src/components/site/`.
-- **Link-preview images:** `src/lib/og.tsx`, used by each `opengraph-image.tsx`.
+- **Link-preview images:** `src/lib/og.tsx`, used by each `opengraph-image.tsx`. The image URL's
+  `?hash` comes only from the route file's text, so after changing how an image looks, bump the
+  "Look v" comment in every `opengraph-image.tsx`, then re-inspect the URLs in LinkedIn's Post
+  Inspector. Otherwise LinkedIn keeps its cached copy.
 - **Brand assets:** `bun run brand` regenerates the monogram, favicons and font instances from
   `assets/fonts` (see `assets/README.md`). Never edit generated files by hand.
 - **Resume:** the source is the general resume in the Job Hunt app (`Job Hunt/App`). Render
