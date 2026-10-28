@@ -20,6 +20,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0010: Site structure and navigation](decisions/0010-site-structure-and-navigation.md)
 - [0011: Icons, monogram and analytics](decisions/0011-icons-identity-analytics.md)
 - [0012: Brand assets generated in code](decisions/0012-assets-generated-in-code.md)
+- [0013: Search visibility and security headers](decisions/0013-search-and-security-headers.md)
 
 ## Research (local only, gitignored)
 
@@ -44,5 +45,5 @@ Read in order; each builds on the previous ones.
 8. [Imagery and identity](design/08-imagery-and-identity.md): photo, icons, monogram, favicon, OG image
 9. [Motion and interactions](design/09-motion-and-interactions.md): durations, easing, reduced motion
 10. [Accessibility](design/10-accessibility.md): WCAG 2.2 AA rules
-11. [Performance and SEO](design/11-performance-and-seo.md): targets, metadata, JSON-LD, analytics
+11. [Performance and SEO](design/11-performance-and-seo.md): targets, metadata, JSON-LD, security headers, analytics
 12. [Polish checklist](design/12-polish-checklist.md): before launch

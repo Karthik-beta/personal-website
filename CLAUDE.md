@@ -54,6 +54,7 @@ file fully before doing anything in this repo.
 | [0010](docs/decisions/0010-site-structure-and-navigation.md)  | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                        |
 | [0011](docs/decisions/0011-icons-identity-analytics.md)       | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
 | [0012](docs/decisions/0012-assets-generated-in-code.md)       | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
+| [0013](docs/decisions/0013-search-and-security-headers.md)    | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                |
 
 ## Conventions
 
@@ -86,7 +87,10 @@ file fully before doing anything in this repo.
 ## Where things live
 
 - **Site facts** (name, email, links, description): `src/lib/site.ts`. Change facts there only.
-- **Home sections:** `src/components/home/` (hero, chapters, work, about, contact, JSON-LD).
+- **Home sections:** `src/components/home/` (hero, chapters, work, about, contact).
+- **Structured data:** `src/lib/structured-data.ts`. Bump `site.updated` or a case study's
+  `updated` when its content changes (sitemap and JSON-LD dates).
+- **Security headers and CSP:** `next.config.ts`. A new third-party host must be added to the CSP.
 - **Case studies:** content in `src/content/case-studies.ts`; one static route per study in
   `src/app/work/<slug>/` (not a `[slug]` route: with Cache Components it can't return a real 404).
 - **Shared UI:** `src/components/ui/` (button, text link, container), `src/components/site/`.

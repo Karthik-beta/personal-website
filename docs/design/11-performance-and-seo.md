@@ -111,35 +111,63 @@ Set with Next.js's Metadata API in `layout.tsx` and each page.
 
 ## Structured data (JSON-LD)
 
-A `Person` object on the home page, using only confirmed facts:
+Built in `src/lib/structured-data.ts` and rendered by `src/components/site/json-ld.tsx`
+([ADR 0013](../decisions/0013-search-and-security-headers.md)). Confirmed facts only, and only
+facts a reader can also see on the page, as Google's guidelines require.
 
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Karthik Parameshwara",
-  "url": "https://karthik.nz",
-  "jobTitle": "Software Engineer",
-  "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
-  "alumniOf": { "@type": "CollegeOrUniversity", "name": "MVJ College of Engineering" },
-  "knowsAbout": ["TypeScript", "Node.js", "NestJS", "Next.js", "React", "PostgreSQL", "Docker"],
-  "sameAs": [
-    "https://github.com/Karthik-beta",
-    "https://www.linkedin.com/in/karthik-paramesh",
-    "https://x.com/K4rthik__"
-  ]
-}
-```
+- **Home:** a `WebSite` (tells Google the site's name is "Karthik Parameshwara") and a
+  `ProfilePage` whose `mainEntity` is the `Person`. Google lists "About me" pages as a valid use
+  of ProfilePage.
+- **Person** (`@id` `https://karthik.nz/#person`): name, given and family name,
+  `alternateName` "Karthik P" (the LinkedIn and resume name), photo, job title, description,
+  Bengaluru, MVJ College of Engineering, the hero's stack as `knowsAbout`, and the GitHub,
+  LinkedIn and X profiles as `sameAs`.
+- **Each case study:** an `Article` (headline, summary, preview image, published and updated
+  dates) whose author and publisher point to the Person `@id`, plus a two-step `BreadcrumbList`
+  (Karthik Parameshwara › project). Google shows breadcrumbs on desktop only.
 
-Case-study pages may add `CreativeWork` later. Validated with Google's Rich Results Test before
-launch.
+Dates come from `site.published` / `site.updated` and each case study's `published` /
+`updated`. **Bump `updated` when the page's content changes in a way a reader would notice**,
+never for code or styling changes: Google stops trusting dates that change without reason.
+
+Validate after deploying with Google's [Rich Results Test](https://search.google.com/test/rich-results)
+and the [Schema Markup Validator](https://validator.schema.org/).
 
 ## Sitemap and robots
 
-- `src/app/sitemap.ts` lists `/` and every `/work/*` page.
+- `src/app/sitemap.ts` lists `/` and every `/work/*` page with a real `lastmod` date. It sends
+  no `changefreq` or `priority`: Google ignores both.
 - `src/app/robots.ts` allows everything except `/styleguide`, and points to the sitemap.
 - `/styleguide` also sets `robots: { index: false, follow: false }` in its metadata, because
   robots.txt alone doesn't stop a page that's linked elsewhere from being indexed.
+
+## Security headers
+
+Set for every path in `next.config.ts` ([ADR 0013](../decisions/0013-search-and-security-headers.md)):
+
+| Header                       | Value (summary)                                                                   | What it does                                                    |
+| ---------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `Content-Security-Policy`    | own origin only, plus the Cloudflare beacon; no plugins; `frame-ancestors 'none'` | Blocks scripts and other content from anywhere not listed       |
+| `X-Content-Type-Options`     | `nosniff`                                                                         | Browsers don't guess file types                                 |
+| `X-Frame-Options`            | `DENY`                                                                            | No other site can show this one in a frame (older browsers)     |
+| `Referrer-Policy`            | `strict-origin-when-cross-origin`                                                 | Other sites see only "karthik.nz" as the referrer, not the path |
+| `Cross-Origin-Opener-Policy` | `same-origin`                                                                     | Pages opened from here can't reach back into this one           |
+| `Permissions-Policy`         | camera, microphone, location, payment, USB and Topics off                         | The site never asks for these                                   |
+| `Strict-Transport-Security`  | from Vercel, two years                                                            | HTTPS only                                                      |
+
+- The CSP allows `'unsafe-inline'` scripts because pages are pre-rendered: a per-request nonce
+  would make every page render on demand. It still blocks every third-party script except the
+  analytics beacon (`static.cloudflareinsights.com`, reporting to `cloudflareinsights.com`).
+- **No `includeSubDomains` on HSTS:** it would also apply to workclock.karthik.nz and
+  blinkql.karthik.nz, which are hosted elsewhere.
+- Adding any new third-party script, font, image host or embed means adding it to the CSP.
+
+## Search engines
+
+Google Search Console and Bing Webmaster Tools, both free, verified through a DNS TXT record in
+Cloudflare (Bing can import the Google property). They show whether pages are indexed, which
+searches lead to the site, and any crawl or structured-data errors. The sitemap is submitted in
+both.
 
 ## Analytics
 
