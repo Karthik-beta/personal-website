@@ -23,7 +23,14 @@ const person = {
   address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "MVJ College of Engineering" },
   knowsAbout: ["TypeScript", "Node.js", "NestJS", "Next.js", "React", "PostgreSQL", "Docker"],
-  sameAs: [site.links.github, site.links.linkedin, site.links.x],
+  // Profiles elsewhere that are also Karthik's, including the writing profiles not linked on the page.
+  sameAs: [
+    site.links.github,
+    site.links.linkedin,
+    site.links.x,
+    site.links.devto,
+    site.links.hashnode,
+  ],
 };
 
 // Google wants full date-times with a time zone (a bare date is flagged as invalid). The source

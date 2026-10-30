@@ -18,6 +18,8 @@ export const site = {
     github: "https://github.com/Karthik-beta",
     linkedin: "https://www.linkedin.com/in/karthik-paramesh",
     x: "https://x.com/K4rthik__",
+    devto: "https://dev.to/k4rthik_",
+    hashnode: "https://hashnode.com/@karthik-beta",
   },
 } as const;
 
