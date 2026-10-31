@@ -9,6 +9,7 @@ export function SiteFooter() {
     { href: site.links.x, label: "X" },
     { href: `mailto:${site.email}`, label: "Email" },
     { href: site.repo, label: "Source on GitHub" },
+    { href: "/privacy", label: "Privacy" },
   ];
 
   return (

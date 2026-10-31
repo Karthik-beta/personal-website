@@ -49,7 +49,7 @@ export function CopyEmail({ email }: { email: string }) {
         >
           {email}
         </a>
-        <Button variant="quiet" onClick={copy}>
+        <Button variant="quiet" onClick={copy} data-track="email_copy">
           {result === "copied" ? (
             <Check aria-hidden size={18} strokeWidth={1.75} />
           ) : (

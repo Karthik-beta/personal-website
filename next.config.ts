@@ -5,15 +5,17 @@ const isDev = process.env.NODE_ENV === "development";
 
 // Content Security Policy: what the page may load and who may frame it. Pages are static, so
 // there's no per-request nonce and Next.js's inline scripts need 'unsafe-inline'. The policy
-// still blocks third-party scripts (except the Cloudflare analytics beacon), plugins, framing
-// and form posts elsewhere. React needs 'unsafe-eval' in development only.
+// still blocks third-party scripts (except the Cloudflare and Google analytics tags), plugins,
+// framing and form posts elsewhere. React needs 'unsafe-eval' in development only. The Google
+// hosts are the ones Google lists for a GA4 tag, plus www.google.com: the tag also sends each hit
+// there, and blocking it would log a CSP error on every page.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com https://www.googletagmanager.com`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com",
   "font-src 'self'",
-  "connect-src 'self' https://cloudflareinsights.com",
+  "connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
