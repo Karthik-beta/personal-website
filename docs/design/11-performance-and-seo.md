@@ -1,7 +1,8 @@
 # 11: Performance and SEO
 
 - Status: Approved (2026-10-27)
-- Decision record (analytics): [ADR 0011](../decisions/0011-icons-identity-analytics.md)
+- Decision records (analytics): [ADR 0011](../decisions/0011-icons-identity-analytics.md),
+  [ADR 0015](../decisions/0015-google-analytics.md)
 
 ## Targets
 
@@ -145,19 +146,21 @@ and the [Schema Markup Validator](https://validator.schema.org/).
 
 Set for every path in `next.config.ts` ([ADR 0013](../decisions/0013-search-and-security-headers.md)):
 
-| Header                       | Value (summary)                                                                   | What it does                                                    |
-| ---------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `Content-Security-Policy`    | own origin only, plus the Cloudflare beacon; no plugins; `frame-ancestors 'none'` | Blocks scripts and other content from anywhere not listed       |
-| `X-Content-Type-Options`     | `nosniff`                                                                         | Browsers don't guess file types                                 |
-| `X-Frame-Options`            | `DENY`                                                                            | No other site can show this one in a frame (older browsers)     |
-| `Referrer-Policy`            | `strict-origin-when-cross-origin`                                                 | Other sites see only "karthik.nz" as the referrer, not the path |
-| `Cross-Origin-Opener-Policy` | `same-origin`                                                                     | Pages opened from here can't reach back into this one           |
-| `Permissions-Policy`         | camera, microphone, location, payment, USB and Topics off                         | The site never asks for these                                   |
-| `Strict-Transport-Security`  | from Vercel, two years                                                            | HTTPS only                                                      |
+| Header                       | Value (summary)                                                                | What it does                                                    |
+| ---------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| `Content-Security-Policy`    | own origin only, plus the analytics tags; no plugins; `frame-ancestors 'none'` | Blocks scripts and other content from anywhere not listed       |
+| `X-Content-Type-Options`     | `nosniff`                                                                      | Browsers don't guess file types                                 |
+| `X-Frame-Options`            | `DENY`                                                                         | No other site can show this one in a frame (older browsers)     |
+| `Referrer-Policy`            | `strict-origin-when-cross-origin`                                              | Other sites see only "karthik.nz" as the referrer, not the path |
+| `Cross-Origin-Opener-Policy` | `same-origin`                                                                  | Pages opened from here can't reach back into this one           |
+| `Permissions-Policy`         | camera, microphone, location, payment, USB and Topics off                      | The site never asks for these                                   |
+| `Strict-Transport-Security`  | from Vercel, two years                                                         | HTTPS only                                                      |
 
 - The CSP allows `'unsafe-inline'` scripts because pages are pre-rendered: a per-request nonce
   would make every page render on demand. It still blocks every third-party script except the
-  analytics beacon (`static.cloudflareinsights.com`, reporting to `cloudflareinsights.com`).
+  analytics tags: Cloudflare's beacon (`static.cloudflareinsights.com`, reporting to
+  `cloudflareinsights.com`) and Google's tag (`www.googletagmanager.com`, reporting to
+  `*.google-analytics.com`, `*.analytics.google.com` and `www.google.com`).
 - **No `includeSubDomains` on HSTS:** it would also apply to workclock.karthik.nz and
   blinkql.karthik.nz, which are hosted elsewhere.
 - Adding any new third-party script, font, image host or embed means adding it to the CSP.
@@ -181,4 +184,15 @@ both.
   with the site token stored in an environment variable (`NEXT_PUBLIC_CF_BEACON_TOKEN`).
   It only loads in production. Configured during Phase 6.
 - **Resume downloads** show up as page views of `/resume.pdf`.
-- No other tracking, no cookies, no fingerprinting.
+
+**Google Analytics 4** (free, [ADR 0015](../decisions/0015-google-analytics.md)), for clicks and
+behaviour.
+
+- Loaded the same way as the Cloudflare beacon: production only, on karthik.nz only, after the page
+  is interactive, with the measurement ID in `NEXT_PUBLIC_GA_ID`.
+- Enhanced measurement records page views (including client-side navigation), outbound clicks,
+  scrolling and PDF opens. The site adds `resume_open`, `email_click` and `email_copy`; any element
+  with `data-track="<event>"` sends that event when clicked.
+- It sets cookies and there is deliberately no consent banner. `/privacy` says what is recorded
+  and how to opt out. Retention stays at two months and Google Signals stays off; the privacy page
+  states both.

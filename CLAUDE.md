@@ -56,6 +56,7 @@ file fully before doing anything in this repo.
 | [0012](docs/decisions/0012-assets-generated-in-code.md)       | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
 | [0013](docs/decisions/0013-search-and-security-headers.md)    | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                |
 | [0014](docs/decisions/0014-resume-opens-in-new-tab.md)        | Resume links open the PDF in a new tab, labelled "View resume" / "Resume"                                    |
+| [0015](docs/decisions/0015-google-analytics.md)               | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                            |
 
 ## Conventions
 
