@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { buttonClasses } from "@/components/ui/button";
 
 type Theme = "light" | "dark";
@@ -24,15 +24,33 @@ function subscribe(onChange: () => void) {
   };
 }
 
+// The layout's theme-color metas follow the system setting. Once the visitor picks a theme, a
+// media-less meta placed first wins (browsers use the first match), so a phone's browser bar
+// matches the page. Next re-renders its own metas on navigation, so this one is separate.
+function syncBrowserBar() {
+  let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]:not([media])');
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "theme-color";
+    document.head.prepend(meta);
+  }
+  meta.content = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim();
+}
+
 export function ThemeToggle() {
   // null on the server: the theme is only known in the browser.
   const theme = useSyncExternalStore<Theme | null>(subscribe, currentTheme, () => null);
+
+  useEffect(() => {
+    if (document.documentElement.hasAttribute("data-theme")) syncBrowserBar();
+  }, []);
 
   function toggle() {
     const root = document.documentElement;
     const next: Theme = currentTheme() === "dark" ? "light" : "dark";
     root.classList.add("theme-switching");
     root.setAttribute("data-theme", next);
+    syncBrowserBar();
     try {
       localStorage.setItem("theme", next);
     } catch {
