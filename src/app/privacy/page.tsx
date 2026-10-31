@@ -20,23 +20,21 @@ export default function Privacy() {
           <div className="grid max-w-[65ch] gap-4">
             <h1 className="text-3xl font-semibold stretch-heading">Privacy</h1>
             <p className="text-lg">
-              This site uses two analytics tools to see which pages and links are useful. Nothing is
-              sold or used for advertising.
+              I use two simple analytics tools to learn which pages and projects people find useful,
+              so I can keep improving the site. I never sell this data or use it for ads.
             </p>
 
             <h2 className="mt-6 text-xl font-semibold stretch-heading">Google Analytics</h2>
             <p>
-              Google Analytics sets cookies to tell a returning browser from a new one. It records
-              the pages you open, the links and buttons you click, how far you scroll, the site that
-              sent you, your device and browser, and your approximate location (country and city).
-              Google doesn&rsquo;t store IP addresses in Google Analytics, and the data is kept for
-              two months.
+              Google Analytics uses a small cookie to count returning visits. It shows me things
+              like which pages get read, which links get clicked and roughly where visitors are
+              (country or city). It doesn&rsquo;t tell me who you are. Google doesn&rsquo;t keep IP
+              addresses, and the data is deleted after two months.
             </p>
             <p>
-              To opt out, block cookies for this site, use a content blocker, or install
-              Google&rsquo;s{" "}
-              <TextLink href="https://tools.google.com/dlpage/gaoptout">opt-out add-on</TextLink>.
-              Google&rsquo;s own use of the data is covered by its{" "}
+              If you&rsquo;d rather not be counted, a content blocker or Google&rsquo;s{" "}
+              <TextLink href="https://tools.google.com/dlpage/gaoptout">opt-out add-on</TextLink>{" "}
+              turns it off. Google explains how it handles this data in its{" "}
               <TextLink href="https://policies.google.com/technologies/partner-sites">
                 partner-sites policy
               </TextLink>
@@ -44,15 +42,13 @@ export default function Privacy() {
             </p>
 
             <h2 className="mt-6 text-xl font-semibold stretch-heading">Cloudflare Web Analytics</h2>
-            <p>
-              Cloudflare counts visits and measures page speed without cookies and without
-              identifying you.
-            </p>
+            <p>Cloudflare only counts visits and checks how fast pages load. It uses no cookies.</p>
 
             <h2 className="mt-6 text-xl font-semibold stretch-heading">Email</h2>
             <p>
-              If you email <TextLink href={`mailto:${site.email}`}>{site.email}</TextLink>, your
-              message is used only to reply. Questions about this page can go to the same address.
+              If you email me at <TextLink href={`mailto:${site.email}`}>{site.email}</TextLink>,
+              I&rsquo;ll only use your message to reply. Any questions about this page are welcome
+              there too.
             </p>
           </div>
         </MarginGrid>
