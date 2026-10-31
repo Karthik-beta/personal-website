@@ -3,6 +3,7 @@
 import { Menu } from "lucide-react";
 import { type ComponentType, useEffect, useState } from "react";
 import { buttonClasses } from "@/components/ui/button";
+import { MenuLabel } from "./menu-label";
 
 // The Base UI dialog is only needed on phones, and only once someone opens the menu, so its
 // code isn't part of the initial page load (docs/design/11-performance-and-seo.md).
@@ -29,7 +30,7 @@ function MenuButton(props: React.ComponentProps<"button">) {
   return (
     <button type="button" className={buttonClasses("quiet", "md:hidden")} {...props}>
       <Menu aria-hidden size={18} strokeWidth={1.75} />
-      Menu
+      <MenuLabel />
     </button>
   );
 }

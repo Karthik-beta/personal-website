@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { buttonClasses } from "@/components/ui/button";
 import { sections } from "@/lib/site";
+import { MenuLabel } from "./menu-label";
 
 /** Loaded on demand by <MobileMenu>; opens immediately on first mount. */
 export default function MobileMenuDialog() {
@@ -19,7 +20,7 @@ export default function MobileMenuDialog() {
         ) : (
           <Menu aria-hidden size={18} strokeWidth={1.75} />
         )}
-        Menu
+        <MenuLabel />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-x-0 top-14 bottom-0 bg-ink/20 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
