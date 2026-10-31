@@ -95,6 +95,8 @@ function Section({ id, title, section }: { id: string; title: string; section: C
 
 export function CaseStudyPage({ slug }: { slug: Slug }) {
   const study = getCaseStudy(slug);
+  // "now" for ongoing work has no end date, so it gets no <time>.
+  const [start, end] = study.when.label.split(" – ");
 
   const index = caseStudies.indexOf(study);
   const next = caseStudies[(index + 1) % caseStudies.length];
@@ -116,13 +118,17 @@ export function CaseStudyPage({ slug }: { slug: Slug }) {
         <MarginGrid
           margin={
             <>
-              <time dateTime={study.when.from}>{study.when.label.split(" – ")[0]}</time>
-              {study.when.to && (
+              <time dateTime={study.when.from}>{start}</time>
+              {end && (
                 <>
                   {" – "}
-                  <time dateTime={study.when.to} className="whitespace-nowrap">
-                    {study.when.label.split(" – ")[1]}
-                  </time>
+                  {study.when.to ? (
+                    <time dateTime={study.when.to} className="whitespace-nowrap">
+                      {end}
+                    </time>
+                  ) : (
+                    <span className="whitespace-nowrap">{end}</span>
+                  )}
                 </>
               )}
             </>
