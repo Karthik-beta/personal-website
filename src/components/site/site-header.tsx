@@ -72,9 +72,9 @@ export function SiteHeader() {
                 <Link
                   href={`/#${section.id}`}
                   aria-current={
-                    section.id === "work" && pathname.startsWith("/work") ? "page" : undefined
+                    section.id === "work" && pathname.startsWith("/work") ? "true" : undefined
                   }
-                  className="flex min-h-11 items-center px-3 text-sm font-medium decoration-2 underline-offset-[0.35em] hover:underline aria-[current=page]:underline"
+                  className="flex min-h-11 items-center px-3 text-sm font-medium decoration-2 underline-offset-[0.35em] hover:underline aria-[current=true]:underline"
                 >
                   {section.label}
                 </Link>

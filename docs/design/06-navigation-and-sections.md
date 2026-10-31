@@ -37,7 +37,7 @@ Phone:    KP  Karthik Parameshwara                          [◐]  [Resume]  [Me
 - **Resume** is the only filled button in the nav: the most important action on the site.
 - **Phone menu:** "Menu" opens a panel built on Base UI's `Dialog`, with the three section links
   as large targets. It closes on Escape, on outside tap, and when a link is chosen.
-- **Current location:** on case-study pages, "Work" is marked `aria-current="page"` and underlined.
+- **Current location:** on case-study pages, "Work" is marked `aria-current="true"` and underlined. Not `"page"`: the link leads to the home page's Work section, not to the page being read.
 
 ## Home page sections, mapped to the story
 
