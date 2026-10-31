@@ -21,20 +21,16 @@ export const metadata: Metadata = {
   applicationName: site.name,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
-  alternates: { canonical: "/" },
+  // Site-wide fields only. The canonical URL and og:url belong to each page, and Next fills the
+  // og and twitter title and description from the page's own.
   openGraph: {
     type: "website",
     locale: "en_GB",
     siteName: site.name,
-    url: "/",
-    title: site.title,
-    description: site.description,
   },
   twitter: {
     card: "summary_large_image",
     creator: site.x,
-    title: site.title,
-    description: site.description,
   },
   formatDetection: { telephone: false, email: false, address: false },
 };

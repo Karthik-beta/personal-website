@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import { MarginGrid } from "@/components/home/margin-grid";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
+
+export const metadata: Metadata = { title: "Page not found" };
 
 export default function NotFound() {
   return (
