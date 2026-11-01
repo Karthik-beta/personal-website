@@ -18,6 +18,7 @@ const links = [
   ["Email", site.email],
   ["GitHub", site.links.github],
   ["LinkedIn", site.links.linkedin],
+  ["AI agents", `${site.url}/llms.txt`],
 ];
 
 export async function GET() {
