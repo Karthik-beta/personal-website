@@ -141,6 +141,12 @@ page has one visual language: **filled ultramarine = merged**, **ultramarine out
 - Pull request titles are shown as written on GitHub, minus two kinds of noise: a commit-type
   prefix ("fix(charts): use…" becomes "Use…") and a trailing issue number ("(#179)"), which the
   link already carries.
+- **As the list grows (ADR 0020):** a total line under the description ("6 pull requests to 3
+  projects: 1 merged, 5 in review."); five pull requests per project, the older ones behind
+  "Show 7 older pull requests"; six projects, the project with the newest pull request first,
+  the rest behind "Show 3 more projects". The toggles are native `<details>` (no JavaScript),
+  styled like the resume's evidence toggle: accent text, a chevron that turns when open, and
+  words that flip to "Hide". The tally of squares wraps onto more lines.
 - **Not shown:** pull request numbers, lines and files changed. An engineer sees them one click
   away; for a recruiter they're noise.
 - **Left out:** pull requests to Karthik's own repositories and to the organisations Karthik has
@@ -216,7 +222,7 @@ monogram without the name, so four links, the theme toggle and Resume fit on one
 | What                                  | Source                                                     |
 | ------------------------------------- | ---------------------------------------------------------- |
 | Active days                           | GitHub GraphQL: the contribution calendar for Karthik-beta |
-| Upstream pull requests                | GitHub: pull requests authored by Karthik-beta             |
+| Upstream pull requests                | GitHub: merged and open pull requests by Karthik-beta      |
 | Versions and release dates            | crates.io, PyPI and npm public APIs                        |
 | Descriptions, status words, hide list | `src/content/open-source.ts` (written with Karthik)        |
 

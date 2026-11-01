@@ -26,6 +26,8 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0016: The resume is a page, with evidence beside each line](decisions/0016-resume-as-a-page.md)
 - [0017: An open-source page with live data](decisions/0017-open-source-page.md)
 - [0018: Contributions as a status ledger; activity from 1 October](decisions/0018-contributions-ledger-and-activity.md)
+- [0019: Four easter eggs, each where only a curious visitor looks](decisions/0019-easter-eggs.md)
+- [0020: Contributions that keep growing](decisions/0020-contributions-at-scale.md)
 
 ## Research (local only, gitignored)
 

@@ -61,6 +61,7 @@ file fully before doing anything in this repo.
 | [0017](docs/decisions/0017-open-source-page.md)                  | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch   |
 | [0018](docs/decisions/0018-contributions-ledger-and-activity.md) | Contributions as a status ledger (squares, review time, stars, logos); activity from 1 Oct                   |
 | [0019](docs/decisions/0019-easter-eggs.md)                       | Four easter eggs: 404 heading, console note, `curl` card, tap the clock for the time difference              |
+| [0020](docs/decisions/0020-contributions-at-scale.md)            | Contributions: all merged and open PRs fetched; 5 per project and 6 projects shown, the rest behind toggles  |
 
 ## Conventions
 
