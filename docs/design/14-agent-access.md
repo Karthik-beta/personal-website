@@ -142,7 +142,7 @@ Markdown. `https://karthik.nz/llms.txt` lists every page.
 **Verify.** The MCP Inspector (run with `npx`, nothing installed) connects to a production build,
 lists the tools and calls each one. The page bundles are unchanged, as in Phase 1.
 
-## Speed: why mobile is 80, and what would raise it
+## Speed: what limits the phone score
 
 Lighthouse simulates a mid-range phone with a CPU four times slower than a laptop. On both pages
 the score is held down by Total Blocking Time (510 to 900 ms over four runs per page, against a
@@ -156,16 +156,33 @@ What blocks the main thread (from the first mobile run of each page):
 | `googletagmanager.com/gtag/js`               | 2 tasks, 360 to 390 ms together | Google Analytics (ADR 0015) |
 | `_next/static/.../3lw5hnoc0n6xr.js` (230 KB) | 55 to 70 ms                     | React DOM                   |
 
-- **Google Analytics** loads with `afterInteractive`. Moving it to `lazyOnload` (after the page
-  has fully loaded, when the browser is idle) is the cheapest lever. Whether it moves the score
-  is unproven: it depends on whether the work then falls outside Lighthouse's measuring window.
-  It needs a prototype measured with at least three runs each way. Analytics would still record
-  nearly every visit, but a visitor who leaves within the first second might not be counted.
-- **The Next.js runtime task alone** is longer than the whole 200 ms budget. It is the cost of
-  React and the App Router on a slow phone. A guess, not measured: with it in place, a lab mobile
-  score of 95 may not be reachable without removing client-side React from these pages, which
-  would be a redesign. Real visitors' Web Vitals in Cloudflare decide whether that is worth it, as
-  the site has decided before.
+### Measured across devices (2026-11-01, Lighthouse 13.5.0)
+
+Every page on the live site, phone, tablet (820 x 1180, phone throttling) and desktop, three runs
+each (median):
+
+| Device  | Performance                    | Accessibility | Best practices | SEO |
+| ------- | ------------------------------ | ------------- | -------------- | --- |
+| Desktop | 100 on all 7 pages (99 to 100) | 100           | 96             | 100 |
+| Tablet  | 81 to 84                       | 100           | 96             | 100 |
+| Phone   | 81 to 85                       | 100           | 96             | 100 |
+
+- **Best practices 96 is this PC, not the site.** Its DNS blocks the Cloudflare beacon and
+  Google Analytics' collect address, which logs two console errors. PageSpeed Insights from
+  another network should show 100.
+- **Google Analytics is not the limiter.** With its scripts blocked on the live site, phone
+  scores stayed 78 to 87 and TBT 494 to 890 ms. Loading it later can't reach 95.
+- **Tried on two production builds side by side, five alternating runs per page:**
+  `experimental.inlineCss` lowered the phone median from 86 to 83 (the HTML grew from 145 to
+  246 KB because Next.js copies the CSS into the React payload) and was reverted. Blocking every
+  prefetch request changed nothing (86 against 85), so links keep prefetching.
+- **What sets the ceiling:** about 187 KB of compressed JavaScript, mostly React DOM (73 KB) and
+  the Next.js router (48 KB). On a simulated phone its start-up is one 450 to 490 ms task, more
+  than the whole 200 ms TBT budget, and Lighthouse also counts those scripts against LCP, because
+  they start before the first paint (observed first and largest paint are both 260 to 310 ms).
+- **Reaching 95 on phones would need these pages without client-side React,** for example a
+  rebuild on a framework that ships no JavaScript by default. That is a redesign and isn't
+  planned. The decision log is `.verify-runs/lh/decision.tsv` (local).
 - None of the agent work above adds JavaScript to any page, so it cannot lower these scores. The
   "First Load JS unchanged" check in each phase proves that.
 

@@ -31,6 +31,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0021: Markdown versions of the pages, and llms.txt](decisions/0021-markdown-for-agents.md)
 - [0022: Discovery signals for agents and Bing](decisions/0022-discovery-signals.md)
 - [0023: A read-only MCP server](decisions/0023-mcp-server.md)
+- [0024: Listing the MCP server in the official MCP Registry](decisions/0024-mcp-registry-listing.md)
 
 ## Research (local only, gitignored)
 
