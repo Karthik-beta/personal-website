@@ -80,6 +80,9 @@ function fragments(markdown: string) {
 const variesOnAccept = (res: Response) =>
   (res.headers.get("vary") ?? "").split(",").some((name) => name.trim().toLowerCase() === "accept");
 
+/** Next.js adds its own font preload links to the same header. */
+const links = (res: Response) => (res.headers.get("link") ?? "").split(/,\s*(?=<)/);
+
 async function get(path: string, headers: Record<string, string>) {
   const res = await fetch(base + path, { headers, redirect: "manual" });
   return { res, body: await res.text() };
@@ -100,6 +103,11 @@ for (const doc of agentDocs) {
   if (!variesOnAccept(page.res)) {
     warnings.push(`${doc.path}: HTML has no Vary: Accept (${page.res.headers.get("vary")})`);
   }
+  const alternate = `<${site.url}${mdPath}>; rel="alternate"; type="text/markdown"`;
+  check(
+    links(page.res).includes(alternate),
+    `${doc.path}: Link is ${page.res.headers.get("link")}, expected ${alternate}`,
+  );
   check(md.res.status === 200, `${mdPath}: answered ${md.res.status}`);
   check(
     md.res.headers.get("content-type") === "text/markdown; charset=utf-8",
@@ -110,6 +118,10 @@ for (const doc of agentDocs) {
   check(
     md.res.headers.get("link") === canonical,
     `${mdPath}: Link is ${md.res.headers.get("link")}, expected ${canonical}`,
+  );
+  check(
+    negotiated.res.headers.get("link") === canonical,
+    `${doc.path} as Markdown: Link is ${negotiated.res.headers.get("link")}, expected ${canonical}`,
   );
   check(negotiated.body === md.body, `${doc.path}: Accept: text/markdown did not return ${mdPath}`);
 
@@ -139,6 +151,10 @@ check(
   curl.res.headers.get("content-type")?.startsWith("text/plain") ?? false,
   `plain curl on / no longer gets the card (${curl.res.headers.get("content-type")})`,
 );
+check(
+  curl.body.includes(`AI agents ${site.url}/llms.txt`),
+  "the curl card does not point to llms.txt",
+);
 const curlMarkdown = await get("/", { "User-Agent": "curl/8.9.1", Accept: "text/markdown" });
 check(
   curlMarkdown.res.headers.get("content-type")?.startsWith("text/markdown") ?? false,
@@ -149,9 +165,22 @@ for (const path of ["/nope.md", "/work/nope.md", "/md/nope"]) {
   check(missing.res.status === 404, `${path} answered ${missing.res.status}, not 404`);
 }
 
+const keyPath = `/${site.indexNowKey}.txt`;
+const keyFile = await get(keyPath, browser);
+check(
+  keyFile.res.status === 200 && keyFile.body === site.indexNowKey,
+  `${keyPath} answered ${keyFile.res.status} with "${keyFile.body.slice(0, 40)}", not the key`,
+);
+check(
+  keyFile.res.headers.get("content-type")?.startsWith("text/plain") ?? false,
+  `${keyPath}: Content-Type is ${keyFile.res.headers.get("content-type")}`,
+);
+
 for (const warning of warnings) console.warn(`WARN ${warning}`);
 if (failures.length > 0) {
   console.error(failures.map((failure) => `FAIL ${failure}`).join("\n"));
   process.exit(1);
 }
-console.log(`OK: ${agentDocs.length} pages, their Markdown, llms.txt and llms-full.txt`);
+console.log(
+  `OK: ${agentDocs.length} pages, their Markdown, llms.txt, llms-full.txt, the card and the IndexNow key`,
+);
