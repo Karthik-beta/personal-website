@@ -17,7 +17,11 @@ const check = (ok: boolean, message: string) => {
   if (!ok) failures.push(message);
 };
 
-const markdown = async (path: string) => (await fetch(base + path)).text();
+// The open-source data is fetched on two hourly caches (the .md page and the MCP call), so the
+// fetch time in its last line can differ by minutes while the content is the same.
+const sameContent = (text: string) =>
+  text.replace(/registries at \d\d:\d\d on \d+ \w+/, "registries at <time>");
+const markdown = async (path: string) => sameContent(await (await fetch(base + path)).text());
 
 type Content = { type: string; text?: string }[];
 const textOf = (result: Record<string, unknown>) =>
@@ -76,7 +80,7 @@ const registryTools: [string, string, Record<string, unknown>?][] = [
 ];
 for (const [name, path, args] of registryTools) {
   check(
-    (await call(name, args)) === (await markdown(path)),
+    sameContent(await call(name, args)) === (await markdown(path)),
     `${name} ${JSON.stringify(args ?? {})} differs from ${path}`,
   );
 }
@@ -98,7 +102,9 @@ for (const doc of agentDocs) {
   const [content] = contents;
   check(content?.mimeType === "text/markdown", `${uri}: mimeType is ${content?.mimeType}`);
   check(
-    content && "text" in content && content.text === (await markdown(markdownPath(doc))),
+    content &&
+      "text" in content &&
+      sameContent(content.text) === (await markdown(markdownPath(doc))),
     `${uri} differs from ${markdownPath(doc)}`,
   );
 }
