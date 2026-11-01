@@ -12,6 +12,8 @@ export const site = {
   resumePdf: "/resume.pdf",
   resumePdfName: "Karthik_Parameshwara_Resume.pdf",
   repo: "https://github.com/Karthik-beta/personal-website",
+  // Public by design: IndexNow proves ownership by fetching public/<key>.txt.
+  indexNowKey: "15225cfc06039e2c92109a1d4bed20eb",
   copyrightYear: 2026,
   // ISO dates for search engines (sitemap, structured data). Bump `updated` when the home page's
   // content changes in a way a reader would notice, not for code or styling changes.
