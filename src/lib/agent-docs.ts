@@ -263,6 +263,26 @@ export function llmsTxt() {
       `- ${link("GitHub", site.links.github)}`,
       `- ${link("LinkedIn", site.links.linkedin)}`,
     ].join("\n"),
+    "## MCP",
+    `- ${link("MCP server", "/mcp")}: read-only tools and resources with the same content, over Streamable HTTP`,
+  );
+}
+
+/** Who Karthik is in a few lines, from the home page's facts: the MCP server's get_profile. */
+export function profileMarkdown() {
+  return md(
+    `# ${site.name}`,
+    site.description,
+    home.hero.facts.map((fact) => `- **${fact.label}:** ${fact.value}`).join("\n"),
+    "## Links",
+    [
+      `- ${link("Website", "/")}`,
+      `- ${link("Resume", site.resume)}`,
+      `- ${link("Resume (PDF)", site.resumePdf)}`,
+      `- ${link(site.email, `mailto:${site.email}`)}`,
+      `- ${link("GitHub", site.links.github)}`,
+      `- ${link("LinkedIn", site.links.linkedin)}`,
+    ].join("\n"),
   );
 }
 
