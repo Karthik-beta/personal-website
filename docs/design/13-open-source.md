@@ -70,11 +70,15 @@ Desktop (≥ 768 px)
 │                  Merged in 2 days                              │
 │                …                                               │
 │                                                                │
-│  Activity      Mon Tue Wed Thu Fri Sat Sun                     │
-│  28 Sept                    □   □   □   □                      │
-│   5 Oct         □   □   □   □   □   ■   ■                      │
-│  12 Oct         ■   ■   ■   ■   ■   ■   ■                      │
-│  …                                                             │
+│                Activity                                        │
+│                Oct             Nov                             │
+│  Mon               □   ■   ■   ■   …                           │
+│                    □   ■   ■   ■                               │
+│  Wed               □   ■   ■   ■                               │
+│                □   □   ■   ■   ■                               │
+│  Fri           □   □   ■   ■   ■                               │
+│                □   ■   ■   ■   ■                               │
+│                □   ■   ■   ■   ■                               │
 │                Active on 23 of 32 days.                        │
 │                                                                │
 │                Updated from GitHub and the package registries  │
@@ -82,10 +86,9 @@ Desktop (≥ 768 px)
 └────────────────────────────────────────────────────────────────┘
 ```
 
-On phones the margin labels move above their content, as on every other page. The timesheet is
-seven columns of 28 px cells on phones (it fits a 320 px screen with the week dates beside it)
-and 36 px cells from 640 px up. The week dates stay in their own column at every width, like a
-timesheet.
+On phones the margin labels move above their content, as on every other page. The timesheet
+keeps its weekday labels in their own narrow column at every width, and its squares adapt to the
+width (see below).
 
 ### Libraries
 
@@ -145,11 +148,18 @@ page has one visual language: **filled ultramarine = merged**, **ultramarine out
 The GitHub contribution graph is the default way to show activity, and it shows up on most
 developer sites. This page uses a **weekly timesheet** instead, which fits "Working hours":
 
-- **One row per week**, Monday to Sunday, starting with the week of 1 October 2026 and growing
-  from there, with no rolling window. Each row's start date sits in the time margin, the same
-  place the home page's chapters put their dates. The heading is just "Activity".
+- **Laid on its side (Karthik, 2026-11-01): one column per week**, oldest on the left, starting
+  with the week of 1 October 2026 and growing to the right, with no rolling window. The weekdays
+  run down the time margin (Mon, Wed and Fri labelled; every row named for screen readers), and
+  a month name ("Oct", "Nov"; January with its year) sits over the week that month starts in.
+  The heading is just "Activity".
+- **Adapts to the width.** Squares grow to 36 px while there are few weeks and shrink as weeks
+  are added, down to 14 px. Past that the grid scrolls sideways inside its own box (never the
+  page), opening at the newest week, with the weekday labels pinned. The box is right-to-left
+  (`dir="rtl"`) around a left-to-right table, which is what makes it open at the right end
+  without script; checked in Chromium, Firefox and WebKit.
 - **Each day is either shipped or not.** An active day is a filled `accent` square
-  (`radius-band`). A day with no activity is an empty square with a `rule-strong`
+  (`radius-mark`). A day with no activity is an empty square with a `rule-strong`
   outline (3:1 contrast). Days before 1 October have no square at all.
 - **No shades for volume.** GitHub's graph darkens busier days. That would push attention to raw
   counts (some days have over 200 contributions), which can read as automation. One shade says
@@ -175,13 +185,14 @@ A new section between **Work** and **About**, in the same grid:
   Open source    Maintains workclock and fiscalclock, published on npm,
                  PyPI and crates.io, and sends fixes to projects such as
                  Haystack.
-                 [the last 4 weeks of the timesheet, small]
+                 [the activity grid, the same as on the page]
                  See open-source work
 ```
 
 - The sentence is built from the data: the library names and the repositories with merged or
   open pull requests.
-- The small timesheet shows only the last four weeks, so the section stays short.
+- The activity grid is shown whole: laid on its side it is always seven rows tall, so the
+  section stays short however long the record gets.
 - The link goes to `/open-source`.
 
 ## Navigation
@@ -241,4 +252,4 @@ Checked against [04](04-theme.md) and the frontend-design guidance before writin
   `radius-band`), Instrument Sans, the existing type and spacing scales. No new tokens.
 - **Motion:** none.
 - **The bold element:** the timesheet on this page. On the home page the headline stays the one
-  bold thing; the teaser's small timesheet is deliberately small.
+  bold thing; the teaser's grid is seven short rows under a sentence.

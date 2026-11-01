@@ -50,7 +50,7 @@ Phone:    KP  Karthik Parameshwara                          [◐]  [Resume]  [Me
 | 1   | Proof       | Skim layer                         | Three verifiable facts: deployments, co-founder, open-source library                                              |
 | 2   | Chapters    | Story path                         | Four dated chapters in the time margin: customers first → learning to ship → building a company → now             |
 | 3   | Work        | Story path                         | Three case-study summaries (linked) + two short entries                                                           |
-| 3a  | Open source | Story path                         | One sentence (libraries, projects), the last four weeks of the timesheet, link to `/open-source`                  |
+| 3a  | Open source | Story path                         | One sentence (libraries, projects), the activity grid, link to `/open-source`                                     |
 | 4   | About       | Human layer                        | Small photo, short personal paragraph, languages                                                                  |
 | 5   | Contact     | Action                             | One sentence, email (with copy button), links, resume                                                             |
 | —   | Footer      | Housekeeping                       | Name, © year, links, "Source on GitHub"                                                                           |

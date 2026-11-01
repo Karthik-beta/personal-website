@@ -33,6 +33,9 @@ muted, or not at all.
   images.
 - **Activity** starts on 1 October 2026 and grows week by week with no rolling window. The
   heading is "Activity" and the sentences carry no date.
+- **The activity grid runs sideways:** one column per week, squares adapting to the width (36 px
+  down to 14 px), then scrolling inside its own box from the newest week. The home page shows
+  the whole grid instead of the last four weeks.
 - **`g8r-b8/frontierLab` is hidden** through a `hiddenRepos` list in `src/content/open-source.ts`.
 
 ## Why
@@ -47,3 +50,5 @@ muted, or not at all.
   stay as they were.
 - Starting the record on 1 October shows the whole month honestly, including the days before the
   daily run began.
+- A sideways grid stays seven rows tall however long the record grows, so neither the page nor
+  the home teaser gets longer every week.
