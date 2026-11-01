@@ -30,9 +30,12 @@ export async function OpenSource() {
             </p>
           </div>
         </MarginGrid>
-        <div className="-ml-1">
-          <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
-        </div>
+        <MarginGrid>
+          {/* -ml-1 takes back the grid's 4 px edge spacing, so the labels line up. */}
+          <div className="-ml-1">
+            <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
+          </div>
+        </MarginGrid>
         <MarginGrid>
           <TextLink href="/open-source" kind="action">
             See open-source work

@@ -97,14 +97,15 @@ export default async function OpenSourcePage() {
               Activity
             </h2>
           </MarginGrid>
-          <div className="grid gap-4">
-            <div className="-ml-1">
-              <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
-            </div>
-            <MarginGrid>
+          <MarginGrid>
+            <div className="grid gap-4">
+              {/* -ml-1 takes back the grid's 4 px edge spacing, so the labels line up. */}
+              <div className="-ml-1">
+                <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
+              </div>
               <p className="max-w-[65ch]">{activitySummary(data)}</p>
-            </MarginGrid>
-          </div>
+            </div>
+          </MarginGrid>
         </section>
 
         <MarginGrid className="border-t border-rule pt-6">
