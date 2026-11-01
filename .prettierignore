@@ -7,3 +7,4 @@ next-env.d.ts
 AGENTS.md
 /.wiki/
 /src/content/resume.json
+/.verify-runs/
