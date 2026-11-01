@@ -37,21 +37,40 @@ const securityHeaders = [
   },
 ];
 
+// Pages that also have a Markdown version (src/lib/agent-docs.ts), and where it is served from.
+const markdownPages = [
+  { source: "/", destination: "/md/index" },
+  { source: "/resume", destination: "/md/resume" },
+  { source: "/open-source", destination: "/md/open-source" },
+  { source: "/work/:slug([^/.]+)", destination: "/md/work/:slug" },
+];
+const wantsMarkdown = [{ type: "header" as const, key: "accept", value: "(.*)text/markdown(.*)" }];
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // The same URL answers with HTML or Markdown, so caches must key on Accept.
+      ...markdownPages.map(({ source }) => ({
+        source,
+        headers: [{ key: "Vary", value: "Accept" }],
+      })),
+    ];
   },
   async rewrites() {
     return {
       beforeFiles: [
+        // An explicit Accept: text/markdown wins over the curl card; plain curl sends */*.
+        ...markdownPages.map((page) => ({ ...page, has: wantsMarkdown })),
         {
           source: "/",
           has: [{ type: "header", key: "user-agent", value: "curl/.*" }],
           destination: "/card.txt",
         },
       ],
+      afterFiles: [{ source: "/:path*.md", destination: "/md/:path*" }],
     };
   },
   turbopack: {
