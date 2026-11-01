@@ -1,0 +1,9 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "nz.karthik/karthik-parameshwara",
+  "title": "Karthik Parameshwara",
+  "description": "Read-only profile, resume, projects and open-source work of software engineer Karthik Parameshwara.",
+  "version": "1.0.0",
+  "websiteUrl": "https://karthik.nz",
+  "remotes": [{ "type": "streamable-http", "url": "https://karthik.nz/mcp" }]
+}

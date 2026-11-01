@@ -20,7 +20,8 @@
     "oss:snapshot": "bun scripts/open-source-snapshot.ts",
     "agent-docs:check": "bun scripts/check-agent-docs.ts",
     "mcp:check": "bun scripts/check-mcp.ts",
-    "indexnow": "bun scripts/indexnow.ts"
+    "indexnow": "bun scripts/indexnow.ts",
+    "mcp:registry": "bun scripts/mcp-registry.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
