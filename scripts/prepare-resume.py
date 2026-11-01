@@ -2,7 +2,11 @@
 Prepares the public resume: removes phone numbers (true redaction: the text is deleted,
 not covered) and personal metadata, then writes public/resume.pdf.
 
-    python -I scripts/prepare-resume.py "path/to/Resume.pdf"
+    python -I scripts/prepare-resume.py "path/to/Resume.pdf" [--json "path/to/resume.json"]
+
+--json also installs the /resume page's data as src/content/resume.json. Make both files in
+one run of the Job Hunt app, so the page and the PDF say the same thing:
+`uv run jobhunt master --web <pdf> --json <json>`. The JSON gets the same phone check.
 
 Prefer a resume rendered without the phone (`uv run jobhunt master --web <pdf>` in the
 Job Hunt app): redaction leaves a gap where the number was, so the header line sits off
@@ -11,14 +15,19 @@ centre. The script still verifies that no phone number is left.
 Requires PyMuPDF. Re-run whenever the resume changes.
 """
 
+import argparse
+import json
 import re
-import sys
 from pathlib import Path
 
 import fitz  # PyMuPDF
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "public/resume.pdf"
+PAGE_DATA = ROOT / "src/content/resume.json"
+# The shape src/content/resume.ts reads. jobhunt bumps it when the shape changes.
+PAGE_DATA_VERSION = 1
+PHONE = re.compile(r"(?:\+?\d[\s-]?){10,}")
 SEPARATORS = {"•", "|", "·"}
 DIGITS = re.compile(r"^\+?[\d()-]+$")
 
@@ -39,11 +48,27 @@ def same_line(a, b):
     return abs(a[1] - b[1]) < 2 and b[0] >= a[2] - 1
 
 
-def main():
-    if len(sys.argv) != 2:
-        sys.exit("Usage: python -I scripts/prepare-resume.py <resume.pdf>")
+def install_page_data(path):
+    """Checks the /resume page data and writes src/content/resume.json."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if data.get("version") != PAGE_DATA_VERSION:
+        raise SystemExit(
+            f"Page data is version {data.get('version')}; this site reads version {PAGE_DATA_VERSION}."
+        )
+    text = json.dumps(data, indent=2, ensure_ascii=False)
+    if PHONE.search(text):
+        raise SystemExit("Phone-like text in the page data. Not safe to publish.")
+    PAGE_DATA.write_text(text + "\n", encoding="utf-8", newline="\n")
+    print(f"Wrote {PAGE_DATA.relative_to(ROOT)}.")
 
-    doc = fitz.open(sys.argv[1])
+
+def main():
+    parser = argparse.ArgumentParser(description="Prepare the public resume.")
+    parser.add_argument("pdf", help="the resume PDF, ideally rendered without the phone")
+    parser.add_argument("--json", help="the /resume page data from the Job Hunt app")
+    args = parser.parse_args()
+
+    doc = fitz.open(args.pdf)
     removed = 0
     for page in doc:
         words = page.get_text("words")
@@ -73,10 +98,15 @@ def main():
 
     # Verify: no 10+ digit sequence remains anywhere in the text.
     text = "".join(page.get_text() for page in fitz.open(OUTPUT))
-    leftover = re.findall(r"(?:\+?\d[\s-]?){10,}", text)
+    leftover = PHONE.findall(text)
     if leftover:
-        sys.exit(f"Phone-like text still present: {len(leftover)} match(es). Not safe to publish.")
+        raise SystemExit(
+            f"Phone-like text still present: {len(leftover)} match(es). Not safe to publish."
+        )
     print(f"Removed {removed} phone number(s). Wrote {OUTPUT.relative_to(ROOT)}.")
+
+    if args.json:
+        install_page_data(args.json)
 
 
 if __name__ == "__main__":

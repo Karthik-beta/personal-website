@@ -6,3 +6,4 @@ bun.lock
 next-env.d.ts
 AGENTS.md
 /.wiki/
+/src/content/resume.json

@@ -8,6 +8,8 @@ export const site = {
   x: "@K4rthik__",
   email: "karthikparam10@gmail.com",
   resume: "/resume.pdf",
+  resumePdf: "/resume.pdf",
+  resumePdfName: "Karthik_Parameshwara_Resume.pdf",
   repo: "https://github.com/Karthik-beta/personal-website",
   copyrightYear: 2026,
   // ISO dates for search engines (sitemap, structured data). Bump `updated` when the home page's

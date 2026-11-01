@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "updated": "2026-11-01",
+  "name": "Karthik Parameshwara",
+  "contact": [
+    [
+      {
+        "text": "Bengaluru, India"
+      },
+      {
+        "text": "karthikparam10@gmail.com",
+        "href": "mailto:karthikparam10@gmail.com"
+      }
+    ],
+    [
+      {
+        "text": "karthik.nz",
+        "href": "https://karthik.nz"
+      },
+      {
+        "text": "linkedin.com/in/karthik-paramesh",
+        "href": "https://linkedin.com/in/karthik-paramesh"
+      },
+      {
+        "text": "github.com/Karthik-beta",
+        "href": "https://github.com/Karthik-beta"
+      }
+    ]
+  ],
+  "sections": [
+    {
+      "kind": "text",
+      "title": "Summary",
+      "text": "Full-stack software engineer (backend-leaning) with 3+ years of building enterprise software, from the data model to customer deployment. Co-founded Pivotr and built core modules of its ERP, Aria; shipped 30+ customer deployments across 2 companies."
+    },
+    {
+      "kind": "entries",
+      "title": "Experience",
+      "entries": [
+        {
+          "head": {
+            "left": "Pivotr",
+            "right": "Bengaluru, India"
+          },
+          "sub": {
+            "left": "Co-founder & Software Engineer",
+            "right": "June 2025 – September 2026"
+          },
+          "lines": [],
+          "bullets": [
+            {
+              "id": "pivotr-1",
+              "text": "Architected and delivered 2 core ERP modules, Asset Management and Inventory Management, with APIs, relational data models, and enterprise workflows in TypeScript, Next.js, NestJS, Prisma, and PostgreSQL.",
+              "sources": [
+                "pivotr.erp-modules"
+              ],
+              "notes": [
+                {
+                  "fact": "pivotr.erp-modules",
+                  "text": "Data models, business logic, APIs and screens for both modules, on one shared platform.",
+                  "links": [
+                    {
+                      "label": "Aria case study",
+                      "href": "/work/aria#what-i-did",
+                      "kind": "case-study"
+                    },
+                    {
+                      "label": "Code on GitHub",
+                      "href": "https://github.com/Karthik-beta/Aria",
+                      "kind": "code"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "pivotr-2",
+              "text": "Built the shared platform: authentication, CI/CD pipelines, Docker and Caddy deployment, and a Windows installer.",
+              "sources": [
+                "pivotr.platform"
+              ],
+              "notes": [
+                {
+                  "fact": "pivotr.platform",
+                  "text": "A type-only API contract keeps NestJS and Next.js in step; the installer updates itself and rolls back on failure.",
+                  "links": [
+                    {
+                      "label": "How the platform works",
+                      "href": "/work/aria#what-i-did",
+                      "kind": "case-study"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "pivotr-3",
+              "text": "Delivered 12 Asset Management deployments across customer environments, owning configuration, rollout, and post-deployment support.",
+              "sources": [
+                "pivotr.deployments"
+              ],
+              "notes": [
+                {
+                  "fact": "pivotr.deployments",
+                  "text": "Owned each of the 12 rollouts, from configuration to troubleshooting and support afterwards.",
+                  "links": [
+                    {
+                      "label": "Outcome",
+                      "href": "/work/aria#outcome",
+                      "kind": "case-study"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "head": {
+            "left": "Getin Solutions",
+            "right": "Bengaluru, India"
+          },
+          "sub": {
+            "left": "Software Developer",
+            "right": "June 2023 – May 2025"
+          },
+          "lines": [],
+          "bullets": [
+            {
+              "id": "getin-1",
+              "text": "Developed and deployed 2 enterprise applications for manufacturing customers, an HRMS and a production-operations system, using Angular, Django, and PostgreSQL.",
+              "sources": [
+                "getin.apps"
+              ],
+              "notes": [
+                {
+                  "fact": "getin.apps",
+                  "text": "Client code is private. The work covered attendance, shift management, production planning and quality workflows.",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "id": "getin-2",
+              "text": "Executed 20+ customer deployments across both products, covering configuration, testing, rollout, and post-production support.",
+              "sources": [
+                "getin.deployments"
+              ],
+              "notes": [
+                {
+                  "fact": "getin.deployments",
+                  "text": "Client work, so no public code: configuration, testing, rollout and support after go-live for each customer.",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "id": "getin-3",
+              "text": "Engineered a shift-recognition algorithm for 3 shift models (Fixed, Rotational, and Auto Shift) from real-time attendance data, including shifts that span calendar days.",
+              "sources": [
+                "getin.shift-algorithm"
+              ],
+              "notes": [
+                {
+                  "fact": "getin.shift-algorithm",
+                  "text": "Shifts that run past midnight later led to workclock, a library that counts overnight shifts correctly.",
+                  "links": [
+                    {
+                      "label": "The overnight-shift problem",
+                      "href": "/work/workclock#problem",
+                      "kind": "case-study"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "entries",
+      "title": "Projects",
+      "entries": [
+        {
+          "head": {
+            "left": "Blinkql",
+            "note": "blinkql.karthik.nz",
+            "right": "October 2026 – Present"
+          },
+          "sub": null,
+          "lines": [],
+          "bullets": [
+            {
+              "id": "blinkql-1",
+              "text": "Designed an in-browser SQL workbench for CSV, Parquet, and JSON files with React, TypeScript, and DuckDB-WASM, keeping files local.",
+              "sources": [
+                "blinkql.what"
+              ],
+              "notes": [
+                {
+                  "fact": "blinkql.what",
+                  "text": "No backend: files are read by the browser and never uploaded.",
+                  "links": [
+                    {
+                      "label": "Try Blinkql",
+                      "href": "https://blinkql.karthik.nz",
+                      "kind": "live"
+                    },
+                    {
+                      "label": "Blinkql case study",
+                      "href": "/work/blinkql",
+                      "kind": "case-study"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "blinkql-2",
+              "text": "Optimized first-query time from about 45 to 10 ms, backed by cross-browser Playwright tests in CI.",
+              "sources": [
+                "blinkql.performance",
+                "blinkql.quality"
+              ],
+              "notes": [
+                {
+                  "fact": "blinkql.performance",
+                  "text": "Every experiment has a published before-and-after write-up with its raw benchmark results.",
+                  "links": [
+                    {
+                      "label": "Write-ups on the wiki",
+                      "href": "https://github.com/Karthik-beta/Blinkql/wiki",
+                      "kind": "case-study"
+                    },
+                    {
+                      "label": "Results",
+                      "href": "/work/blinkql#outcome",
+                      "kind": "case-study"
+                    }
+                  ]
+                },
+                {
+                  "fact": "blinkql.quality",
+                  "text": "CI runs on every pull request and fails it if a benchmark regresses.",
+                  "links": [
+                    {
+                      "label": "CI runs",
+                      "href": "https://github.com/Karthik-beta/Blinkql/actions",
+                      "kind": "ci"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "head": {
+            "left": "workclock",
+            "note": "workclock.karthik.nz",
+            "right": "September 2026 – Present"
+          },
+          "sub": null,
+          "lines": [],
+          "bullets": [
+            {
+              "id": "workclock-1",
+              "text": "Implemented a business-time arithmetic library (working hours, SLAs, time zones) with a Rust core and Python and JavaScript bindings, published on crates.io, PyPI, and npm.",
+              "sources": [
+                "workclock.what"
+              ],
+              "notes": [
+                {
+                  "fact": "workclock.what",
+                  "text": "One Rust core shared by all three languages, with a docs site and an in-browser playground.",
+                  "links": [
+                    {
+                      "label": "crates.io",
+                      "href": "https://crates.io/crates/workclock",
+                      "kind": "package"
+                    },
+                    {
+                      "label": "PyPI",
+                      "href": "https://pypi.org/project/workclock/",
+                      "kind": "package"
+                    },
+                    {
+                      "label": "npm",
+                      "href": "https://www.npmjs.com/package/workclock",
+                      "kind": "package"
+                    },
+                    {
+                      "label": "workclock case study",
+                      "href": "/work/workclock",
+                      "kind": "case-study"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "head": {
+            "left": "AI Job Resume Matcher",
+            "note": "karthik.nz/work/job-matcher",
+            "right": "September 2026 – Present"
+          },
+          "sub": null,
+          "lines": [],
+          "bullets": [
+            {
+              "id": "job-matcher-1",
+              "text": "Created a self-hosted job matcher that scrapes job boards and scores listings against a resume with an LLM, using NestJS, Next.js, PostgreSQL, BullMQ, and Docker.",
+              "sources": [
+                "job-matcher.what"
+              ],
+              "notes": [
+                {
+                  "fact": "job-matcher.what",
+                  "text": "Filters listings before any LLM call, so tokens are spent only on jobs that could fit.",
+                  "links": [
+                    {
+                      "label": "Job Matcher case study",
+                      "href": "/work/job-matcher",
+                      "kind": "case-study"
+                    },
+                    {
+                      "label": "Code on GitHub",
+                      "href": "https://github.com/Karthik-beta/AI-Job-Resume-Matcher",
+                      "kind": "code"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "entries",
+      "title": "Education",
+      "entries": [
+        {
+          "head": {
+            "left": "MVJ College of Engineering",
+            "right": "Bengaluru, India"
+          },
+          "sub": {
+            "left": "Bachelor of Engineering, Mechanical Engineering",
+            "right": "2022",
+            "bold": false
+          },
+          "lines": [
+            "Research: Presented a research paper at the Second International Conference on Materials and Technologies, 2022."
+          ],
+          "bullets": []
+        }
+      ]
+    },
+    {
+      "kind": "lines",
+      "title": "Skills",
+      "lines": [
+        {
+          "label": "Programming:",
+          "text": "TypeScript, JavaScript, Python, SQL, Rust"
+        },
+        {
+          "label": "Backend:",
+          "text": "NestJS, Node.js, Django, FastAPI, REST APIs, tRPC"
+        },
+        {
+          "label": "Frontend:",
+          "text": "Next.js, React, Angular, Tailwind CSS"
+        },
+        {
+          "label": "Data:",
+          "text": "PostgreSQL, Prisma, Redis, BullMQ"
+        },
+        {
+          "label": "Testing:",
+          "text": "Jest, Vitest, Playwright"
+        },
+        {
+          "label": "DevOps & Tools:",
+          "text": "Docker, GitHub Actions, CI/CD, Git, AWS"
+        },
+        {
+          "label": "Language:",
+          "text": "Native English and Kannada, Fluent Hindi, Elementary Spanish, Conversational Telugu"
+        },
+        {
+          "label": "Interests:",
+          "text": "Football, Running"
+        }
+      ]
+    }
+  ]
+}
