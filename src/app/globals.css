@@ -185,3 +185,11 @@
     }
   }
 }
+
+/* Printing (the resume page): the margins of the Harvard PDF. Header, footer and the page's
+   controls hide themselves with `print:hidden`. */
+@media print {
+  @page {
+    margin: 0.5in 0.42in;
+  }
+}

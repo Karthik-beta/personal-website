@@ -49,7 +49,7 @@ export function SiteHeader() {
       ref={ref}
       onFocus={() => setHidden(false)}
       className={cn(
-        "sticky top-0 z-40 border-b bg-paper transition-[translate,border-color] duration-200 ease-enter",
+        "sticky top-0 z-40 border-b bg-paper transition-[translate,border-color] duration-200 ease-enter print:hidden",
         scrolled ? "border-rule" : "border-transparent",
         hidden && "-translate-y-full",
       )}

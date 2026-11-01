@@ -99,3 +99,38 @@ export function caseStudyStructuredData(study: CaseStudy) {
     ],
   };
 }
+
+/** Resume: a page about Karthik, plus breadcrumbs back to the home page. */
+export function resumeStructuredData({
+  description,
+  updated,
+}: {
+  description: string;
+  updated: string;
+}) {
+  const url = `${site.url}/resume`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: `Resume | ${site.name}`,
+        description,
+        dateModified: dateTime(updated),
+        inLanguage: "en-GB",
+        about: personRef,
+        author: personRef,
+        isPartOf: { "@id": websiteId },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: site.name, item: site.url },
+          { "@type": "ListItem", position: 2, name: "Resume", item: url },
+        ],
+      },
+    ],
+  };
+}

@@ -13,7 +13,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="mt-24 border-t border-rule py-8 text-xs text-muted">
+    <footer className="mt-24 border-t border-rule py-8 text-xs text-muted print:hidden">
       <Container className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
         <p>
           © {site.copyrightYear} {site.name}
