@@ -154,8 +154,9 @@ page has one visual language: **filled ultramarine = merged**, **ultramarine out
 The GitHub contribution graph is the default way to show activity, and it shows up on most
 developer sites. This page uses a **weekly timesheet** instead, which fits "Working hours":
 
-- **Laid on its side (Karthik, 2026-11-01): one column per week**, oldest on the left, starting
-  with the week of 1 October 2026 and growing to the right, with no rolling window. The grid sits in
+- **Laid on its side (Karthik, 2026-11-01): one column per week**, oldest on the left, each
+  running Sunday to Saturday (Sunday on top; Karthik's choice), starting with the week of
+  1 October 2026 and growing to the right, with no rolling window. The grid sits in
   the content column with the weekdays labelled right beside it (Mon, Wed and Fri; every row
   named for screen readers). Each month is named once ("Oct", "Nov"; January with its year):
   over the first column, then over the first week that starts in a new month. The heading is
