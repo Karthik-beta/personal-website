@@ -155,18 +155,20 @@ The GitHub contribution graph is the default way to show activity, and it shows 
 developer sites. This page uses a **weekly timesheet** instead, which fits "Working hours":
 
 - **Laid on its side (Karthik, 2026-11-01): one column per week**, oldest on the left, starting
-  with the week of 1 October 2026 and growing to the right, with no rolling window. The weekdays
-  run down the time margin (Mon, Wed and Fri labelled; every row named for screen readers), and
-  a month name ("Oct", "Nov"; January with its year) sits over the week that month starts in.
-  The heading is just "Activity".
-- **Adapts to the width.** Squares grow to 36 px while there are few weeks and shrink as weeks
-  are added, down to 14 px. Past that the grid scrolls sideways inside its own box (never the
+  with the week of 1 October 2026 and growing to the right, with no rolling window. The grid sits in
+  the content column with the weekdays labelled right beside it (Mon, Wed and Fri; every row
+  named for screen readers). Each month is named once ("Oct", "Nov"; January with its year):
+  over the first column, then over the first week that starts in a new month. The heading is
+  just "Activity".
+- **Compact, and adapts to the width.** Squares are 16 px at most with a 4 px gap, and shrink
+  as weeks are added, down to 10 px (a year fits the desktop content column). Past that the grid scrolls sideways inside its own box (never the
   page), opening at the newest week, with the weekday labels pinned. The box is right-to-left
   (`dir="rtl"`) around a left-to-right table, which is what makes it open at the right end
   without script; checked in Chromium, Firefox and WebKit.
 - **Each day is either shipped or not.** An active day is a filled `accent` square
-  (`radius-mark`). A day with no activity is an empty square with a `rule-strong`
-  outline (3:1 contrast). Days before 1 October have no square at all.
+  (`radius-mark`). A day with no activity is a quiet `rule` square: the
+  shipped days carry the information, at full contrast, and the gaps stay in the background.
+  Days before 1 October have no square at all.
 - **No shades for volume.** GitHub's graph darkens busier days. That would push attention to raw
   counts (some days have over 200 contributions), which can read as automation. One shade says
   the only thing that matters here: Karthik showed up.

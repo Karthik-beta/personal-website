@@ -33,8 +33,8 @@ muted, or not at all.
   images.
 - **Activity** starts on 1 October 2026 and grows week by week with no rolling window. The
   heading is "Activity" and the sentences carry no date.
-- **The activity grid runs sideways:** one column per week, squares adapting to the width (36 px
-  down to 14 px), then scrolling inside its own box from the newest week. The home page shows
+- **The activity grid runs sideways:** one column per week, compact squares adapting to the width (16 px
+  down to 10 px), weekday labels beside the grid, then scrolling inside its own box from the newest week. The home page shows
   the whole grid instead of the last four weeks.
 - **Library icons** come from each library's website (its touch icon), fetched on the server and
   embedded, like the owner logos. A site that isn't live yet shows no icon.
