@@ -3,7 +3,7 @@ import { GitHubIcon, LinkedInIcon } from "@/components/icons/brand";
 import { FactsRow } from "@/components/site/facts-row";
 import { LocalTime } from "@/components/site/local-time";
 import { ProofStrip } from "@/components/site/proof-strip";
-import { buttonClasses } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { site } from "@/lib/site";
@@ -56,16 +56,10 @@ export function Hero() {
               <LocalTime />
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a
-                href={site.resume}
-                target="_blank"
-                rel="noopener"
-                className={buttonClasses("primary")}
-              >
+              <ButtonLink href={site.resume}>
                 <FileText {...iconProps} />
                 View resume
-                <span className="sr-only"> (PDF, opens in a new tab)</span>
-              </a>
+              </ButtonLink>
               <TextLink href={`mailto:${site.email}`} kind="action" icon={<Mail {...iconProps} />}>
                 Email me
               </TextLink>

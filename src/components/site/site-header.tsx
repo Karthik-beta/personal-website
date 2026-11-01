@@ -4,7 +4,7 @@ import { FileText } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { buttonClasses } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { sections, site } from "@/lib/site";
 import { MobileMenu } from "./mobile-menu";
@@ -83,11 +83,10 @@ export function SiteHeader() {
           </ul>
         </nav>
         <ThemeToggle />
-        <a href={site.resume} target="_blank" rel="noopener" className={buttonClasses("primary")}>
+        <ButtonLink href={site.resume} aria-current={pathname === site.resume ? "page" : undefined}>
           <FileText aria-hidden size={18} strokeWidth={1.75} />
           Resume
-          <span className="sr-only"> (PDF, opens in a new tab)</span>
-        </a>
+        </ButtonLink>
         <MobileMenu />
       </div>
     </header>

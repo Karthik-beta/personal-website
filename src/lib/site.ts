@@ -7,7 +7,8 @@ export const site = {
   url: "https://karthik.nz",
   x: "@K4rthik__",
   email: "karthikparam10@gmail.com",
-  resume: "/resume.pdf",
+  // The resume page (ADR 0016); the PDF is downloaded from there.
+  resume: "/resume",
   resumePdf: "/resume.pdf",
   resumePdfName: "Karthik_Parameshwara_Resume.pdf",
   repo: "https://github.com/Karthik-beta/personal-website",

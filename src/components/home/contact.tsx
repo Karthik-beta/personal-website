@@ -1,7 +1,7 @@
 import { FileText } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons/brand";
 import { CopyEmail } from "@/components/site/copy-email";
-import { buttonClasses } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { site } from "@/lib/site";
@@ -23,16 +23,10 @@ export function Contact() {
             </div>
             <CopyEmail email={site.email} />
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a
-                href={site.resume}
-                target="_blank"
-                rel="noopener"
-                className={buttonClasses("primary")}
-              >
+              <ButtonLink href={site.resume}>
                 <FileText aria-hidden size={18} strokeWidth={1.75} />
                 View resume
-                <span className="sr-only"> (PDF, opens in a new tab)</span>
-              </a>
+              </ButtonLink>
               <TextLink href={site.links.linkedin} kind="action" icon={<LinkedInIcon />}>
                 LinkedIn
               </TextLink>
