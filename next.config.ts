@@ -43,6 +43,17 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/",
+          has: [{ type: "header", key: "user-agent", value: "curl/.*" }],
+          destination: "/card.txt",
+        },
+      ],
+    };
+  },
   turbopack: {
     // Pin the project root: a stray lockfile in a parent folder must not change it.
     root: path.join(__dirname),
