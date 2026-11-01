@@ -26,8 +26,18 @@ export const site = {
   },
 } as const;
 
-export const sections = [
-  { id: "work", label: "Work" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
+/** Main nav: home sections, plus the open-source page (ADR 0017). */
+export const nav = [
+  { href: "/#work", label: "Work" },
+  { href: "/open-source", label: "Open source" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ] as const;
+
+/** Marks the nav item for where the reader is: "page" on a page it links to, "true" on a case
+ *  study (its link leads to the home page's Work section, not to the page being read). */
+export function navCurrent(href: string, pathname: string) {
+  if (href === pathname) return "page";
+  if (href === "/#work" && pathname.startsWith("/work")) return "true";
+  return undefined;
+}

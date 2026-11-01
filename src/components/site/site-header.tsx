@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-import { sections, site } from "@/lib/site";
+import { nav, navCurrent, site } from "@/lib/site";
 import { MobileMenu } from "./mobile-menu";
 import { Monogram } from "./monogram";
 import { ThemeToggle } from "./theme-toggle";
@@ -61,22 +61,21 @@ export function SiteHeader() {
           className="mr-auto flex min-h-11 items-center gap-2 text-sm font-semibold"
         >
           <Monogram tone="ink" />
-          <span aria-hidden className="hidden sm:inline">
+          {/* Between md and lg the nav links need the room, so the monogram stands alone. */}
+          <span aria-hidden className="hidden sm:inline md:hidden lg:inline">
             {site.name}
           </span>
         </Link>
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex items-center gap-1">
-            {sections.map((section) => (
-              <li key={section.id}>
+            {nav.map((item) => (
+              <li key={item.href}>
                 <Link
-                  href={`/#${section.id}`}
-                  aria-current={
-                    section.id === "work" && pathname.startsWith("/work") ? "true" : undefined
-                  }
-                  className="flex min-h-11 items-center px-3 text-sm font-medium decoration-2 underline-offset-[0.35em] hover:underline aria-[current=true]:underline"
+                  href={item.href}
+                  aria-current={navCurrent(item.href, pathname)}
+                  className="flex min-h-11 items-center px-3 text-sm font-medium whitespace-nowrap decoration-2 underline-offset-[0.35em] hover:underline aria-[current]:underline"
                 >
-                  {section.label}
+                  {item.label}
                 </Link>
               </li>
             ))}

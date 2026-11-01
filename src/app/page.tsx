@@ -3,6 +3,7 @@ import { About } from "@/components/home/about";
 import { Chapters } from "@/components/home/chapters";
 import { Contact } from "@/components/home/contact";
 import { Hero } from "@/components/home/hero";
+import { OpenSource } from "@/components/home/open-source";
 import { Work } from "@/components/home/work";
 import { JsonLd } from "@/components/site/json-ld";
 import { site } from "@/lib/site";
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero />
       <Chapters />
       <Work />
+      <OpenSource />
       <About />
       <Contact />
     </main>

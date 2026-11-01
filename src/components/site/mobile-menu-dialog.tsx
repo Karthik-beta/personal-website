@@ -3,14 +3,16 @@
 import { Dialog } from "@base-ui/react/dialog";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { buttonClasses } from "@/components/ui/button";
-import { sections } from "@/lib/site";
+import { nav, navCurrent } from "@/lib/site";
 import { MenuLabel } from "./menu-label";
 
 /** Loaded on demand by <MobileMenu>; opens immediately on first mount. */
 export default function MobileMenuDialog() {
   const [open, setOpen] = useState(true);
+  const pathname = usePathname();
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -28,14 +30,15 @@ export default function MobileMenuDialog() {
           <Dialog.Title className="sr-only">Site menu</Dialog.Title>
           <nav aria-label="Main">
             <ul>
-              {sections.map((section) => (
-                <li key={section.id} className="border-b border-rule last:border-b-0">
+              {nav.map((item) => (
+                <li key={item.href} className="border-b border-rule last:border-b-0">
                   <Link
-                    href={`/#${section.id}`}
+                    href={item.href}
+                    aria-current={navCurrent(item.href, pathname)}
                     onClick={() => setOpen(false)}
-                    className="flex min-h-14 items-center text-xl font-semibold stretch-title"
+                    className="flex min-h-14 items-center text-xl font-semibold stretch-title decoration-2 underline-offset-[0.25em] aria-[current]:underline"
                   >
-                    {section.label}
+                    {item.label}
                   </Link>
                 </li>
               ))}
