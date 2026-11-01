@@ -9,6 +9,8 @@ export type Library = {
   languages: string[];
   /** Package names on each registry. */
   packages: { npm: string; pypi: string; crates: string };
+  /** The library's own website; its icon is shown beside the name once the site is live. */
+  site: string;
   docs: string;
   repo: string;
 };
@@ -34,6 +36,7 @@ export const openSource = {
       status: "not yet stable",
       languages: ["Rust", "Python", "JavaScript"],
       packages: { npm: "workclock", pypi: "workclock", crates: "workclock" },
+      site: "https://workclock.karthik.nz",
       docs: "https://workclock.karthik.nz/docs/",
       repo: "https://github.com/Karthik-beta/workclock",
     },
@@ -44,6 +47,7 @@ export const openSource = {
       status: "in development",
       languages: ["Rust", "Python", "JavaScript"],
       packages: { npm: "fiscalclock", pypi: "fiscalclock", crates: "fiscalclock" },
+      site: "https://fiscalclock.karthik.nz",
       docs: "https://github.com/Karthik-beta/fiscalclock/wiki",
       repo: "https://github.com/Karthik-beta/fiscalclock",
     },

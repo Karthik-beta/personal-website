@@ -44,7 +44,20 @@ export function LibraryEntry({ library, data }: { library: Library; data: OpenSo
     >
       <article className="grid max-w-[65ch] gap-4">
         <div className="grid gap-2">
-          <h3 className="text-xl font-semibold stretch-title">{library.name}</h3>
+          <div className="flex items-center gap-3">
+            {release?.icon && (
+              // The library website's own icon; decorative, since the name sits beside it.
+              <Image
+                src={release.icon}
+                alt=""
+                width={32}
+                height={32}
+                unoptimized
+                className="size-8 rounded-band border border-rule"
+              />
+            )}
+            <h3 className="text-xl font-semibold stretch-title">{library.name}</h3>
+          </div>
           <p>{library.summary}</p>
         </div>
         <MetaList

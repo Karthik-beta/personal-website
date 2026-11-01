@@ -21,7 +21,13 @@ export type RepoContributions = {
   avatar?: string;
   pullRequests: PullRequest[];
 };
-export type Release = { name: string; version: string; released: string };
+export type Release = {
+  name: string;
+  version: string;
+  released: string;
+  /** The library website's icon as a data: URL, when the site is up. */
+  icon?: string;
+};
 
 export type OpenSourceData = {
   /** When the oldest part of this data was fetched (ISO date-time). */
@@ -46,6 +52,26 @@ export const addDays = (date: string, days: number) => {
   d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().slice(0, 10);
 };
+
+/**
+ * A website's icon, read from its own <link> tags. The touch icon comes first: it has its own
+ * background, so it reads on both themes. An SVG icon is skipped, because it follows the
+ * visitor's system theme rather than this site's toggle and can vanish on a dark page.
+ */
+async function siteIcon(site: string) {
+  const res = await fetch(site, { headers: { "User-Agent": userAgent }, signal: timeout() });
+  if (!res.ok) throw new Error(`${site}: HTTP ${res.status}`);
+  const links = (await res.text()).match(/<link\b[^>]*>/gi) ?? [];
+  const attr = (tag: string, name: string) =>
+    tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1] ?? "";
+  const find = (test: (rel: string, type: string) => boolean) =>
+    links.find((tag) => test(attr(tag, "rel").toLowerCase(), attr(tag, "type")));
+  const tag =
+    find((rel) => rel === "apple-touch-icon") ??
+    find((rel, type) => rel.split(" ").includes("icon") && type === "image/png") ??
+    find((rel, type) => rel.split(" ").includes("icon") && type !== "image/svg+xml");
+  return dataUrl(new URL(tag ? attr(tag, "href") : "/favicon.ico", site).href);
+}
 
 async function dataUrl(url: string) {
   const res = await fetch(url, { headers: { "User-Agent": userAgent }, signal: timeout() });
@@ -209,7 +235,9 @@ const compareVersions = (a: string, b: string) => {
 };
 
 /** The newest version published on all three registries, and the day it reached the last one. */
-async function fetchRelease(name: string, packages: { npm: string; pypi: string; crates: string }) {
+async function fetchRelease({ name, packages, site }: (typeof openSource.libraries)[number]) {
+  // A site that isn't live yet just has no icon.
+  const icon = siteIcon(site).catch(() => undefined);
   const [npm, pypi, crates] = await Promise.all([
     getJson(`https://registry.npmjs.org/${packages.npm}`),
     getJson(`https://pypi.org/pypi/${packages.pypi}/json`),
@@ -239,7 +267,7 @@ async function fetchRelease(name: string, packages: { npm: string; pypi: string;
     .map((registry) => registry.get(version)!)
     .sort()
     .at(-1)!;
-  return { name, version, released: bengaluruDate(new Date(last)) };
+  return { name, version, released: bengaluruDate(new Date(last)), icon: await icon };
 }
 
 /**
@@ -261,9 +289,9 @@ export async function fetchOpenSource({
   const github = token
     ? fetchGitHub(token, now, today).then((part) => ({ ...part, at: stamp }))
     : Promise.reject(new Error("GITHUB_TOKEN is not set"));
-  const registries = Promise.all(
-    openSource.libraries.map((library) => fetchRelease(library.name, library.packages)),
-  ).then((releases) => ({ releases, at: stamp }));
+  const registries = Promise.all(openSource.libraries.map((library) => fetchRelease(library))).then(
+    (releases) => ({ releases, at: stamp }),
+  );
 
   const [gh, reg] = await Promise.allSettled([github, registries]);
   const pick = <T>(result: PromiseSettledResult<T>, fromSnapshot: (s: OpenSourceData) => T) => {
@@ -285,6 +313,10 @@ export async function fetchOpenSource({
     today: gh.status === "fulfilled" ? today : (fallback?.today ?? today),
     days: ghPart.days,
     contributions: ghPart.contributions,
-    releases: regPart.releases,
+    // An icon that failed this time keeps the snapshot's copy.
+    releases: regPart.releases.map((release) => ({
+      ...release,
+      icon: release.icon ?? fallback?.releases.find((item) => item.name === release.name)?.icon,
+    })),
   };
 }
