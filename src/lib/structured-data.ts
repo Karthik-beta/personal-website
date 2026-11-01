@@ -1,5 +1,6 @@
 import photo from "../../assets/photo/karthik-parameshwara-square.jpg";
 import type { CaseStudy } from "@/content/case-studies";
+import { openSource } from "@/content/open-source";
 import { site } from "@/lib/site";
 
 // schema.org JSON-LD for search engines (docs/design/11-performance-and-seo.md). Confirmed facts
@@ -94,6 +95,49 @@ export function caseStudyStructuredData(study: CaseStudy) {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: site.name, item: site.url },
           { "@type": "ListItem", position: 2, name: study.title, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+/** Open source: a page listing Karthik's libraries as source code, plus breadcrumbs. */
+export function openSourceStructuredData({
+  description,
+  updated,
+}: {
+  description: string;
+  updated: string;
+}) {
+  const url = `${site.url}/open-source`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: `Open source | ${site.name}`,
+        description,
+        dateModified: dateTime(updated),
+        inLanguage: "en-GB",
+        author: personRef,
+        isPartOf: { "@id": websiteId },
+        hasPart: openSource.libraries.map((library) => ({
+          "@type": "SoftwareSourceCode",
+          name: library.name,
+          description: library.summary,
+          codeRepository: library.repo,
+          programmingLanguage: library.languages,
+          url: library.docs,
+          author: personRef,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: site.name, item: site.url },
+          { "@type": "ListItem", position: 2, name: "Open source", item: url },
         ],
       },
     ],
