@@ -25,6 +25,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0015: Google Analytics for clicks and behaviour](decisions/0015-google-analytics.md)
 - [0016: The resume is a page, with evidence beside each line](decisions/0016-resume-as-a-page.md)
 - [0017: An open-source page with live data](decisions/0017-open-source-page.md)
+- [0018: Contributions as a status ledger; activity from 1 October](decisions/0018-contributions-ledger-and-activity.md)
 
 ## Research (local only, gitignored)
 

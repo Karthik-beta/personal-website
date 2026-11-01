@@ -40,25 +40,26 @@ file fully before doing anything in this repo.
 
 ## Approved decisions
 
-| ADR                                                           | Decision                                                                                                     |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| [0001](docs/decisions/0001-framework-and-hosting.md)          | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                                         |
-| [0002](docs/decisions/0002-styling-tailwind.md)               | Tailwind CSS v4, design tokens in `src/app/globals.css`                                                      |
-| [0003](docs/decisions/0003-package-manager-bun.md)            | Bun as package manager and script runner; Next.js runs on Node                                               |
-| [0004](docs/decisions/0004-ui-primitives-base-ui.md)          | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3                          |
-| [0005](docs/decisions/0005-license.md)                        | MIT for code; content, personal info and branding all rights reserved                                        |
-| [0006](docs/decisions/0006-docs-wiki-mirror.md)               | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end              |
-| [0007](docs/decisions/0007-private-docs-local-only.md)        | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published                |
-| [0008](docs/decisions/0008-private-docs-notion.md)            | Private docs and personal inputs are mirrored to a private Notion project                                    |
-| [0009](docs/decisions/0009-visual-direction-working-hours.md) | Visual direction "Working hours": Instrument Sans, ultramarine accent, light default + dark, local-time line |
-| [0010](docs/decisions/0010-site-structure-and-navigation.md)  | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                        |
-| [0011](docs/decisions/0011-icons-identity-analytics.md)       | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
-| [0012](docs/decisions/0012-assets-generated-in-code.md)       | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
-| [0013](docs/decisions/0013-search-and-security-headers.md)    | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                |
-| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)        | Superseded by 0016                                                                                           |
-| [0015](docs/decisions/0015-google-analytics.md)               | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                            |
-| [0016](docs/decisions/0016-resume-as-a-page.md)               | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line          |
-| [0017](docs/decisions/0017-open-source-page.md)               | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch   |
+| ADR                                                              | Decision                                                                                                     |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [0001](docs/decisions/0001-framework-and-hosting.md)             | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                                         |
+| [0002](docs/decisions/0002-styling-tailwind.md)                  | Tailwind CSS v4, design tokens in `src/app/globals.css`                                                      |
+| [0003](docs/decisions/0003-package-manager-bun.md)               | Bun as package manager and script runner; Next.js runs on Node                                               |
+| [0004](docs/decisions/0004-ui-primitives-base-ui.md)             | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3                          |
+| [0005](docs/decisions/0005-license.md)                           | MIT for code; content, personal info and branding all rights reserved                                        |
+| [0006](docs/decisions/0006-docs-wiki-mirror.md)                  | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end              |
+| [0007](docs/decisions/0007-private-docs-local-only.md)           | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published                |
+| [0008](docs/decisions/0008-private-docs-notion.md)               | Private docs and personal inputs are mirrored to a private Notion project                                    |
+| [0009](docs/decisions/0009-visual-direction-working-hours.md)    | Visual direction "Working hours": Instrument Sans, ultramarine accent, light default + dark, local-time line |
+| [0010](docs/decisions/0010-site-structure-and-navigation.md)     | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                        |
+| [0011](docs/decisions/0011-icons-identity-analytics.md)          | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
+| [0012](docs/decisions/0012-assets-generated-in-code.md)          | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
+| [0013](docs/decisions/0013-search-and-security-headers.md)       | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                |
+| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)           | Superseded by 0016                                                                                           |
+| [0015](docs/decisions/0015-google-analytics.md)                  | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                            |
+| [0016](docs/decisions/0016-resume-as-a-page.md)                  | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line          |
+| [0017](docs/decisions/0017-open-source-page.md)                  | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch   |
+| [0018](docs/decisions/0018-contributions-ledger-and-activity.md) | Contributions as a status ledger (squares, review time, stars, logos); activity from 1 Oct                   |
 
 ## Conventions
 
@@ -98,7 +99,7 @@ file fully before doing anything in this repo.
 - **Case studies:** content in `src/content/case-studies.ts`; one static route per study in
   `src/app/work/<slug>/` (not a `[slug]` route: with Cache Components it can't return a real 404).
 - **Shared UI:** `src/components/ui/` (button, text link, container), `src/components/site/`.
-- **Open source page:** fixed facts (libraries, status words, hidden owners) in
+- **Open source page:** fixed facts (libraries, status words, hidden owners and repos) in
   `src/content/open-source.ts`; live data from GitHub and the registries in `src/lib/open-source/`,
   cached for an hour. Needs `GITHUB_TOKEN` (read-only, server only) in Vercel; without it the
   GitHub part falls back to `src/content/open-source.snapshot.json`. Refresh that with

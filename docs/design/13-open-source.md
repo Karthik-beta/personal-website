@@ -26,7 +26,8 @@ From the research doc (local), confirmed by Karthik on 2026-11-01:
 
 - **workclock**: published on npm, PyPI and crates.io; released but not yet stable.
 - **fiscalclock**: published 0.1.0 on npm, PyPI and crates.io; still in development.
-- **Daily activity** since 10 October 2026.
+- **Daily activity** since 10 October 2026. The timesheet starts on 1 October 2026 (Karthik's
+  choice), so 1–9 October show as days with no activity.
 
 Everything else on the page (versions, release dates, pull requests, their status, active days)
 comes live from GitHub and the package registries, never typed by hand.
@@ -43,9 +44,9 @@ Desktop (≥ 768 px)
 │ [nav]                                                          │
 │                                                                │
 │                Open source                                     │
-│                Two libraries Karthik maintains, fixes sent to  │
-│                other projects, and a record of shipping every  │
-│                day since 10 October.                           │
+│                Two libraries I maintain, fixes I've sent to    │
+│                other people's projects, and the days I've      │
+│                shipped.                                        │
 │                                                                │
 │  Libraries     workclock                                       │
 │                Business-time arithmetic: working hours, SLAs,  │
@@ -61,20 +62,20 @@ Desktop (≥ 768 px)
 │                Version   0.1.0, in development                 │
 │                ...                                             │
 │                                                                │
-│  Contributions deepset-ai/haystack                             │
-│                Validate batch_size in SASEvaluator    In review│
-│                                                                │
-│                shaongitbd/doory                                │
-│                Free crop keeps the side you aren't…   Merged   │
-│                Crop: a resize past the image edge…    In review│
+│  Contributions [logo] shaongitbd/doory  1.9k stars      □ □ □ ■│
+│                1 merged, 3 in review                           │
+│  31 Oct        □ Crop: a resize past the image edge…           │
+│                  In review for 1 day                           │
+│  29 Oct        ■ Free crop keeps the side you aren't dragging  │
+│                  Merged in 2 days                              │
 │                …                                               │
 │                                                                │
-│  Every day     Mon Tue Wed Thu Fri Sat Sun                     │
-│   6 Oct                         ■   ■   ■                      │
-│  13 Oct         ■   ■   ■   ■   ■   ■   ■                      │
-│  20 Oct         ■   ■   ■   ■   ■   ■   ■                      │
-│  27 Oct         ■   ■   ■   ■   ■   ■   ◪ (today)              │
-│                Shipped something every day since 10 October.   │
+│  Activity      Mon Tue Wed Thu Fri Sat Sun                     │
+│  28 Sept                    □   □   □   □                      │
+│   5 Oct         □   □   □   □   □   ■   ■                      │
+│  12 Oct         ■   ■   ■   ■   ■   ■   ■                      │
+│  …                                                             │
+│                Active on 23 of 32 days.                        │
 │                                                                │
 │                Updated from GitHub and the package registries  │
 │                at 10:20 on 1 Nov (Bengaluru time).             │
@@ -107,21 +108,35 @@ timesheet.
   the browser ("8 working hours from now ends at…"). It shows the library working, but needs a
   CSP change for WebAssembly, so it's out of the first version.
 
-### Contributions
+### Contributions: a status ledger (ADR 0018)
 
-- Grouped by repository, most recent activity first. The repository name links to the
-  repository; each pull request is a row with its date in the time margin (merged date, or the
-  date it was opened), its title linking to the pull request, and its status on the right.
-- **Status, in words:** "Merged", "In review" or "Draft". The status word is in `ink`;
-  "Merged" also gets a small Lucide check icon, so colour is never the only signal.
+The pull requests read as a ledger that uses the timesheet's squares at a smaller size, so the
+page has one visual language: **filled ultramarine = merged**, **ultramarine outline = in review**,
+**dashed outline = draft**. No new colours; one new radius token, `radius-mark` (3 px), for the
+12 px squares.
+
+- **Per repository,** a heading row: the owner's logo (24 px), the repository name linking to it,
+  its star count in muted text ("32k stars"; none shown for a repository with no stars), and a
+  count line ("1 merged, 3 in review"). On the right, a tally: one square per pull request,
+  newest first. The tally is hidden from screen readers; the count line says the same in words.
+- **Per pull request,** a row with its date in the time margin (merged date, or the date it was
+  opened), its status square, its title linking to the pull request, and its status and review
+  time in words under it: "Merged in 2 days", "Merged the same day", "In review for 14 days".
+  Shape and words carry the status, so colour is never the only signal.
+- **Logos** are the repository owners' GitHub avatars, downloaded on the server with the rest of
+  the data (64 px) and embedded as `data:` images. Visitors' browsers never contact GitHub, and
+  the CSP needs no new host.
+- **Star counts** are shown, small and muted. They tell a recruiter at a glance that SigNoz and
+  Haystack are widely used projects, which is the real signal. This reverses the first version's
+  "no star counts" (ADR 0018).
 - Pull request titles are shown as written on GitHub, minus two kinds of noise: a commit-type
   prefix ("fix(charts): use…" becomes "Use…") and a trailing issue number ("(#179)"), which the
   link already carries.
-- **Not shown:** lines added or removed, review time, star counts. They're noise for a recruiter,
-  and an engineer can see them one click away. Star counts in particular would borrow other
-  projects' popularity as decoration.
-- **Left out automatically:** pull requests to Karthik's own repositories, and to the
-  organisations Karthik has worked for (a hide list in `src/content/open-source.ts`).
+- **Not shown:** pull request numbers, lines and files changed. An engineer sees them one click
+  away; for a recruiter they're noise.
+- **Left out:** pull requests to Karthik's own repositories and to the organisations Karthik has
+  worked for (`hiddenOwners`), and repositories Karthik chose not to list (`hiddenRepos`), both in
+  `src/content/open-source.ts`.
 - **Maintainer quotes** appear only once a real one exists, and only after Karthik approves it.
   The page has no slot for them until then, so it never looks like something is missing.
 
@@ -130,22 +145,22 @@ timesheet.
 The GitHub contribution graph is the default way to show activity, and it shows up on most
 developer sites. This page uses a **weekly timesheet** instead, which fits "Working hours":
 
-- **One row per week**, Monday to Sunday, starting with the week of 10 October. Each row's start
-  date sits in the time margin, the same place the home page's chapters put their dates.
+- **One row per week**, Monday to Sunday, starting with the week of 1 October 2026 and growing
+  from there, with no rolling window. Each row's start date sits in the time margin, the same
+  place the home page's chapters put their dates. The heading is just "Activity".
 - **Each day is either shipped or not.** An active day is a filled `accent` square
-  (`radius-band`). A day with no activity is an empty square with a `rule` outline. Days before
-  10 October have no square at all, so the record starts cleanly instead of showing empty days
-  before it.
+  (`radius-band`). A day with no activity is an empty square with a `rule-strong`
+  outline (3:1 contrast). Days before 1 October have no square at all.
 - **No shades for volume.** GitHub's graph darkens busier days. That would push attention to raw
   counts (some days have over 200 contributions), which can read as automation. One shade says
   the only thing that matters here: Karthik showed up.
 - **Today** is drawn with a dashed outline until the first contribution of the day, then filled
   like any other day. Today never counts as missed.
-- **The sentence under it is generated from the data:** "Shipped something every day since 10
-  October." while the run is unbroken; "Active on 41 of 45 days since 10 October." if a day is ever
-  missed. Honest either way, and never a countdown.
-- Once the record is longer than 13 weeks, the page shows the latest 13 and says "since 10
-  October" in the sentence, so the page doesn't keep growing.
+- **The sentence under it is generated from the data:** "Shipped something every day." when
+  every day is active; otherwise "Active on 23 of 32 days." Honest either way, never a countdown,
+  and without a date: the first row already shows where the record starts.
+- GitHub returns a year of activity per request, so the data is fetched one year at a time from
+  1 October 2026 and the record keeps growing past a year.
 
 ### Freshness line
 

@@ -1,6 +1,7 @@
 # 0017: An open-source page with live data
 
-- Status: Accepted (2026-11-01)
+- Status: Accepted (2026-11-01). Star counts (decision 5) and the timesheet window revised by
+  [0018](0018-contributions-ledger-and-activity.md).
 - Date: 2026-11-01
 - Design: [13-open-source](../design/13-open-source.md)
 
