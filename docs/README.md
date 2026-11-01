@@ -28,6 +28,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0018: Contributions as a status ledger; activity from 1 October](decisions/0018-contributions-ledger-and-activity.md)
 - [0019: Four easter eggs, each where only a curious visitor looks](decisions/0019-easter-eggs.md)
 - [0020: Contributions that keep growing](decisions/0020-contributions-at-scale.md)
+- [0021: Markdown versions of the pages, and llms.txt](decisions/0021-markdown-for-agents.md)
 
 ## Research (local only, gitignored)
 
@@ -55,4 +56,4 @@ Read in order; each builds on the previous ones.
 11. [Performance and SEO](design/11-performance-and-seo.md): targets, metadata, JSON-LD, security headers, analytics
 12. [Polish checklist](design/12-polish-checklist.md): before launch
 13. [Open source page](design/13-open-source.md): libraries, upstream pull requests, the timesheet
-14. [Access for AI agents and search](design/14-agent-access.md): proposed; Markdown pages, `llms.txt`, an MCP server, mobile speed
+14. [Access for AI agents and search](design/14-agent-access.md): Markdown pages and `llms.txt` built (ADR 0021); proposed: `llms.txt`, an MCP server, mobile speed

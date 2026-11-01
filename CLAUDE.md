@@ -62,6 +62,7 @@ file fully before doing anything in this repo.
 | [0018](docs/decisions/0018-contributions-ledger-and-activity.md) | Contributions as a status ledger (squares, review time, stars, logos); activity from 1 Oct                   |
 | [0019](docs/decisions/0019-easter-eggs.md)                       | Four easter eggs: 404 heading, console note, `curl` card, tap the clock for the time difference              |
 | [0020](docs/decisions/0020-contributions-at-scale.md)            | Contributions: all merged and open PRs fetched; 5 per project and 6 projects shown, the rest behind toggles  |
+| [0021](docs/decisions/0021-markdown-for-agents.md)               | Markdown version of every page from one registry, `llms.txt`, `Accept: text/markdown`; parity check          |
 
 ## Conventions
 
@@ -112,6 +113,11 @@ file fully before doing anything in this repo.
   Inspector. Otherwise LinkedIn keeps its cached copy. A link already on the LinkedIn profile can
   keep a broken thumbnail even then: re-add it with `?v=2` on the end (LinkedIn fetches it fresh
   and stores the canonical URL).
+- **Markdown for agents (ADR 0021):** the page registry and Markdown builders are
+  `src/lib/agent-docs.ts`; routes in `src/app/md/`, `src/app/llms.txt/`, `src/app/llms-full.txt/`;
+  rewrites in `next.config.ts`. Home copy lives in `src/content/home.ts`. A new page needs a
+  registry entry and a `markdownPages` line. After any wording change, run
+  `bun run agent-docs:check` against a production build (`bun run start -p 3200`).
 - **Easter eggs (ADR 0019):** the console note is `src/instrumentation-client.ts`; the `curl`
   card is `src/app/card.txt/route.ts`, behind a user-agent rewrite in `next.config.ts`; the clock
   toggle is in `src/components/site/local-time.tsx`. All three share the time sentence in
