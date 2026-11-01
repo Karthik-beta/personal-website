@@ -1,5 +1,6 @@
 import path from "node:path";
 import type { NextConfig } from "next";
+import { site } from "./src/lib/site";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -39,10 +40,10 @@ const securityHeaders = [
 
 // Pages that also have a Markdown version (src/lib/agent-docs.ts), and where it is served from.
 const markdownPages = [
-  { source: "/", destination: "/md/index" },
-  { source: "/resume", destination: "/md/resume" },
-  { source: "/open-source", destination: "/md/open-source" },
-  { source: "/work/:slug([^/.]+)", destination: "/md/work/:slug" },
+  { source: "/", destination: "/md/index", markdown: "/index.md" },
+  { source: "/resume", destination: "/md/resume", markdown: "/resume.md" },
+  { source: "/open-source", destination: "/md/open-source", markdown: "/open-source.md" },
+  { source: "/work/:slug([^/.]+)", destination: "/md/work/:slug", markdown: "/work/:slug.md" },
 ];
 const wantsMarkdown = [{ type: "header" as const, key: "accept", value: "(.*)text/markdown(.*)" }];
 
@@ -53,17 +54,31 @@ const nextConfig: NextConfig = {
     return [
       { source: "/:path*", headers: securityHeaders },
       // The same URL answers with HTML or Markdown, so caches must key on Accept.
-      ...markdownPages.map(({ source }) => ({
-        source,
-        headers: [{ key: "Vary", value: "Accept" }],
-      })),
+      ...markdownPages.flatMap(({ source, markdown }) => [
+        { source, headers: [{ key: "Vary", value: "Accept" }] },
+        {
+          // Only on the HTML: the Markdown answer keeps its own Link to the canonical page.
+          source,
+          missing: wantsMarkdown,
+          headers: [
+            {
+              key: "Link",
+              value: `<${site.url}${markdown}>; rel="alternate"; type="text/markdown"`,
+            },
+          ],
+        },
+      ]),
     ];
   },
   async rewrites() {
     return {
       beforeFiles: [
         // An explicit Accept: text/markdown wins over the curl card; plain curl sends */*.
-        ...markdownPages.map((page) => ({ ...page, has: wantsMarkdown })),
+        ...markdownPages.map(({ source, destination }) => ({
+          source,
+          destination,
+          has: wantsMarkdown,
+        })),
         {
           source: "/",
           has: [{ type: "header", key: "user-agent", value: "curl/.*" }],
