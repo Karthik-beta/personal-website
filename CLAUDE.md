@@ -64,6 +64,7 @@ file fully before doing anything in this repo.
 | [0020](docs/decisions/0020-contributions-at-scale.md)            | Contributions: all merged and open PRs fetched; 5 per project and 6 projects shown, the rest behind toggles       |
 | [0021](docs/decisions/0021-markdown-for-agents.md)               | Markdown version of every page from one registry, `llms.txt`, `Accept: text/markdown`; parity check               |
 | [0022](docs/decisions/0022-discovery-signals.md)                 | `Link` header to each page's Markdown, `llms.txt` on the `curl` card, IndexNow (`bun run indexnow` after deploys) |
+| [0023](docs/decisions/0023-mcp-server.md)                        | Read-only MCP server at `/mcp` (official SDK, stateless), tools and resources from the agent-docs registry        |
 
 ## Conventions
 
@@ -119,6 +120,8 @@ file fully before doing anything in this repo.
   rewrites in `next.config.ts`. Home copy lives in `src/content/home.ts`. A new page needs a
   registry entry and a `markdownPages` line. After any wording change, run
   `bun run agent-docs:check` against a production build (`bun run start -p 3200`).
+- **MCP server (ADR 0023):** `src/app/mcp/route.ts` and `src/lib/mcp.ts`; its answers come from
+  `src/lib/agent-docs.ts`. Check it with `bun run mcp:check` against a production build.
 - **IndexNow (ADR 0022):** after a deploy with new or changed pages is live, run
   `bun run indexnow` to tell Bing. The key is `site.indexNowKey` and `public/<key>.txt`; change
   both together or not at all.

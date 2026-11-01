@@ -30,6 +30,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0020: Contributions that keep growing](decisions/0020-contributions-at-scale.md)
 - [0021: Markdown versions of the pages, and llms.txt](decisions/0021-markdown-for-agents.md)
 - [0022: Discovery signals for agents and Bing](decisions/0022-discovery-signals.md)
+- [0023: A read-only MCP server](decisions/0023-mcp-server.md)
 
 ## Research (local only, gitignored)
 
@@ -57,4 +58,4 @@ Read in order; each builds on the previous ones.
 11. [Performance and SEO](design/11-performance-and-seo.md): targets, metadata, JSON-LD, security headers, analytics
 12. [Polish checklist](design/12-polish-checklist.md): before launch
 13. [Open source page](design/13-open-source.md): libraries, upstream pull requests, the timesheet
-14. [Access for AI agents and search](design/14-agent-access.md): Markdown pages and `llms.txt` (ADR 0021) and discovery signals (ADR 0022) built; proposed: `llms.txt`, an MCP server, mobile speed
+14. [Access for AI agents and search](design/14-agent-access.md): Markdown pages and `llms.txt` (ADR 0021) discovery signals (ADR 0022) and an MCP server (ADR 0023) built; proposed: `llms.txt`, an MCP server, mobile speed
