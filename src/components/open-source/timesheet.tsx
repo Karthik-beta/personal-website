@@ -1,9 +1,9 @@
 import { cn } from "@/lib/cn";
 import { formatDay, type Week } from "@/lib/open-source";
 
-const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-// Every other weekday is labelled, so the labels never crowd the squares.
-const labelled = new Set([0, 2, 4]);
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// Mon, Wed and Fri are labelled, so the labels never crowd the squares.
+const labelled = new Set([1, 3, 5]);
 
 const label = { active: "active", missed: "no activity", today: "today, nothing yet", none: "" };
 

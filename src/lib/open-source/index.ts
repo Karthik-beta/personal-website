@@ -21,17 +21,15 @@ export async function getOpenSource(): Promise<OpenSourceData> {
 export type Cell = { date: string; kind: "active" | "missed" | "today" | "none" };
 export type Week = { start: string; cells: Cell[] };
 
-const mondayOf = (date: string) => {
-  const weekday = (new Date(`${date}T00:00:00Z`).getUTCDay() + 6) % 7; // Monday = 0
-  return addDays(date, -weekday);
-};
+// Weeks start on Sunday (Karthik's choice, 2026-11-01).
+const sundayOf = (date: string) => addDays(date, -new Date(`${date}T00:00:00Z`).getUTCDay());
 
-/** The timesheet: Monday-to-Sunday rows ending with this week; the last `limit` of them if set. */
+/** The timesheet: Sunday-to-Saturday weeks ending with this week; the last `limit` of them if set. */
 export function timesheetWeeks(data: OpenSourceData, limit?: number): Week[] {
   const active = new Map(data.days.map((day) => [day.date, day.active]));
   const since = data.days[0]?.date ?? data.today;
   const weeks: Week[] = [];
-  for (let start = mondayOf(since); start <= data.today; start = addDays(start, 7)) {
+  for (let start = sundayOf(since); start <= data.today; start = addDays(start, 7)) {
     const cells = Array.from({ length: 7 }, (_, i): Cell => {
       const date = addDays(start, i);
       if (date < since || date > data.today) return { date, kind: "none" };
