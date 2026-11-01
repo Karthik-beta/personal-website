@@ -24,6 +24,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0014: The resume opens in a new tab](decisions/0014-resume-opens-in-new-tab.md) (superseded by 0016)
 - [0015: Google Analytics for clicks and behaviour](decisions/0015-google-analytics.md)
 - [0016: The resume is a page, with evidence beside each line](decisions/0016-resume-as-a-page.md)
+- [0017: An open-source page with live data](decisions/0017-open-source-page.md)
 
 ## Research (local only, gitignored)
 
@@ -50,3 +51,4 @@ Read in order; each builds on the previous ones.
 10. [Accessibility](design/10-accessibility.md): WCAG 2.2 AA rules
 11. [Performance and SEO](design/11-performance-and-seo.md): targets, metadata, JSON-LD, security headers, analytics
 12. [Polish checklist](design/12-polish-checklist.md): before launch
+13. [Open source page](design/13-open-source.md): libraries, upstream pull requests, the timesheet

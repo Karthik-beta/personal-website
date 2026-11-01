@@ -58,6 +58,7 @@ file fully before doing anything in this repo.
 | [0014](docs/decisions/0014-resume-opens-in-new-tab.md)        | Superseded by 0016                                                                                           |
 | [0015](docs/decisions/0015-google-analytics.md)               | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                            |
 | [0016](docs/decisions/0016-resume-as-a-page.md)               | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line          |
+| [0017](docs/decisions/0017-open-source-page.md)               | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch   |
 
 ## Conventions
 
@@ -97,6 +98,11 @@ file fully before doing anything in this repo.
 - **Case studies:** content in `src/content/case-studies.ts`; one static route per study in
   `src/app/work/<slug>/` (not a `[slug]` route: with Cache Components it can't return a real 404).
 - **Shared UI:** `src/components/ui/` (button, text link, container), `src/components/site/`.
+- **Open source page:** fixed facts (libraries, status words, hidden owners) in
+  `src/content/open-source.ts`; live data from GitHub and the registries in `src/lib/open-source/`,
+  cached for an hour. Needs `GITHUB_TOKEN` (read-only, server only) in Vercel; without it the
+  GitHub part falls back to `src/content/open-source.snapshot.json`. Refresh that with
+  `GITHUB_TOKEN=$(gh auth token) bun run oss:snapshot` when committing other work.
 - **Link-preview images:** `src/lib/og.tsx`, used by each `opengraph-image.tsx`. The image URL's
   `?hash` comes only from the route file's text, so after changing how an image looks, bump the
   "Look v" comment in every `opengraph-image.tsx`, then re-inspect the URLs in LinkedIn's Post

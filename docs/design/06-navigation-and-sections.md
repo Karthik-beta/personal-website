@@ -12,6 +12,7 @@
 | `/work/job-matcher` | Case study: AI Job Resume Matcher             | Yes                       |
 | `/work/workclock`   | Case study: workclock                         | Yes                       |
 | `/work/blinkql`     | Case study: Blinkql (added 2026-10-27)        | Yes                       |
+| `/open-source`      | Libraries, upstream PRs, activity (ADR 0017)  | Yes                       |
 | `/resume`           | Resume, with evidence notes (ADR 0016)        | Yes                       |
 | `/resume.pdf`       | Resume PDF, downloaded from `/resume`         | Yes                       |
 | `/styleguide`       | Design tokens and components                  | **No** (`noindex`)        |
@@ -23,7 +24,7 @@ email. Shorter projects (Pivotr's internal tools) appear on the home page only.
 ## Navigation bar
 
 ```text
-Desktop:  KP  Karthik Parameshwara               Work  About  Contact  [◐]  [Resume]
+Desktop:  KP  Karthik Parameshwara     Work  Open source  About  Contact  [◐]  [Resume]
 Phone:    KP  Karthik Parameshwara                          [◐]  [Resume]  [Menu]
 ```
 
@@ -33,24 +34,26 @@ Phone:    KP  Karthik Parameshwara                          [◐]  [Resume]  [Me
   back the moment you scroll up, so the **Resume** button is always one gesture away. It's always
   shown at the very top of the page and whenever something in it has keyboard focus.
 - **Name** links home. **Work / About / Contact** jump to sections on the home page (from a case
-  study, they go to `/#work` etc.).
+  study, they go to `/#work` etc.). **Open source** goes to the `/open-source` page (ADR 0017).
+  Between 768 and 1023 px the name is hidden and the monogram stands alone, so the links fit.
 - **Theme toggle** (◐) cycles light → dark, and is labelled for screen readers.
 - **Resume** is the only filled button in the nav: the most important action on the site.
-- **Phone menu:** "Menu" opens a panel built on Base UI's `Dialog`, with the three section links
+- **Phone menu:** "Menu" opens a panel built on Base UI's `Dialog`, with the four nav links
   as large targets. It closes on Escape, on outside tap, and when a link is chosen.
 - **Current location:** on case-study pages, "Work" is marked `aria-current="true"` and underlined. Not `"page"`: the link leads to the home page's Work section, not to the page being read.
 
 ## Home page sections, mapped to the story
 
-| #   | Section  | Story role (see private story doc) | Content                                                                                                           |
-| --- | -------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| 0   | Hero     | Skim layer                         | Name, headline, facts row (role, experience, availability, where), local time, Resume / Email / GitHub / LinkedIn |
-| 1   | Proof    | Skim layer                         | Three verifiable facts: deployments, co-founder, open-source library                                              |
-| 2   | Chapters | Story path                         | Four dated chapters in the time margin: customers first → learning to ship → building a company → now             |
-| 3   | Work     | Story path                         | Three case-study summaries (linked) + two short entries                                                           |
-| 4   | About    | Human layer                        | Small photo, short personal paragraph, languages                                                                  |
-| 5   | Contact  | Action                             | One sentence, email (with copy button), links, resume                                                             |
-| —   | Footer   | Housekeeping                       | Name, © year, links, "Source on GitHub"                                                                           |
+| #   | Section     | Story role (see private story doc) | Content                                                                                                           |
+| --- | ----------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 0   | Hero        | Skim layer                         | Name, headline, facts row (role, experience, availability, where), local time, Resume / Email / GitHub / LinkedIn |
+| 1   | Proof       | Skim layer                         | Three verifiable facts: deployments, co-founder, open-source library                                              |
+| 2   | Chapters    | Story path                         | Four dated chapters in the time margin: customers first → learning to ship → building a company → now             |
+| 3   | Work        | Story path                         | Three case-study summaries (linked) + two short entries                                                           |
+| 3a  | Open source | Story path                         | One sentence (libraries, projects), the last four weeks of the timesheet, link to `/open-source`                  |
+| 4   | About       | Human layer                        | Small photo, short personal paragraph, languages                                                                  |
+| 5   | Contact     | Action                             | One sentence, email (with copy button), links, resume                                                             |
+| —   | Footer      | Housekeeping                       | Name, © year, links, "Source on GitHub"                                                                           |
 
 The **first screen** (no scrolling, 375 × 667 phone and 1280 × 800 laptop) must show: name,
 headline, role, experience, availability and the Resume button. This gets checked at every build
