@@ -99,8 +99,8 @@ const plainTitle = (title: string) => {
   return plain.charAt(0).toUpperCase() + plain.slice(1);
 };
 
-type GitHubResult = {
-  /** One contributions collection per year, aliased y0, y1, … (see `query`). */
+type Calendar = {
+  /** One contributions collection per year, aliased y0, y1, … (see `calendarQuery`). */
   user: Record<
     string,
     {
@@ -109,7 +109,11 @@ type GitHubResult = {
       };
     }
   >;
+};
+
+type SearchPage = {
   search: {
+    pageInfo: { hasNextPage: boolean; endCursor: string | null };
     nodes: ({
       title: string;
       url: string;
@@ -129,9 +133,7 @@ type GitHubResult = {
 
 // GitHub returns at most a year of contributions per collection, so the record since
 // `openSource.since` is asked for one year at a time, as aliased collections in one request.
-const query = (
-  years: { from: string; to: string }[],
-) => `query ($login: String!, $search: String!) {
+const calendarQuery = (years: { from: string; to: string }[]) => `query ($login: String!) {
   user(login: $login) {
     ${years
       .map(
@@ -141,7 +143,11 @@ const query = (
       )
       .join("\n    ")}
   }
-  search(query: $search, type: ISSUE, first: 100) {
+}`;
+
+const searchQuery = `query ($search: String!, $after: String) {
+  search(query: $search, type: ISSUE, first: 100, after: $after) {
+    pageInfo { hasNextPage endCursor }
     nodes {
       ... on PullRequest {
         title url state isDraft createdAt mergedAt
@@ -150,6 +156,28 @@ const query = (
     }
   }
 }`;
+
+async function graphql<T>(token: string, query: string, variables: Record<string, unknown>) {
+  const result = await getJson("https://api.github.com/graphql", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ query, variables }),
+  });
+  if (result.errors?.length) throw new Error(`GitHub: ${result.errors[0].message}`);
+  return result.data as T;
+}
+
+/** Every result of a search, 100 at a time (GitHub stops a search at 1,000). */
+async function searchAll(token: string, search: string) {
+  const nodes: SearchPage["search"]["nodes"] = [];
+  let after: string | null = null;
+  do {
+    const page: SearchPage = await graphql<SearchPage>(token, searchQuery, { search, after });
+    nodes.push(...page.search.nodes);
+    after = page.search.pageInfo.hasNextPage ? page.search.pageInfo.endCursor : null;
+  } while (after);
+  return nodes;
+}
 
 async function fetchGitHub(token: string, now: Date, today: string) {
   const years: { from: string; to: string }[] = [];
@@ -161,23 +189,17 @@ async function fetchGitHub(token: string, now: Date, today: string) {
     });
   }
   const hidden = openSource.hiddenOwners.map((owner) => `-user:${owner}`).join(" ");
-  const body = JSON.stringify({
-    query: query(years),
-    variables: {
-      login: openSource.github,
-      search: `is:pr is:public author:${openSource.github} ${hidden}`,
-    },
-  });
-  const result = await getJson("https://api.github.com/graphql", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body,
-  });
-  if (result.errors?.length) throw new Error(`GitHub: ${result.errors[0].message}`);
-  const data = result.data as GitHubResult;
+  const prs = `is:pr is:public author:${openSource.github} ${hidden}`;
+  // Merged and open (drafts included) as two searches, so pull requests closed without merging
+  // are never fetched; search can't ask for "merged or open" in one go.
+  const [calendar, merged, open] = await Promise.all([
+    graphql<Calendar>(token, calendarQuery(years), { login: openSource.github }),
+    searchAll(token, `${prs} is:merged`),
+    searchAll(token, `${prs} is:open`),
+  ]);
 
   const active = new Set(
-    Object.values(data.user)
+    Object.values(calendar.user)
       .flatMap((year) => year.contributionCalendar.weeks)
       .flatMap((week) => week.contributionDays)
       .filter((day) => day.contributionCount > 0)
@@ -189,7 +211,7 @@ async function fetchGitHub(token: string, now: Date, today: string) {
   }
 
   const byRepo = new Map<string, RepoContributions>();
-  for (const pr of data.search.nodes) {
+  for (const pr of [...merged, ...open]) {
     if (!pr || pr.state === "CLOSED") continue;
     if (openSource.hiddenOwners.includes(pr.repository.owner.login)) continue;
     if (openSource.hiddenRepos.includes(pr.repository.nameWithOwner)) continue;
