@@ -23,7 +23,17 @@ const person = {
   description: site.description,
   address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "MVJ College of Engineering" },
-  knowsAbout: ["TypeScript", "Node.js", "NestJS", "Next.js", "React", "PostgreSQL", "Docker"],
+  knowsAbout: [
+    "TypeScript",
+    "Node.js",
+    "NestJS",
+    "Next.js",
+    "React",
+    "PostgreSQL",
+    "Docker",
+    "Python",
+    "Rust",
+  ],
   // Profiles elsewhere that are also Karthik's, including the writing profiles not linked on the page.
   sameAs: [
     site.links.github,
