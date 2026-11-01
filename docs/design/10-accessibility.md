@@ -66,7 +66,9 @@ screen reader should find it just as good.
 
 - Link text makes sense on its own ("Read the Aria case study", not "click here").
 - External links say so: an icon plus visually hidden "(opens in a new tab)".
-- The resume link says it's a PDF and opens a new tab: "View resume (PDF, opens in a new tab)".
+- The resume buttons open `/resume`, a normal page (ADR 0016). Its evidence notes follow their
+  line in reading order; on phones each sits behind a native `<details>` toggle, "Evidence for
+  this line". The "Download PDF" button says what it does.
 
 ## Motion
 

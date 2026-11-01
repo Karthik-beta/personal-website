@@ -183,7 +183,7 @@ both.
 - **Setup:** Cloudflare's small beacon script, added in `layout.tsx` with `strategy="afterInteractive"`,
   with the site token stored in an environment variable (`NEXT_PUBLIC_CF_BEACON_TOKEN`).
   It only loads in production. Configured during Phase 6.
-- **Resume downloads** show up as page views of `/resume.pdf`.
+- **Resume views** show up as page views of `/resume`; downloads of the PDF as views of `/resume.pdf`.
 
 **Google Analytics 4** (free, [ADR 0015](../decisions/0015-google-analytics.md)), for clicks and
 behaviour.
@@ -191,7 +191,8 @@ behaviour.
 - Loaded the same way as the Cloudflare beacon: production only, on karthik.nz only, after the page
   is interactive, with the measurement ID in `NEXT_PUBLIC_GA_ID`.
 - Enhanced measurement records page views (including client-side navigation), outbound clicks,
-  scrolling and PDF opens. The site adds `resume_open`, `email_click` and `email_copy`; any element
+  scrolling and PDF opens. The site adds `resume_open` (a link to `/resume`), `resume_download`, `email_click` and
+  `email_copy`; any element
   with `data-track="<event>"` sends that event when clicked.
 - It sets cookies and there is deliberately no consent banner. `/privacy` says what is recorded
   and how to opt out. Retention stays at two months and Google Signals stays off; the privacy page

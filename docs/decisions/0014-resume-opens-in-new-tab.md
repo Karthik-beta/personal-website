@@ -1,6 +1,6 @@
 # 0014: The resume opens in a new tab
 
-- Status: Accepted
+- Status: Superseded by [0016](0016-resume-as-a-page.md)
 - Date: 2026-10-28
 
 ## Context

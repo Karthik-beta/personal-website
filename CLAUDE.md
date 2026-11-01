@@ -55,8 +55,9 @@ file fully before doing anything in this repo.
 | [0011](docs/decisions/0011-icons-identity-analytics.md)       | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                      |
 | [0012](docs/decisions/0012-assets-generated-in-code.md)       | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                   |
 | [0013](docs/decisions/0013-search-and-security-headers.md)    | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                |
-| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)        | Resume links open the PDF in a new tab, labelled "View resume" / "Resume"                                    |
+| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)        | Superseded by 0016                                                                                           |
 | [0015](docs/decisions/0015-google-analytics.md)               | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                            |
+| [0016](docs/decisions/0016-resume-as-a-page.md)               | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line          |
 
 ## Conventions
 
@@ -105,10 +106,13 @@ file fully before doing anything in this repo.
 - **Brand assets:** `bun run brand` regenerates the monogram, favicons and font instances from
   `assets/fonts` (see `assets/README.md`). Never edit generated files by hand.
 - **Resume:** the source is the general resume in the Job Hunt app (`Job Hunt/App`). Render
-  it without the phone with `uv run jobhunt master --web <pdf>` there, then run
-  `python -I scripts/prepare-resume.py <pdf>`. That script writes `public/resume.pdf`, cleans
-  the metadata, redacts any phone number left and checks none remains. Always run new resumes
-  through it. Resume links open in a new tab (ADR 0014).
+  the PDF (without the phone) and the page data together there with
+  `uv run jobhunt master --web <pdf> --json <json>`, then run
+  `python -I scripts/prepare-resume.py <pdf> --json <json>`. That script writes
+  `public/resume.pdf` and `src/content/resume.json`, cleans the PDF's metadata, and checks no
+  phone number is left in either. Always run new resumes through it, and never edit
+  `resume.json` by hand: evidence notes are written and approved in the facts bank. The
+  resume buttons open the `/resume` page (ADR 0016).
 
 ## Open items (content from Karthik)
 

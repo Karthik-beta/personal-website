@@ -25,18 +25,19 @@ Never `height`, `width` or layout properties.
 
 ## Interactions
 
-| Element        | Interaction      | Response                                                                                                                |
-| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Links          | Hover            | Colour → `accent-hover`, underline 1 → 2 px (120 ms)                                                                    |
-| Primary button | Hover / press    | Background → `accent-hover`; on press moves down 1 px                                                                   |
-| Quiet button   | Hover / press    | Background → `band`; on press moves down 1 px                                                                           |
-| Any focusable  | Keyboard focus   | 2 px `accent` ring, offset 3 px. Appears instantly, no animation                                                        |
-| Nav bar        | Scroll down / up | Slides up out of view / back in (200 ms)                                                                                |
-| Mobile menu    | Open / close     | Fades and slides 8 px down / back (200 / 150 ms)                                                                        |
-| Copy email     | Click            | Label changes to "Copied" with a check for 2 s                                                                          |
-| Theme toggle   | Click            | Theme switches instantly. Colour transitions are disabled for that frame so the page doesn't fade between themes        |
-| Local time     | Every 30 s       | Text updates in place, no animation                                                                                     |
-| Chapter dates  | Scroll (desktop) | Date stays pinned in the time margin while its chapter is visible (CSS `position: sticky`, no JavaScript, no animation) |
+| Element        | Interaction                           | Response                                                                                                                |
+| -------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Links          | Hover                                 | Colour → `accent-hover`, underline 1 → 2 px (120 ms)                                                                    |
+| Primary button | Hover / press                         | Background → `accent-hover`; on press moves down 1 px                                                                   |
+| Quiet button   | Hover / press                         | Background → `band`; on press moves down 1 px                                                                           |
+| Any focusable  | Keyboard focus                        | 2 px `accent` ring, offset 3 px. Appears instantly, no animation                                                        |
+| Nav bar        | Scroll down / up                      | Slides up out of view / back in (200 ms)                                                                                |
+| Mobile menu    | Open / close                          | Fades and slides 8 px down / back (200 / 150 ms)                                                                        |
+| Copy email     | Click                                 | Label changes to "Copied" with a check for 2 s                                                                          |
+| Theme toggle   | Click                                 | Theme switches instantly. Colour transitions are disabled for that frame so the page doesn't fade between themes        |
+| Local time     | Every 30 s                            | Text updates in place, no animation                                                                                     |
+| Evidence notes | Hover / focus a resume line (desktop) | Note text `muted` → `ink`, hairline `rule-strong` → `accent`, bullet → `accent` (120 ms)                                |
+| Chapter dates  | Scroll (desktop)                      | Date stays pinned in the time margin while its chapter is visible (CSS `position: sticky`, no JavaScript, no animation) |
 
 ## Scroll-driven storytelling
 
