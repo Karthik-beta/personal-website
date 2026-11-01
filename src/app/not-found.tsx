@@ -12,7 +12,7 @@ export default function NotFound() {
         <MarginGrid margin="404">
           <div className="grid max-w-[65ch] gap-4">
             <h1 className="text-3xl font-semibold stretch-heading">
-              This page doesn&rsquo;t exist
+              This page never made it to production
             </h1>
             <p className="text-lg">The link may be old, or the address mistyped.</p>
             <div className="flex flex-wrap gap-x-6 gap-y-3">
