@@ -60,6 +60,7 @@ file fully before doing anything in this repo.
 | [0016](docs/decisions/0016-resume-as-a-page.md)                  | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line          |
 | [0017](docs/decisions/0017-open-source-page.md)                  | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch   |
 | [0018](docs/decisions/0018-contributions-ledger-and-activity.md) | Contributions as a status ledger (squares, review time, stars, logos); activity from 1 Oct                   |
+| [0019](docs/decisions/0019-easter-eggs.md)                       | Four easter eggs: 404 heading, console note, `curl` card, tap the clock for the time difference              |
 
 ## Conventions
 
@@ -110,6 +111,10 @@ file fully before doing anything in this repo.
   Inspector. Otherwise LinkedIn keeps its cached copy. A link already on the LinkedIn profile can
   keep a broken thumbnail even then: re-add it with `?v=2` on the end (LinkedIn fetches it fresh
   and stores the canonical URL).
+- **Easter eggs (ADR 0019):** the console note is `src/instrumentation-client.ts`; the `curl`
+  card is `src/app/card.txt/route.ts`, behind a user-agent rewrite in `next.config.ts`; the clock
+  toggle is in `src/components/site/local-time.tsx`. All three share the time sentence in
+  `src/lib/bengaluru-time.ts`. Keep it to these: a new egg needs its own ADR.
 - **Brand assets:** `bun run brand` regenerates the monogram, favicons and font instances from
   `assets/fonts` (see `assets/README.md`). Never edit generated files by hand.
 - **Resume:** the source is the general resume in the Job Hunt app (`Job Hunt/App`). Render

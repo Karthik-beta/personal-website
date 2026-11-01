@@ -36,6 +36,7 @@ Never `height`, `width` or layout properties.
 | Copy email     | Click                                 | Label changes to "Copied" with a check for 2 s                                                                          |
 | Theme toggle   | Click                                 | Theme switches instantly. Colour transitions are disabled for that frame so the page doesn't fade between themes        |
 | Local time     | Every 30 s                            | Text updates in place, no animation                                                                                     |
+| Local time     | Hover / click (ADR 0019)              | Text → `accent` on hover (120 ms). Click: the visitor's own time and the gap to Bengaluru; again to switch back         |
 | Evidence notes | Hover / focus a resume line (desktop) | Note text `muted` → `ink`, hairline `rule-strong` → `accent`, bullet → `accent` (120 ms)                                |
 | Chapter dates  | Scroll (desktop)                      | Date stays pinned in the time margin while its chapter is visible (CSS `position: sticky`, no JavaScript, no animation) |
 

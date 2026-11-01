@@ -17,6 +17,7 @@
 | `/resume.pdf`       | Resume PDF, downloaded from `/resume`         | Yes                       |
 | `/styleguide`       | Design tokens and components                  | **No** (`noindex`)        |
 | `/404`              | Not found page                                | No                        |
+| `/card.txt`         | Plain-text card for curl (ADR 0019)           | No (`noindex` header)     |
 
 Each case study has its own URL, so Karthik can paste a direct link into an application or
 email. Shorter projects (Pivotr's internal tools) appear on the home page only.
