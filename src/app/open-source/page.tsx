@@ -98,7 +98,7 @@ export default async function OpenSourcePage() {
             </h2>
           </MarginGrid>
           <div className="grid gap-4">
-            <div className="-ml-1 sm:-ml-1.5">
+            <div className="-ml-1">
               <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
             </div>
             <MarginGrid>

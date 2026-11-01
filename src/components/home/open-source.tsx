@@ -8,7 +8,7 @@ import { MarginGrid } from "./margin-grid";
 const list = (items: string[]) =>
   new Intl.ListFormat("en-GB", { style: "long", type: "conjunction" }).format(items);
 
-/** Home teaser for /open-source: one sentence built from the data and the last four weeks. */
+/** Home teaser for /open-source: one sentence built from the data, and the activity grid. */
 export async function OpenSource() {
   const data = await getOpenSource();
   const libraries = list(openSource.libraries.map((library) => library.name));
@@ -30,8 +30,8 @@ export async function OpenSource() {
             </p>
           </div>
         </MarginGrid>
-        <div className="-ml-1 sm:-ml-1.5">
-          <Timesheet weeks={timesheetWeeks(data, 4)} today={data.today} />
+        <div className="-ml-1">
+          <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
         </div>
         <MarginGrid>
           <TextLink href="/open-source" kind="action">
