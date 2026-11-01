@@ -1,7 +1,7 @@
 # 14: Access for AI agents and search
 
-- Status: Phase 1 built (2026-11-01, ADR 0021). Phases 2 and 3 and the speed prototype are
-  proposed; each needs Karthik's go and gets its own ADR.
+- Status: Phase 1 built (2026-11-01, ADR 0021). Phase 2 built (2026-11-01, ADR 0022). Phase 3
+  and the speed prototype are proposed; each needs Karthik's go and gets its own ADR.
 - Related: [11-performance-and-seo](11-performance-and-seo.md), ADR 0013 (search and headers),
   ADR 0015 (analytics), ADR 0019 (the `curl` card).
 
