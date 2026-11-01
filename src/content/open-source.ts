@@ -16,6 +16,9 @@ export type Library = {
 };
 
 export const openSource = {
+  /** The page's meta description, and its summary in llms.txt. */
+  description:
+    "Libraries Karthik Parameshwara maintains, pull requests to other projects, and daily activity, live from GitHub and the package registries.",
   github: "Karthik-beta",
   /** Where the activity timesheet starts; it grows from here, week by week (Karthik, 2026-11-01). */
   since: "2026-10-01",

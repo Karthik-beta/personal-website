@@ -4,10 +4,12 @@ import { CopyEmail } from "@/components/site/copy-email";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
+import { home } from "@/content/home";
 import { site } from "@/lib/site";
 import { MarginGrid } from "./margin-grid";
 
 export function Contact() {
+  const { contact } = home;
   return (
     <section id="contact" aria-labelledby="contact-title" className="pb-8">
       <Container>
@@ -15,26 +17,24 @@ export function Contact() {
           <div className="grid max-w-[60ch] gap-6">
             <div className="grid gap-2">
               <h2 id="contact-title" className="text-2xl font-semibold stretch-heading">
-                Contact
+                {contact.title}
               </h2>
-              <p className="text-lg">
-                I&rsquo;m available now. The fastest way to reach me is email.
-              </p>
+              <p className="text-lg">{contact.lead}</p>
             </div>
             <CopyEmail email={site.email} />
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
               <ButtonLink href={site.resume}>
                 <FileText aria-hidden size={18} strokeWidth={1.75} />
-                View resume
+                {contact.actions.resume}
               </ButtonLink>
               <TextLink href={site.links.linkedin} kind="action" icon={<LinkedInIcon />}>
-                LinkedIn
+                {contact.actions.linkedin}
               </TextLink>
               <TextLink href={site.links.github} kind="action" icon={<GitHubIcon />}>
-                GitHub
+                {contact.actions.github}
               </TextLink>
               <TextLink href={site.links.x} kind="action" icon={<XIcon />}>
-                X
+                {contact.actions.x}
               </TextLink>
             </div>
           </div>

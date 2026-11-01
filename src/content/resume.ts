@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 import data from "./resume.json";
 
 // The /resume page's content. resume.json is generated, never edited by hand: the Job Hunt app
@@ -41,3 +42,6 @@ export type Resume = {
 };
 
 export const resume = data as Resume;
+
+/** The page's meta description, and its summary in llms.txt. */
+export const resumeDescription = `${site.name}'s resume, with each line linked to the work behind it.`;

@@ -3,11 +3,9 @@ import type { Metadata } from "next";
 import { ResumeSheet } from "@/components/resume/resume-sheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { buttonClasses } from "@/components/ui/button";
-import { resume } from "@/content/resume";
+import { resume, resumeDescription as description } from "@/content/resume";
 import { site } from "@/lib/site";
 import { resumeStructuredData } from "@/lib/structured-data";
-
-const description = `${site.name}'s resume, with each line linked to the work behind it.`;
 
 export const metadata: Metadata = {
   title: "Resume",

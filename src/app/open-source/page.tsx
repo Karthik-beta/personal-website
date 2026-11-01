@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { MarginGrid } from "@/components/home/margin-grid";
-import { Contributions, contributionTotals, LibraryEntry } from "@/components/open-source/sections";
+import { Contributions, LibraryEntry } from "@/components/open-source/sections";
 import { Timesheet } from "@/components/open-source/timesheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { Container } from "@/components/ui/container";
 import { openSource } from "@/content/open-source";
 import { activitySummary, getOpenSource, lastActivity, timesheetWeeks } from "@/lib/open-source";
+import { contributionTotals, fetchedAt } from "@/lib/open-source/words";
 import { site } from "@/lib/site";
 import { openSourceStructuredData } from "@/lib/structured-data";
 
-const description =
-  "Libraries Karthik Parameshwara maintains, pull requests to other projects, and daily activity, live from GitHub and the package registries.";
+const { description } = openSource;
 
 export const metadata: Metadata = {
   title: "Open source",
@@ -32,18 +32,6 @@ export const metadata: Metadata = {
     description,
   },
 };
-
-const fetchedAt = (iso: string) =>
-  new Intl.DateTimeFormat("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-    day: "numeric",
-    month: "short",
-    timeZone: "Asia/Kolkata",
-  })
-    .formatToParts(new Date(iso))
-    .reduce<Record<string, string>>((parts, part) => ({ ...parts, [part.type]: part.value }), {});
 
 export default async function OpenSourcePage() {
   const data = await getOpenSource();
