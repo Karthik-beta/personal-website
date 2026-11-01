@@ -19,6 +19,7 @@
     "brand": "python -I scripts/build-brand.py",
     "oss:snapshot": "bun scripts/open-source-snapshot.ts",
     "agent-docs:check": "bun scripts/check-agent-docs.ts",
+    "mcp:check": "bun scripts/check-mcp.ts",
     "indexnow": "bun scripts/indexnow.ts"
   },
   "dependencies": {
