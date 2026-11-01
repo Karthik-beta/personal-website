@@ -36,6 +36,8 @@ muted, or not at all.
 - **The activity grid runs sideways:** one column per week, squares adapting to the width (36 px
   down to 14 px), then scrolling inside its own box from the newest week. The home page shows
   the whole grid instead of the last four weeks.
+- **Library icons** come from each library's website (its touch icon), fetched on the server and
+  embedded, like the owner logos. A site that isn't live yet shows no icon.
 - **`g8r-b8/frontierLab` is hidden** through a `hiddenRepos` list in `src/content/open-source.ts`.
 
 ## Why

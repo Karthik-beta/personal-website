@@ -95,6 +95,12 @@ width (see below).
 - One entry per library, stacked in the reading column, with "Released 30 Oct" (the latest
   release) in the time margin. **Not cards:** the theme rules out a grid
   of project cards with tech badges.
+- **Icon** (32 px) beside the name: the library website's own icon (workclock.karthik.nz,
+  fiscalclock.karthik.nz), read from the site's `<link>` tags on the server and embedded as a
+  `data:` image. The touch icon comes first because it has its own background; an SVG icon is
+  skipped because it follows the visitor's system theme, not this site's toggle, and can vanish
+  on a dark page. A site that isn't live yet just shows no icon until it is (fiscalclock, as of
+  2026-11-01). The sites are only read, never changed.
 - Name (`text-xl`, 600), a one-line description in plain words, then label/value rows (the
   case-study meta list): Version, Install from, Links.
 - **Status words come from Karthik, not from the version number:** "not yet stable" for
