@@ -89,6 +89,8 @@
   --text-display--letter-spacing: -0.01em;
 
   --radius-band: 0.375rem;
+  /* Small status squares (contributions); the timesheet's squares scaled down. */
+  --radius-mark: 0.1875rem;
   --radius-control: 0.5rem;
 
   --ease-enter: cubic-bezier(0.2, 0, 0, 1);

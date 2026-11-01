@@ -1,7 +1,43 @@
 {
-  "fetchedAt": "2026-11-01T04:53:48.592Z",
+  "fetchedAt": "2026-11-01T05:41:50.274Z",
   "today": "2026-11-01",
   "days": [
+    {
+      "date": "2026-10-01",
+      "active": false
+    },
+    {
+      "date": "2026-10-02",
+      "active": false
+    },
+    {
+      "date": "2026-10-03",
+      "active": false
+    },
+    {
+      "date": "2026-10-04",
+      "active": false
+    },
+    {
+      "date": "2026-10-05",
+      "active": false
+    },
+    {
+      "date": "2026-10-06",
+      "active": false
+    },
+    {
+      "date": "2026-10-07",
+      "active": false
+    },
+    {
+      "date": "2026-10-08",
+      "active": false
+    },
+    {
+      "date": "2026-10-09",
+      "active": false
+    },
     {
       "date": "2026-10-10",
       "active": true
@@ -99,66 +135,66 @@
     {
       "repo": "shaongitbd/doory",
       "url": "https://github.com/shaongitbd/doory",
+      "stars": 1946,
+      "avatar": "data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAEAAQAMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APn+iiigAooooAKKKKACiiigAooooAKKKKALFpYXmoSrFZWk9zIzBFSGMuSx6DA7mtG68IeJrG2kubvw9q1vBHjfLLZSIq5OOSRgc8V0Xwycx6xHIJGjCX1qxdANy48w5G4EfnXsfj3Wmm8FeIbd7+7lIeNEWRYsEZjb5tqA9WPQjtQB8xMrIxVlKsDggjBBpKtanzql0fWVj+tVaACiiigAooooA6Hwt4hh0CeR5oXkDSRuCmOCu7sev3qt6r42udTe+hYstpcEkfKS54AXPzY7CuTooAV3Z3LMSWPJJ70lFFABRRRQAUUUUAFFFFABRRRQB//Z",
       "pullRequests": [
         {
           "title": "Crop: a resize past the image edge stops at the edge",
           "url": "https://github.com/shaongitbd/doory/pull/181",
           "state": "open",
-          "date": "2026-10-31"
+          "date": "2026-10-31",
+          "opened": "2026-10-31"
         },
         {
           "title": "Brand kits can be renamed and deleted from the editor",
           "url": "https://github.com/shaongitbd/doory/pull/180",
           "state": "open",
-          "date": "2026-10-31"
+          "date": "2026-10-31",
+          "opened": "2026-10-31"
         },
         {
           "title": "Web container starts when the checkout has strict file permissions",
           "url": "https://github.com/shaongitbd/doory/pull/174",
           "state": "open",
-          "date": "2026-10-30"
+          "date": "2026-10-30",
+          "opened": "2026-10-30"
         },
         {
           "title": "Free crop keeps the side you aren't dragging",
           "url": "https://github.com/shaongitbd/doory/pull/167",
           "state": "merged",
-          "date": "2026-10-29"
+          "date": "2026-10-29",
+          "opened": "2026-10-27"
         }
       ]
     },
     {
       "repo": "deepset-ai/haystack",
       "url": "https://github.com/deepset-ai/haystack",
+      "stars": 26897,
+      "avatar": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAABv0lEQVR4nOzaP0gycRgH8DsRDoUX3toiJLAsSgTTK4cgClyioqGlSEiHnGupqGiOJpeCpoaGGhoaW8VQ0LREM5ILPEqIUBRBAwcvSB5o6M/ped794vlew/P9XSgf8BGH0wqCQJEcDQwIQAACEIAABCAAAQggD6CF4escn1z4r66hSY1zwuFanIXWFkAkmjw7v4QmNR3//7UcgDug8h34fPUZDeNjdmhi4w9EHjNZaIoCHKzl0LcDTWzc3m1ZAbgDSu8AAhCAAAQgAAEIQIAEQAO/RiOxu7WNfWhiE729h5EKBG8afYWlhWl22AxNGiDN8WmOh9ZMkikumeKgicooa/kZgDug8h0YsZkrlTdozSQUjvNPL9RHTL0Gu3UI7ohKj6ELxm8iyJzllS2m017/W13fg+OWBXdA6R1AgNIAWu5HDcrlSrVarT9qwDCMXq+DO4QA/shHKJcv1Go1aEQBCsXS5JSn2+Tst87EEw9wTA7g4Og0FE7QNP2cfd3c9cExOYBcvggjVSiWYCQH4HbN6XRMHeD1zMMxUd9CGT4bCMYGB4yszfz7f6sQIOuladP7IAABCEAAAhCAAASoEfA+AMPCJXSfRpaGAAAAAElFTkSuQmCC",
       "pullRequests": [
         {
           "title": "Validate batch_size in SASEvaluator",
           "url": "https://github.com/deepset-ai/haystack/pull/13503",
           "state": "open",
-          "date": "2026-10-31"
+          "date": "2026-10-31",
+          "opened": "2026-10-31"
         }
       ]
     },
     {
       "repo": "SigNoz/signoz",
       "url": "https://github.com/SigNoz/signoz",
+      "stars": 32494,
+      "avatar": "data:image/png;base64,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",
       "pullRequests": [
         {
           "title": "Use unambiguous date format on the x-axis",
           "url": "https://github.com/SigNoz/signoz/pull/13177",
           "state": "open",
-          "date": "2026-10-18"
-        }
-      ]
-    },
-    {
-      "repo": "g8r-b8/frontierLab",
-      "url": "https://github.com/g8r-b8/frontierLab",
-      "pullRequests": [
-        {
-          "title": "Fix Inbox flickering caused by re-creating cards on every repaint",
-          "url": "https://github.com/g8r-b8/frontierLab/pull/2",
-          "state": "open",
-          "date": "2026-10-18"
+          "date": "2026-10-18",
+          "opened": "2026-10-18"
         }
       ]
     }

@@ -5,13 +5,7 @@ import { Timesheet } from "@/components/open-source/timesheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { Container } from "@/components/ui/container";
 import { openSource } from "@/content/open-source";
-import {
-  activitySummary,
-  formatDay,
-  getOpenSource,
-  lastActivity,
-  timesheetWeeks,
-} from "@/lib/open-source";
+import { activitySummary, getOpenSource, lastActivity, timesheetWeeks } from "@/lib/open-source";
 import { site } from "@/lib/site";
 import { openSourceStructuredData } from "@/lib/structured-data";
 
@@ -53,7 +47,6 @@ const fetchedAt = (iso: string) =>
 
 export default async function OpenSourcePage() {
   const data = await getOpenSource();
-  const since = formatDay(openSource.since, data.today, "long");
   const at = fetchedAt(data.fetchedAt);
 
   return (
@@ -65,7 +58,7 @@ export default async function OpenSourcePage() {
             <h1 className="text-3xl font-semibold stretch-heading">Open source</h1>
             <p className="text-lg">
               Two libraries I maintain, fixes I&rsquo;ve sent to other people&rsquo;s projects, and
-              the days I&rsquo;ve shipped since {since}.
+              the days I&rsquo;ve shipped.
             </p>
           </header>
         </MarginGrid>
@@ -101,12 +94,12 @@ export default async function OpenSourcePage() {
         <section aria-labelledby="activity" className="grid gap-6">
           <MarginGrid>
             <h2 id="activity" className="text-2xl font-semibold stretch-heading">
-              Activity since {since}
+              Activity
             </h2>
           </MarginGrid>
           <div className="grid gap-4">
             <div className="-ml-1 sm:-ml-1.5">
-              <Timesheet weeks={timesheetWeeks(data, 13)} today={data.today} />
+              <Timesheet weeks={timesheetWeeks(data)} today={data.today} />
             </div>
             <MarginGrid>
               <p className="max-w-[65ch]">{activitySummary(data)}</p>

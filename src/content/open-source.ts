@@ -15,10 +15,12 @@ export type Library = {
 
 export const openSource = {
   github: "Karthik-beta",
-  /** First day of the unbroken run of daily activity (confirmed by Karthik, 2026-11-01). */
-  since: "2026-10-10",
+  /** Where the activity timesheet starts; it grows from here, week by week (Karthik, 2026-11-01). */
+  since: "2026-10-01",
   /** Pull requests to these owners aren't contributions to other projects. */
   hiddenOwners: ["Karthik-beta", "Pivotr"],
+  /** Repositories Karthik chose not to list (owner/name). */
+  hiddenRepos: ["g8r-b8/frontierLab"],
   /** How a repository is named in running text, where its slug would read oddly. */
   projectNames: { "deepset-ai/haystack": "Haystack", "SigNoz/signoz": "SigNoz" } as Record<
     string,

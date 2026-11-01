@@ -10,8 +10,17 @@ export type PullRequest = {
   state: "merged" | "open" | "draft";
   /** Merged date for merged pull requests, otherwise the date it was opened. */
   date: string;
+  /** The date it was opened, for its review time. */
+  opened: string;
 };
-export type RepoContributions = { repo: string; url: string; pullRequests: PullRequest[] };
+export type RepoContributions = {
+  repo: string;
+  url: string;
+  stars: number;
+  /** The owner's GitHub avatar as a data: URL, so visitors' browsers never contact GitHub. */
+  avatar?: string;
+  pullRequests: PullRequest[];
+};
 export type Release = { name: string; version: string; released: string };
 
 export type OpenSourceData = {
@@ -38,6 +47,13 @@ export const addDays = (date: string, days: number) => {
   return d.toISOString().slice(0, 10);
 };
 
+async function dataUrl(url: string) {
+  const res = await fetch(url, { headers: { "User-Agent": userAgent }, signal: timeout() });
+  const type = res.headers.get("content-type") ?? "";
+  if (!res.ok || !type.startsWith("image/")) throw new Error(`${url}: HTTP ${res.status} ${type}`);
+  return `data:${type};base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`;
+}
+
 async function getJson(url: string, init?: RequestInit) {
   const res = await fetch(url, {
     ...init,
@@ -58,13 +74,15 @@ const plainTitle = (title: string) => {
 };
 
 type GitHubResult = {
-  user: {
-    contributionsCollection: {
+  /** One contributions collection per year, aliased y0, y1, … (see `query`). */
+  user: Record<
+    string,
+    {
       contributionCalendar: {
         weeks: { contributionDays: { date: string; contributionCount: number }[] }[];
       };
-    };
-  };
+    }
+  >;
   search: {
     nodes: ({
       title: string;
@@ -73,37 +91,54 @@ type GitHubResult = {
       isDraft: boolean;
       createdAt: string;
       mergedAt: string | null;
-      repository: { nameWithOwner: string; url: string; owner: { login: string } };
+      repository: {
+        nameWithOwner: string;
+        url: string;
+        stargazerCount: number;
+        owner: { login: string; avatarUrl: string };
+      };
     } | null)[];
   };
 };
 
-const query = `query ($login: String!, $from: DateTime!, $to: DateTime!, $search: String!) {
+// GitHub returns at most a year of contributions per collection, so the record since
+// `openSource.since` is asked for one year at a time, as aliased collections in one request.
+const query = (
+  years: { from: string; to: string }[],
+) => `query ($login: String!, $search: String!) {
   user(login: $login) {
-    contributionsCollection(from: $from, to: $to) {
+    ${years
+      .map(
+        (year, i) => `y${i}: contributionsCollection(from: "${year.from}", to: "${year.to}") {
       contributionCalendar { weeks { contributionDays { date contributionCount } } }
-    }
+    }`,
+      )
+      .join("\n    ")}
   }
   search(query: $search, type: ISSUE, first: 100) {
     nodes {
       ... on PullRequest {
         title url state isDraft createdAt mergedAt
-        repository { nameWithOwner url owner { login } }
+        repository { nameWithOwner url stargazerCount owner { login avatarUrl(size: 64) } }
       }
     }
   }
 }`;
 
 async function fetchGitHub(token: string, now: Date, today: string) {
-  // GitHub allows at most a year per request; the page never shows more than 13 weeks of it.
-  const from = [openSource.since, addDays(today, -364)].sort().at(-1)!;
+  const years: { from: string; to: string }[] = [];
+  for (let from = openSource.since; from <= today; from = addDays(from, 365)) {
+    const end = addDays(from, 364);
+    years.push({
+      from: `${from}T00:00:00Z`,
+      to: end < today ? `${end}T23:59:59Z` : now.toISOString(),
+    });
+  }
   const hidden = openSource.hiddenOwners.map((owner) => `-user:${owner}`).join(" ");
   const body = JSON.stringify({
-    query,
+    query: query(years),
     variables: {
       login: openSource.github,
-      from: `${from}T00:00:00Z`,
-      to: now.toISOString(),
       search: `is:pr is:public author:${openSource.github} ${hidden}`,
     },
   });
@@ -116,7 +151,8 @@ async function fetchGitHub(token: string, now: Date, today: string) {
   const data = result.data as GitHubResult;
 
   const active = new Set(
-    data.user.contributionsCollection.contributionCalendar.weeks
+    Object.values(data.user)
+      .flatMap((year) => year.contributionCalendar.weeks)
       .flatMap((week) => week.contributionDays)
       .filter((day) => day.contributionCount > 0)
       .map((day) => day.date),
@@ -130,13 +166,21 @@ async function fetchGitHub(token: string, now: Date, today: string) {
   for (const pr of data.search.nodes) {
     if (!pr || pr.state === "CLOSED") continue;
     if (openSource.hiddenOwners.includes(pr.repository.owner.login)) continue;
+    if (openSource.hiddenRepos.includes(pr.repository.nameWithOwner)) continue;
     const repo = pr.repository.nameWithOwner;
-    const entry = byRepo.get(repo) ?? { repo, url: pr.repository.url, pullRequests: [] };
+    const entry = byRepo.get(repo) ?? {
+      repo,
+      url: pr.repository.url,
+      stars: pr.repository.stargazerCount,
+      avatar: pr.repository.owner.avatarUrl,
+      pullRequests: [],
+    };
     entry.pullRequests.push({
       title: plainTitle(pr.title),
       url: pr.url,
       state: pr.state === "MERGED" ? "merged" : pr.isDraft ? "draft" : "open",
       date: bengaluruDate(new Date(pr.mergedAt ?? pr.createdAt)),
+      opened: bengaluruDate(new Date(pr.createdAt)),
     });
     byRepo.set(repo, entry);
   }
@@ -147,6 +191,13 @@ async function fetchGitHub(token: string, now: Date, today: string) {
       pullRequests: entry.pullRequests.toSorted((a, b) => b.date.localeCompare(a.date)),
     }))
     .toSorted((a, b) => latest(b).localeCompare(latest(a)));
+
+  // Swap each avatar URL for the image itself; a repository whose image fails just has none.
+  await Promise.all(
+    contributions.map(async (entry) => {
+      entry.avatar = entry.avatar ? await dataUrl(entry.avatar).catch(() => undefined) : undefined;
+    }),
+  );
 
   return { days, contributions };
 }

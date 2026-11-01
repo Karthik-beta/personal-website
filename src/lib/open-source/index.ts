@@ -26,8 +26,8 @@ const mondayOf = (date: string) => {
   return addDays(date, -weekday);
 };
 
-/** The timesheet: Monday-to-Sunday rows ending with this week, at most `limit` of them. */
-export function timesheetWeeks(data: OpenSourceData, limit: number): Week[] {
+/** The timesheet: Monday-to-Sunday rows ending with this week; the last `limit` of them if set. */
+export function timesheetWeeks(data: OpenSourceData, limit?: number): Week[] {
   const active = new Map(data.days.map((day) => [day.date, day.active]));
   const since = data.days[0]?.date ?? data.today;
   const weeks: Week[] = [];
@@ -41,18 +41,18 @@ export function timesheetWeeks(data: OpenSourceData, limit: number): Week[] {
     });
     weeks.push({ start, cells });
   }
-  return weeks.slice(-limit);
+  return limit ? weeks.slice(-limit) : weeks;
 }
 
-/** The sentence under the timesheet: honest whether or not a day was missed. */
+/** The sentence under the timesheet: honest whether or not a day was missed. The timesheet's
+ *  first row shows when the record starts, so the sentence doesn't repeat the date. */
 export function activitySummary(data: OpenSourceData) {
-  const since = formatDay(data.days[0]?.date ?? data.today, data.today, "long");
   const counted = data.days.filter((day) => day.date < data.today || day.active);
   const active = counted.filter((day) => day.active).length;
   if (counted.length > 0 && active === counted.length) {
-    return `Shipped something every day since ${since}.`;
+    return "Shipped something every day.";
   }
-  return `Active on ${active} of ${counted.length} days since ${since}.`;
+  return `Active on ${active} of ${counted.length} days.`;
 }
 
 /** "10 October" or "10 Oct", with the year only when it isn't the current one. */
