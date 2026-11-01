@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MarginGrid } from "@/components/home/margin-grid";
-import { Contributions, LibraryEntry } from "@/components/open-source/sections";
+import { Contributions, contributionTotals, LibraryEntry } from "@/components/open-source/sections";
 import { Timesheet } from "@/components/open-source/timesheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { Container } from "@/components/ui/container";
@@ -86,6 +86,7 @@ export default async function OpenSourcePage() {
                 Pull requests I&rsquo;ve opened on other people&rsquo;s projects, newest first, with
                 their status on GitHub.
               </p>
+              <p>{contributionTotals(data)}</p>
             </div>
           </MarginGrid>
           <Contributions data={data} />
