@@ -1,0 +1,178 @@
+{
+  "fetchedAt": "2026-11-01T04:53:48.592Z",
+  "today": "2026-11-01",
+  "days": [
+    {
+      "date": "2026-10-10",
+      "active": true
+    },
+    {
+      "date": "2026-10-11",
+      "active": true
+    },
+    {
+      "date": "2026-10-12",
+      "active": true
+    },
+    {
+      "date": "2026-10-13",
+      "active": true
+    },
+    {
+      "date": "2026-10-14",
+      "active": true
+    },
+    {
+      "date": "2026-10-15",
+      "active": true
+    },
+    {
+      "date": "2026-10-16",
+      "active": true
+    },
+    {
+      "date": "2026-10-17",
+      "active": true
+    },
+    {
+      "date": "2026-10-18",
+      "active": true
+    },
+    {
+      "date": "2026-10-19",
+      "active": true
+    },
+    {
+      "date": "2026-10-20",
+      "active": true
+    },
+    {
+      "date": "2026-10-21",
+      "active": true
+    },
+    {
+      "date": "2026-10-22",
+      "active": true
+    },
+    {
+      "date": "2026-10-23",
+      "active": true
+    },
+    {
+      "date": "2026-10-24",
+      "active": true
+    },
+    {
+      "date": "2026-10-25",
+      "active": true
+    },
+    {
+      "date": "2026-10-26",
+      "active": true
+    },
+    {
+      "date": "2026-10-27",
+      "active": true
+    },
+    {
+      "date": "2026-10-28",
+      "active": true
+    },
+    {
+      "date": "2026-10-29",
+      "active": true
+    },
+    {
+      "date": "2026-10-30",
+      "active": true
+    },
+    {
+      "date": "2026-10-31",
+      "active": true
+    },
+    {
+      "date": "2026-11-01",
+      "active": true
+    }
+  ],
+  "contributions": [
+    {
+      "repo": "shaongitbd/doory",
+      "url": "https://github.com/shaongitbd/doory",
+      "pullRequests": [
+        {
+          "title": "Crop: a resize past the image edge stops at the edge",
+          "url": "https://github.com/shaongitbd/doory/pull/181",
+          "state": "open",
+          "date": "2026-10-31"
+        },
+        {
+          "title": "Brand kits can be renamed and deleted from the editor",
+          "url": "https://github.com/shaongitbd/doory/pull/180",
+          "state": "open",
+          "date": "2026-10-31"
+        },
+        {
+          "title": "Web container starts when the checkout has strict file permissions",
+          "url": "https://github.com/shaongitbd/doory/pull/174",
+          "state": "open",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "Free crop keeps the side you aren't dragging",
+          "url": "https://github.com/shaongitbd/doory/pull/167",
+          "state": "merged",
+          "date": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "repo": "deepset-ai/haystack",
+      "url": "https://github.com/deepset-ai/haystack",
+      "pullRequests": [
+        {
+          "title": "Validate batch_size in SASEvaluator",
+          "url": "https://github.com/deepset-ai/haystack/pull/13503",
+          "state": "open",
+          "date": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "repo": "SigNoz/signoz",
+      "url": "https://github.com/SigNoz/signoz",
+      "pullRequests": [
+        {
+          "title": "Use unambiguous date format on the x-axis",
+          "url": "https://github.com/SigNoz/signoz/pull/13177",
+          "state": "open",
+          "date": "2026-10-18"
+        }
+      ]
+    },
+    {
+      "repo": "g8r-b8/frontierLab",
+      "url": "https://github.com/g8r-b8/frontierLab",
+      "pullRequests": [
+        {
+          "title": "Fix Inbox flickering caused by re-creating cards on every repaint",
+          "url": "https://github.com/g8r-b8/frontierLab/pull/2",
+          "state": "open",
+          "date": "2026-10-18"
+        }
+      ]
+    }
+  ],
+  "releases": [
+    {
+      "name": "workclock",
+      "version": "0.1.4",
+      "released": "2026-10-30"
+    },
+    {
+      "name": "fiscalclock",
+      "version": "0.1.0",
+      "released": "2026-10-31"
+    }
+  ]
+}
