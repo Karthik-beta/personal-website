@@ -66,6 +66,7 @@ file fully before doing anything in this repo.
 | [0022](docs/decisions/0022-discovery-signals.md)                 | `Link` header to each page's Markdown, `llms.txt` on the `curl` card, IndexNow (`bun run indexnow` after deploys)          |
 | [0023](docs/decisions/0023-mcp-server.md)                        | Read-only MCP server at `/mcp` (official SDK, stateless), tools and resources from the agent-docs registry                 |
 | [0024](docs/decisions/0024-mcp-registry-listing.md)              | MCP Registry listing `nz.karthik/karthik-parameshwara`, proven by `/.well-known/mcp-registry-auth`; `bun run mcp:registry` |
+| [0025](docs/decisions/0025-ask-your-ai.md)                       | "Ask your AI" links (ChatGPT, Claude, Perplexity) with a prefilled prompt, on Contact and `/resume`; no client JS          |
 
 ## Conventions
 
@@ -123,6 +124,9 @@ file fully before doing anything in this repo.
   `bun run agent-docs:check` against a production build (`bun run start -p 3200`).
 - **MCP server (ADR 0023):** `src/app/mcp/route.ts` and `src/lib/mcp.ts`; its answers come from
   `src/lib/agent-docs.ts`. Check it with `bun run mcp:check` against a production build.
+- **"Ask your AI" links (ADR 0025):** assistants and MCP install details in `src/lib/ask-ai.ts`,
+  words and prompts in `src/content/ask-ai.ts`, rendered by `src/components/site/ask-ai.tsx` on
+  Contact and `/resume`. Server components only: keep it free of client JavaScript.
 - **MCP Registry (ADR 0024):** `server.json` at the root; publish with `bun run mcp:registry` after
   the deploy is live. The private key is `~/.mcp-registry/karthik-nz-ed25519.pem` on Karthik's PC,
   never in the repo. Raise `version` in `server.json` for every update.

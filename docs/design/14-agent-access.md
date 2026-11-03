@@ -1,8 +1,9 @@
 # 14: Access for AI agents and search
 
 - Status: Phase 1 built (2026-11-01, ADR 0021). Phase 2 built (2026-11-01, ADR 0022). Phase 3
-  built (2026-11-01, ADR 0023; the MCP Registry listing is not done). The speed prototype is
-  proposed; each needs Karthik's go and gets its own ADR.
+  built (2026-11-01, ADR 0023; the MCP Registry listing is ADR 0024). "Ask your AI" links built
+  (2026-11-03, ADR 0025). The speed prototype is proposed; each needs Karthik's go and gets its
+  own ADR.
 - Related: [11-performance-and-seo](11-performance-and-seo.md), ADR 0013 (search and headers),
   ADR 0015 (analytics), ADR 0019 (the `curl` card).
 
@@ -141,6 +142,23 @@ Markdown. `https://karthik.nz/llms.txt` lists every page.
 
 **Verify.** The MCP Inspector (run with `npx`, nothing installed) connects to a production build,
 lists the tools and calls each one. The page bundles are unchanged, as in Phase 1.
+
+## "Ask your AI about me" (ADR 0025)
+
+Everything above serves agents that already know where to look. This is the entry point for
+people: links that open ChatGPT, Claude or Perplexity with a prompt that points the assistant at
+the page's Markdown and tells it to use only what it says.
+
+- **Data:** a table of assistants, each a name and a function from prompt to URL
+  (`src/lib/ask-ai.ts`), and one prompt per place (`src/content/ask-ai.ts`). Every URL comes from
+  `site.url`.
+- **Home, Contact:** one sentence with the three names as links, "See the prompt" (for any other
+  assistant), and a disclosure with the MCP server's address, the Claude Code command and a
+  Cursor one-click install link.
+- **`/resume`:** the prompt asks the assistant to request the job description first, then
+  compare it with the resume.
+- **No client JavaScript.** Plain links and native `<details>`, so every page loads the same
+  scripts as before.
 
 ## Speed: what limits the phone score
 
