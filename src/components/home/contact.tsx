@@ -1,9 +1,11 @@
 import { FileText } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons/brand";
+import { AskAi, McpConnect } from "@/components/site/ask-ai";
 import { CopyEmail } from "@/components/site/copy-email";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
+import { askAi } from "@/content/ask-ai";
 import { home } from "@/content/home";
 import { site } from "@/lib/site";
 import { MarginGrid } from "./margin-grid";
@@ -36,6 +38,10 @@ export function Contact() {
               <TextLink href={site.links.x} kind="action" icon={<XIcon />}>
                 {contact.actions.x}
               </TextLink>
+            </div>
+            <div className="grid gap-3">
+              <AskAi copy={askAi.home} />
+              <McpConnect />
             </div>
           </div>
         </MarginGrid>

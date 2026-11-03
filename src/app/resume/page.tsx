@@ -1,8 +1,10 @@
 import { Download } from "lucide-react";
 import type { Metadata } from "next";
 import { ResumeSheet } from "@/components/resume/resume-sheet";
+import { AskAi } from "@/components/site/ask-ai";
 import { JsonLd } from "@/components/site/json-ld";
 import { buttonClasses } from "@/components/ui/button";
+import { askAi } from "@/content/ask-ai";
 import { resume, resumeDescription as description } from "@/content/resume";
 import { site } from "@/lib/site";
 import { resumeStructuredData } from "@/lib/structured-data";
@@ -54,6 +56,9 @@ export default function ResumePage() {
             <Download aria-hidden size={18} strokeWidth={1.75} />
             Download PDF
           </a>
+        </div>
+        <div className="mb-6 text-sm lg:mr-(--notes) print:hidden">
+          <AskAi copy={askAi.resume} />
         </div>
         <ResumeSheet resume={resume} />
       </div>
