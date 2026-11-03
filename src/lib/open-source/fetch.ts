@@ -210,9 +210,14 @@ async function fetchGitHub(token: string, now: Date, today: string) {
     days.push({ date, active: active.has(date) });
   }
 
+  // Newest first by the full time, so the projects (in the order their first pull request is
+  // seen) and the pull requests within each come out newest first, even on the same day.
+  const when = (pr: NonNullable<SearchPage["search"]["nodes"][number]>) =>
+    pr.mergedAt ?? pr.createdAt;
   const byRepo = new Map<string, RepoContributions>();
-  for (const pr of [...merged, ...open]) {
-    if (!pr || pr.state === "CLOSED") continue;
+  const all = [...merged, ...open].filter((pr) => pr !== null);
+  for (const pr of all.toSorted((a, b) => when(b).localeCompare(when(a)))) {
+    if (pr.state === "CLOSED") continue;
     if (openSource.hiddenOwners.includes(pr.repository.owner.login)) continue;
     if (openSource.hiddenRepos.includes(pr.repository.nameWithOwner)) continue;
     const repo = pr.repository.nameWithOwner;
@@ -232,13 +237,7 @@ async function fetchGitHub(token: string, now: Date, today: string) {
     });
     byRepo.set(repo, entry);
   }
-  const latest = (entry: RepoContributions) => entry.pullRequests[0].date;
-  const contributions = [...byRepo.values()]
-    .map((entry) => ({
-      ...entry,
-      pullRequests: entry.pullRequests.toSorted((a, b) => b.date.localeCompare(a.date)),
-    }))
-    .toSorted((a, b) => latest(b).localeCompare(latest(a)));
+  const contributions = [...byRepo.values()];
 
   // Swap each avatar URL for the image itself; a repository whose image fails just has none.
   await Promise.all(
