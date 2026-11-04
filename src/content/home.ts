@@ -7,7 +7,10 @@ export type Lead = { strong: string; rest: string };
 /** [ISO date, label] for a <time> element. */
 export type When = [string, string];
 
-export type ChapterBlock = string | { quote: string };
+/** Someone else's published words about Karthik, quoted exactly, with who said it and where. */
+export type Recommendation = { paragraphs: string[]; name: string; role: string; href: string };
+
+export type ChapterBlock = string | { quote: string } | { recommendation: Recommendation };
 
 export type Chapter = {
   title: string;
@@ -98,6 +101,18 @@ export const home = {
         blocks: [
           "In June 2025 I co-founded Pivotr. Our product, Aria, is a modular ERP for businesses. I architected and built two of its core modules, Asset Management and Inventory Management, with TypeScript, NestJS, tRPC, Prisma, PostgreSQL and Next.js.",
           "Owning a product meant owning everything around it. I took Asset Management through 12 customer deployments, built inventory proofs of concept around prospects’ real workflows, and set up an AI-assisted development workflow in which linting, type checks and static analysis gate every change. When the company needed outreach tooling, I built that too: three small tools, each solving the next problem we hit.",
+          {
+            // Two sentences of Prashanth's LinkedIn recommendation (ADR 0026), word for word.
+            recommendation: {
+              paragraphs: [
+                "The asset management product I was selling was built by Karthik, and so were the outreach tools I used to sell it.",
+                "We went into customer meetings together, and more than once what we heard there turned into a working demo for that prospect.",
+              ],
+              name: "Prashanth Matsya",
+              role: "Director of sales, Pivotr",
+              href: "https://www.linkedin.com/in/karthik-paramesh/details/recommendations/",
+            },
+          },
           "Pivotr continues, and Aria is still in use by its customers. After 15 months as a co-founder, I’m returning to what I enjoy most: building software alongside a strong engineering team.",
         ],
       },

@@ -1,4 +1,5 @@
 import { Quote } from "@/components/site/quote";
+import { Recommendation } from "@/components/site/recommendation";
 import { TimeRow } from "@/components/site/time-row";
 import { Container } from "@/components/ui/container";
 import { home, type When } from "@/content/home";
@@ -60,8 +61,10 @@ export function Chapters() {
               {chapter.blocks.map((block, index) =>
                 typeof block === "string" ? (
                   <p key={index}>{block}</p>
-                ) : (
+                ) : "quote" in block ? (
                   <Quote key={index}>{block.quote}</Quote>
+                ) : (
+                  <Recommendation key={index} {...block.recommendation} />
                 ),
               )}
             </Chapter>

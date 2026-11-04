@@ -1,5 +1,5 @@
 import { caseStudies, type CaseSection, type CaseStudy } from "@/content/case-studies";
-import { home, type Chapter } from "@/content/home";
+import { home, type Chapter, type ChapterBlock } from "@/content/home";
 import { openSource } from "@/content/open-source";
 import { resume, resumeDescription, type ResumeRow, type ResumeSection } from "@/content/resume";
 import { activitySummary, formatDay, getOpenSource } from "@/lib/open-source";
@@ -37,6 +37,16 @@ const md = (...blocks: (string | false | null | undefined)[]) =>
 
 const range = (chapter: Chapter) => `${chapter.from[1]} – ${chapter.to ? chapter.to[1] : "now"}`;
 
+function chapterBlock(block: ChapterBlock) {
+  if (typeof block === "string") return block;
+  if ("quote" in block) return `> ${block.quote}`;
+  const { paragraphs, name, role, href } = block.recommendation;
+  return [
+    ...paragraphs.map((paragraph, i) => `> “${paragraph}${i === paragraphs.length - 1 ? "”" : ""}`),
+    `> ${name}, ${role}. ${link("Read it on LinkedIn", href)}`,
+  ].join("\n>\n");
+}
+
 async function homeMarkdown() {
   const { hero, chapters, work, about, contact } = home;
   const data = await getOpenSource();
@@ -57,7 +67,7 @@ async function homeMarkdown() {
       md(
         `### ${chapter.title}`,
         [chapter.role, range(chapter)].filter(Boolean).join(" · "),
-        ...chapter.blocks.map((block) => (typeof block === "string" ? block : `> ${block.quote}`)),
+        ...chapter.blocks.map(chapterBlock),
       ).trimEnd(),
     ),
     `## ${work.title}`,
