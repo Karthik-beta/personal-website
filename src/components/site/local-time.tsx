@@ -64,6 +64,7 @@ export function LocalTime({ className }: { className?: string }) {
       <button
         type="button"
         id={id}
+        aria-describedby={`${id}-hint`}
         onClick={toggle}
         data-track="clock_toggle"
         suppressHydrationWarning
@@ -74,6 +75,10 @@ export function LocalTime({ className }: { className?: string }) {
       >
         {text ?? FALLBACK}
       </button>
+      {/* A sibling, not a child: the inline script below replaces the button's text. */}
+      <span id={`${id}-hint`} className="sr-only">
+        {where === "bengaluru" ? "Press to see your own time" : "Press to see Bengaluru time"}
+      </span>
       <span className="sr-only" aria-live="polite">
         {announced}
       </span>
