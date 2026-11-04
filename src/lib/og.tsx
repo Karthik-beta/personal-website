@@ -7,6 +7,7 @@ import {
   monogramSide,
   monogramViewBox,
 } from "@/components/site/monogram-paths";
+import { site } from "@/lib/site";
 
 // Link-preview images (docs/design/08-imagery-and-identity.md). Rendered at build time from
 // the static font instances made by scripts/build-brand.py. Light theme tokens only.
@@ -55,7 +56,7 @@ export function renderOgImage({ title, summary, footer }: OgImageProps) {
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
         {/* eslint-disable-next-line @next/next/no-img-element -- rendered by Satori, not the browser */}
         <img src={monogramSrc} width={64} height={64} alt="" />
-        <span style={{ fontSize: 32, fontWeight: 600 }}>Karthik Parameshwara</span>
+        <span style={{ fontSize: 32, fontWeight: 600 }}>{site.name}</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
         <span
@@ -88,7 +89,7 @@ export function renderOgImage({ title, summary, footer }: OgImageProps) {
         >
           {footer}
         </span>
-        <span style={{ fontSize: 28, color: colors.muted }}>karthik.nz</span>
+        <span style={{ fontSize: 28, color: colors.muted }}>{new URL(site.url).host}</span>
       </div>
     </div>,
     {

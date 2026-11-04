@@ -23,7 +23,8 @@ export function createMcpServer() {
   const server = new McpServer(
     { name: "karthik-nz", title: site.name, version: "1.0.0", websiteUrl: site.url },
     {
-      instructions: `Read-only information about ${site.name}, a software engineer looking for a role. Every answer is taken from ${site.url}, the same text as its pages.`,
+      // No status here (availability, job search): get_profile reads it from the home page.
+      instructions: `Read-only information about ${site.name}, a software engineer. Every answer is taken from ${site.url}, the same text as its pages.`,
     },
   );
 
