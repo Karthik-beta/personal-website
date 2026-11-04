@@ -33,6 +33,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0023: A read-only MCP server](decisions/0023-mcp-server.md)
 - [0024: Listing the MCP server in the official MCP Registry](decisions/0024-mcp-registry-listing.md)
 - [0025: "Ask your AI about me" links](decisions/0025-ask-your-ai.md)
+- [0026: Quoting a recommendation in the story](decisions/0026-quoting-a-recommendation.md)
 
 ## Research (local only, gitignored)
 

@@ -117,6 +117,13 @@ as selectable text with a `mailto:` link.
 
 For Karthik's own words only. 2 px `accent` left border, 16 px padding, `text-lg`, `ink`.
 
+## Recommendation
+
+Someone else's published words about Karthik (ADR 0026). 2 px `rule-strong` left border, 16 px
+padding, body size, wrapped in quotation marks, so it never reads as Karthik's own quote. Under
+it, a `text-sm` `muted` credit: the name in `ink` semibold, their title, and a link to where the
+words were published. Quoted word for word, only with the person's OK.
+
 ## Skip link
 
 "Skip to content", hidden until focused, then shown at top-left as a primary button.

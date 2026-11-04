@@ -40,33 +40,34 @@ file fully before doing anything in this repo.
 
 ## Approved decisions
 
-| ADR                                                              | Decision                                                                                                                   |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| [0001](docs/decisions/0001-framework-and-hosting.md)             | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                                                       |
-| [0002](docs/decisions/0002-styling-tailwind.md)                  | Tailwind CSS v4, design tokens in `src/app/globals.css`                                                                    |
-| [0003](docs/decisions/0003-package-manager-bun.md)               | Bun as package manager and script runner; Next.js runs on Node                                                             |
-| [0004](docs/decisions/0004-ui-primitives-base-ui.md)             | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3                                        |
-| [0005](docs/decisions/0005-license.md)                           | MIT for code; content, personal info and branding all rights reserved                                                      |
-| [0006](docs/decisions/0006-docs-wiki-mirror.md)                  | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end                            |
-| [0007](docs/decisions/0007-private-docs-local-only.md)           | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published                              |
-| [0008](docs/decisions/0008-private-docs-notion.md)               | Private docs and personal inputs are mirrored to a private Notion project                                                  |
-| [0009](docs/decisions/0009-visual-direction-working-hours.md)    | Visual direction "Working hours": Instrument Sans, ultramarine accent, light default + dark, local-time line               |
-| [0010](docs/decisions/0010-site-structure-and-navigation.md)     | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                                      |
-| [0011](docs/decisions/0011-icons-identity-analytics.md)          | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                                    |
-| [0012](docs/decisions/0012-assets-generated-in-code.md)          | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                                 |
-| [0013](docs/decisions/0013-search-and-security-headers.md)       | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                              |
-| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)           | Superseded by 0016                                                                                                         |
-| [0015](docs/decisions/0015-google-analytics.md)                  | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                                          |
-| [0016](docs/decisions/0016-resume-as-a-page.md)                  | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line                        |
-| [0017](docs/decisions/0017-open-source-page.md)                  | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch                 |
-| [0018](docs/decisions/0018-contributions-ledger-and-activity.md) | Contributions as a status ledger (squares, review time, stars, logos); activity from 1 Oct                                 |
-| [0019](docs/decisions/0019-easter-eggs.md)                       | Four easter eggs: 404 heading, console note, `curl` card, tap the clock for the time difference                            |
-| [0020](docs/decisions/0020-contributions-at-scale.md)            | Contributions: all merged and open PRs fetched; 5 per project and 6 projects shown, the rest behind toggles                |
-| [0021](docs/decisions/0021-markdown-for-agents.md)               | Markdown version of every page from one registry, `llms.txt`, `Accept: text/markdown`; parity check                        |
-| [0022](docs/decisions/0022-discovery-signals.md)                 | `Link` header to each page's Markdown, `llms.txt` on the `curl` card, IndexNow (`bun run indexnow` after deploys)          |
-| [0023](docs/decisions/0023-mcp-server.md)                        | Read-only MCP server at `/mcp` (official SDK, stateless), tools and resources from the agent-docs registry                 |
-| [0024](docs/decisions/0024-mcp-registry-listing.md)              | MCP Registry listing `nz.karthik/karthik-parameshwara`, proven by `/.well-known/mcp-registry-auth`; `bun run mcp:registry` |
-| [0025](docs/decisions/0025-ask-your-ai.md)                       | "Ask your AI" links (ChatGPT, Claude, Perplexity) with a prefilled prompt, on Contact and `/resume`; no client JS          |
+| ADR                                                              | Decision                                                                                                                       |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [0001](docs/decisions/0001-framework-and-hosting.md)             | Next.js App Router, static-first, on Vercel Hobby; DNS on Cloudflare                                                           |
+| [0002](docs/decisions/0002-styling-tailwind.md)                  | Tailwind CSS v4, design tokens in `src/app/globals.css`                                                                        |
+| [0003](docs/decisions/0003-package-manager-bun.md)               | Bun as package manager and script runner; Next.js runs on Node                                                                 |
+| [0004](docs/decisions/0004-ui-primitives-base-ui.md)             | Base UI (`@base-ui/react`, headless) for interactive primitives; install in Phase 3                                            |
+| [0005](docs/decisions/0005-license.md)                           | MIT for code; content, personal info and branding all rights reserved                                                          |
+| [0006](docs/decisions/0006-docs-wiki-mirror.md)                  | `docs/` is the source of truth; design and decisions are mirrored to the wiki at each phase end                                |
+| [0007](docs/decisions/0007-private-docs-local-only.md)           | `docs/research/` and `docs/content/` are gitignored: local only, never committed or published                                  |
+| [0008](docs/decisions/0008-private-docs-notion.md)               | Private docs and personal inputs are mirrored to a private Notion project                                                      |
+| [0009](docs/decisions/0009-visual-direction-working-hours.md)    | Visual direction "Working hours": Instrument Sans, ultramarine accent, light default + dark, local-time line                   |
+| [0010](docs/decisions/0010-site-structure-and-navigation.md)     | Home + case-study pages; slim hide-on-scroll nav with a Resume button                                                          |
+| [0011](docs/decisions/0011-icons-identity-analytics.md)          | Lucide + Simple Icons (inline), "KP" monogram, Cloudflare Web Analytics                                                        |
+| [0012](docs/decisions/0012-assets-generated-in-code.md)          | Monogram, favicons and OG images generated in code from the real font; Canva for the photo                                     |
+| [0013](docs/decisions/0013-search-and-security-headers.md)       | Connected JSON-LD, real sitemap dates, static CSP + security headers, Search Console and Bing                                  |
+| [0014](docs/decisions/0014-resume-opens-in-new-tab.md)           | Superseded by 0016                                                                                                             |
+| [0015](docs/decisions/0015-google-analytics.md)                  | Google Analytics 4 alongside Cloudflare, no banner; click events; `/privacy` page                                              |
+| [0016](docs/decisions/0016-resume-as-a-page.md)                  | Resume is the `/resume` page, generated with the PDF, with approved evidence notes beside each line                            |
+| [0017](docs/decisions/0017-open-source-page.md)                  | `/open-source` page and home teaser: live libraries, upstream PRs, a weekly timesheet; cached server fetch                     |
+| [0018](docs/decisions/0018-contributions-ledger-and-activity.md) | Contributions as a status ledger (squares, review time, stars, logos); activity from 1 Oct                                     |
+| [0019](docs/decisions/0019-easter-eggs.md)                       | Four easter eggs: 404 heading, console note, `curl` card, tap the clock for the time difference                                |
+| [0020](docs/decisions/0020-contributions-at-scale.md)            | Contributions: all merged and open PRs fetched; 5 per project and 6 projects shown, the rest behind toggles                    |
+| [0021](docs/decisions/0021-markdown-for-agents.md)               | Markdown version of every page from one registry, `llms.txt`, `Accept: text/markdown`; parity check                            |
+| [0022](docs/decisions/0022-discovery-signals.md)                 | `Link` header to each page's Markdown, `llms.txt` on the `curl` card, IndexNow (`bun run indexnow` after deploys)              |
+| [0023](docs/decisions/0023-mcp-server.md)                        | Read-only MCP server at `/mcp` (official SDK, stateless), tools and resources from the agent-docs registry                     |
+| [0024](docs/decisions/0024-mcp-registry-listing.md)              | MCP Registry listing `nz.karthik/karthik-parameshwara`, proven by `/.well-known/mcp-registry-auth`; `bun run mcp:registry`     |
+| [0025](docs/decisions/0025-ask-your-ai.md)                       | "Ask your AI" links (ChatGPT, Claude, Perplexity) with a prefilled prompt, on Contact and `/resume`; no client JS              |
+| [0026](docs/decisions/0026-quoting-a-recommendation.md)          | Two sentences of Prashanth's LinkedIn recommendation in the Pivotr chapter, credited and linked; separate look from own quotes |
 
 ## Conventions
 
