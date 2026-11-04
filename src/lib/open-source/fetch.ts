@@ -174,7 +174,9 @@ async function searchAll(token: string, search: string) {
   do {
     const page: SearchPage = await graphql<SearchPage>(token, searchQuery, { search, after });
     nodes.push(...page.search.nodes);
-    after = page.search.pageInfo.hasNextPage ? page.search.pageInfo.endCursor : null;
+    const next = page.search.pageInfo.hasNextPage ? page.search.pageInfo.endCursor : null;
+    if (next && next === after) throw new Error("GitHub: the search returned the same page twice");
+    after = next;
   } while (after);
   return nodes;
 }
@@ -292,8 +294,8 @@ async function fetchRelease({ name, packages, site }: (typeof openSource.librari
 }
 
 /**
- * Fetches everything the page shows. Each source falls back to `fallback` (the committed
- * snapshot) on its own, so one failing API never empties the page. Without a fallback, errors
+ * Fetches everything the page shows. GitHub, and each library's release, fall back to `fallback`
+ * (the committed snapshot) on their own, so one failing API never empties the page. Without a fallback, errors
  * are thrown (the snapshot script wants to know).
  */
 export async function fetchOpenSource({
@@ -310,9 +312,24 @@ export async function fetchOpenSource({
   const github = token
     ? fetchGitHub(token, now, today).then((part) => ({ ...part, at: stamp }))
     : Promise.reject(new Error("GITHUB_TOKEN is not set"));
-  const registries = Promise.all(openSource.libraries.map((library) => fetchRelease(library))).then(
-    (releases) => ({ releases, at: stamp }),
-  );
+  // Per library, so one that isn't on every registry yet doesn't take the other's fresh data
+  // with it. The freshness time is the oldest of what's shown.
+  const registries = Promise.all(
+    openSource.libraries.map((library) =>
+      fetchRelease(library).then(
+        (release) => ({ release, at: stamp }),
+        (error) => {
+          if (!fallback) throw error;
+          console.warn(`open-source: ${library.name} from the snapshot (${String(error)})`);
+          const release = fallback.releases.find((item) => item.name === library.name);
+          return { release, at: fallback.fetchedAt };
+        },
+      ),
+    ),
+  ).then((results) => ({
+    releases: results.flatMap((result) => (result.release ? [result.release] : [])),
+    at: results.map((result) => result.at).sort()[0],
+  }));
 
   const [gh, reg] = await Promise.allSettled([github, registries]);
   const pick = <T>(result: PromiseSettledResult<T>, fromSnapshot: (s: OpenSourceData) => T) => {
