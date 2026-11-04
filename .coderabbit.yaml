@@ -1,0 +1,31 @@
+# Only for the one-off full-repo review PR (review/full into review/base). Never merged to main.
+language: en-GB
+reviews:
+  profile: assertive
+  poem: false
+  high_level_summary: true
+  review_status: true
+  collapse_walkthrough: false
+  sequence_diagrams: false
+  auto_review:
+    enabled: false
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        This pull request adds the entire codebase of a live personal website (karthik.nz) so it can be
+        reviewed in full. Treat every file as new code and review all of it.
+        Stack: Next.js 16 App Router with cacheComponents enabled, React 19, Tailwind CSS v4, Bun,
+        hosted on Vercel Hobby. Pages are static; the open-source data is a cached server fetch.
+        Focus only on:
+        1. Bugs and correctness: logic errors, edge cases, server/client component boundaries,
+           caching and "use cache" behaviour, route handlers (Markdown routes, llms.txt, the curl card,
+           the MCP server), rewrites in next.config.ts, date and time-zone handling.
+        2. Security and privacy: the Content Security Policy and security headers, the read-only MCP
+           endpoint (src/app/mcp, src/lib/mcp.ts), user-agent and Accept-header rewrites, secrets or
+           tokens, anything that sends visitor data to third parties, analytics gating.
+        3. Accessibility (WCAG 2.2 AA in light and dark themes, keyboard, screen readers, focus,
+           reduced motion) and performance (client JavaScript added to pages, static rendering
+           lost, layout shift).
+        Skip formatting and naming nitpicks: Prettier and ESLint already enforce them.
+chat:
+  auto_reply: true
