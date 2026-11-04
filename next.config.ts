@@ -21,7 +21,9 @@ const csp = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  "upgrade-insecure-requests",
+  // Vercel builds only: Safari applies it to http://localhost too, and a local build then
+  // loads with no CSS or JavaScript.
+  ...(process.env.VERCEL ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 // Strict-Transport-Security comes from Vercel. It deliberately has no includeSubDomains: that
