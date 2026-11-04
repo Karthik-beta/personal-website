@@ -41,8 +41,16 @@ export function Timesheet({ weeks, today }: { weeks: Week[]; today: string }) {
   return (
     // A right-to-left scroll box opens scrolled to its right end, so a grid wider than the
     // screen starts at the newest week. The table inside is left-to-right as usual, and
-    // mr-auto keeps a narrow grid on the left.
-    <div dir="rtl" className="overflow-x-auto">
+    // mr-auto keeps a narrow grid on the left. Focusable, so keyboard users can scroll it in
+    // browsers that don't focus scroll boxes themselves (Safari). contain-inline-size stops a
+    // grid wider than the screen from widening a parent grid track, and so the page.
+    <div
+      dir="rtl"
+      tabIndex={0}
+      role="region"
+      aria-label="Days with activity, by week"
+      className="overflow-x-auto contain-inline-size"
+    >
       <table
         dir="ltr"
         className="mr-auto w-full table-fixed border-separate border-spacing-1"
