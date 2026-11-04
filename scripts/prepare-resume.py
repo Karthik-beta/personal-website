@@ -18,6 +18,8 @@ Requires PyMuPDF. Re-run whenever the resume changes.
 import argparse
 import json
 import re
+import shutil
+import tempfile
 from pathlib import Path
 
 import fitz  # PyMuPDF
@@ -48,8 +50,8 @@ def same_line(a, b):
     return abs(a[1] - b[1]) < 2 and b[0] >= a[2] - 1
 
 
-def install_page_data(path):
-    """Checks the /resume page data and writes src/content/resume.json."""
+def checked_page_data(path):
+    """The /resume page data as it will be written, after the version and phone checks."""
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     if data.get("version") != PAGE_DATA_VERSION:
         raise SystemExit(
@@ -58,8 +60,7 @@ def install_page_data(path):
     text = json.dumps(data, indent=2, ensure_ascii=False)
     if PHONE.search(text):
         raise SystemExit("Phone-like text in the page data. Not safe to publish.")
-    PAGE_DATA.write_text(text + "\n", encoding="utf-8", newline="\n")
-    print(f"Wrote {PAGE_DATA.relative_to(ROOT)}.")
+    return text + "\n"
 
 
 def main():
@@ -67,6 +68,10 @@ def main():
     parser.add_argument("pdf", help="the resume PDF, ideally rendered without the phone")
     parser.add_argument("--json", help="the /resume page data from the Job Hunt app")
     args = parser.parse_args()
+
+    # Every check runs before anything is written, so a failed run leaves public/ and the page
+    # data as they were, still matching each other.
+    page_data = checked_page_data(args.json) if args.json else None
 
     doc = fitz.open(args.pdf)
     removed = 0
@@ -84,8 +89,8 @@ def main():
             removed += 1
         page.apply_redactions(images=fitz.PDF_REDACT_IMAGE_NONE)
         # Redaction leaves an empty /Annots array behind; drop it so strict PDF scanners
-        # don't see an annotations entry at all.
-        if not page.first_annot:
+        # don't see an annotations entry at all. first_annot skips links, so check those too.
+        if not page.first_annot and not page.first_link:
             doc.xref_set_key(page.xref, "Annots", "null")
 
     # A resume rendered without the phone (`uv run jobhunt master --web`) has nothing to
@@ -93,20 +98,25 @@ def main():
 
     doc.set_metadata({"title": "Karthik Parameshwara: Resume", "author": "Karthik Parameshwara"})
     doc.del_xml_metadata()
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    doc.save(OUTPUT, garbage=4, deflate=True, clean=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        staged = Path(tmp) / OUTPUT.name
+        doc.save(staged, garbage=4, deflate=True, clean=True)
 
-    # Verify: no 10+ digit sequence remains anywhere in the text.
-    text = "".join(page.get_text() for page in fitz.open(OUTPUT))
-    leftover = PHONE.findall(text)
-    if leftover:
-        raise SystemExit(
-            f"Phone-like text still present: {len(leftover)} match(es). Not safe to publish."
-        )
+        # Verify: no 10+ digit sequence remains anywhere in the text.
+        with fitz.open(staged) as saved:
+            text = "".join(page.get_text() for page in saved)
+        leftover = PHONE.findall(text)
+        if leftover:
+            raise SystemExit(
+                f"Phone-like text still present: {len(leftover)} match(es). Not safe to publish."
+            )
+        OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(staged, OUTPUT)
     print(f"Removed {removed} phone number(s). Wrote {OUTPUT.relative_to(ROOT)}.")
 
-    if args.json:
-        install_page_data(args.json)
+    if page_data:
+        PAGE_DATA.write_text(page_data, encoding="utf-8", newline="\n")
+        print(f"Wrote {PAGE_DATA.relative_to(ROOT)}.")
 
 
 if __name__ == "__main__":
