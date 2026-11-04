@@ -64,7 +64,9 @@ function rewriteLinks(markdown: string, docsPath: string): string {
 
 function main() {
   // The checkout is disposable: always start from the published wiki, discarding earlier dry runs.
-  if (existsSync(WIKI_DIR)) {
+  // Check for .git, not the folder: without it, git would find the main repo above and the
+  // reset below would discard its uncommitted work.
+  if (existsSync(join(WIKI_DIR, ".git"))) {
     git(["fetch", "--quiet"]);
     git(["reset", "--hard", "--quiet", "@{u}"]);
     git(["clean", "-fdq"]);
