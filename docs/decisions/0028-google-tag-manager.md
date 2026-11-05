@@ -1,6 +1,7 @@
 # 0028: Google Tag Manager loads Google Analytics and the LinkedIn Insight Tag
 
-- Status: Accepted
+- Status: Accepted; the LinkedIn Insight Tag was dropped and the X pixel added by
+  [0029](0029-x-pixel.md)
 - Date: 2026-11-05
 - Updates: [0015](0015-google-analytics.md) (how Google Analytics is loaded)
 

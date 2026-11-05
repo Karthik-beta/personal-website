@@ -69,7 +69,8 @@ file fully before doing anything in this repo.
 | [0025](docs/decisions/0025-ask-your-ai.md)                       | "Ask your AI" links (ChatGPT, Claude, Perplexity) with a prefilled prompt, on Contact and `/resume`; no client JS              |
 | [0026](docs/decisions/0026-quoting-a-recommendation.md)          | Two sentences of Prashanth's LinkedIn recommendation in the Pivotr chapter, credited and linked; separate look from own quotes |
 | [0027](docs/decisions/0027-leading-readers-into-case-studies.md) | Aria recording on the home Work list; reading times; "Keep reading" ends; GA events for case-study opens, reads, plays         |
-| [0028](docs/decisions/0028-google-tag-manager.md)                | GTM container (`NEXT_PUBLIC_GTM_ID`) replaces gtag.js and loads GA4 + LinkedIn Insight; strict CSP lists each tag's hosts      |
+| [0028](docs/decisions/0028-google-tag-manager.md)                | GTM container (`NEXT_PUBLIC_GTM_ID`) replaces gtag.js and loads GA4; strict CSP lists each tag's hosts                         |
+| [0029](docs/decisions/0029-x-pixel.md)                           | X pixel (`ri4iu`) allowed in the CSP and disclosed on `/privacy`; LinkedIn Insight Tag dropped; Apollo stays blocked           |
 
 ## Conventions
 
@@ -106,7 +107,7 @@ file fully before doing anything in this repo.
 - **Structured data:** `src/lib/structured-data.ts`. Bump `site.updated` or a case study's
   `updated` when its content changes (sitemap and JSON-LD dates).
 - **Security headers and CSP:** `next.config.ts`. A new third-party host must be added to the CSP.
-- **Analytics (ADR 0028):** Google Tag Manager loads GA4 and the LinkedIn Insight Tag; the
+- **Analytics (ADR 0028):** Google Tag Manager loads GA4 and the X pixel (ADR 0029); the
   container ID is `NEXT_PUBLIC_GTM_ID` in Vercel. Events go through `track()` in
   `src/lib/track.ts`. A new `data-track` name must also be added to the GA4 Event trigger's regex
   in GTM, and a new GTM tag's hosts to the CSP.
