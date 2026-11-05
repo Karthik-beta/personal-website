@@ -1,19 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { track, type TrackParams } from "@/lib/track";
 
 /**
- * Sends a GA event the first time this marker scrolls into view. A page Next keeps hidden
+ * Sends an analytics event the first time this marker scrolls into view. A page Next keeps hidden
  * (display: none) never intersects, and effects re-run when it is shown again, so a revisit
  * counts once per visit.
  */
-export function TrackView({
-  event,
-  params,
-}: {
-  event: string;
-  params?: Record<string, string | number>;
-}) {
+export function TrackView({ event, params }: { event: string; params?: TrackParams }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -21,7 +16,7 @@ export function TrackView({
     if (!node) return;
     const observer = new IntersectionObserver((entries) => {
       if (!entries.some((entry) => entry.isIntersecting)) return;
-      window.gtag?.("event", event, params);
+      track(event, params);
       observer.disconnect();
     });
     observer.observe(node);

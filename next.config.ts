@@ -6,17 +6,22 @@ const isDev = process.env.NODE_ENV === "development";
 
 // Content Security Policy: what the page may load and who may frame it. Pages are static, so
 // there's no per-request nonce and Next.js's inline scripts need 'unsafe-inline'. The policy
-// still blocks third-party scripts (except the Cloudflare and Google analytics tags), plugins,
-// framing and form posts elsewhere. React needs 'unsafe-eval' in development only. The Google
-// hosts are the ones Google lists for a GA4 tag, plus www.google.com: the tag also sends each hit
-// there, and blocking it would log a CSP error on every page.
+// still blocks third-party scripts (except Cloudflare's beacon and the tags Google Tag Manager
+// loads), plugins, framing and form posts elsewhere. React needs 'unsafe-eval' in development
+// only; it stays off in production, so GTM "Custom JavaScript" variables won't run (ADR 0028).
+// - Google: the hosts Google lists for GTM and a GA4 tag, plus www.google.com, which the tag also
+//   sends each hit to. tagmanager.google.com, the gstatic hosts and Google Fonts are for GTM's
+//   preview mode only.
+// - LinkedIn Insight Tag: snap.licdn.com serves it; it reports to px.ads.linkedin.com, which can
+//   redirect to www.linkedin.com.
+// A new tag in GTM from any other host is blocked until its hosts are added here.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com https://www.googletagmanager.com`,
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com",
-  "font-src 'self'",
-  "connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com https://www.googletagmanager.com https://tagmanager.google.com https://snap.licdn.com`,
+  "style-src 'self' 'unsafe-inline' https://tagmanager.google.com https://fonts.googleapis.com",
+  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com https://ssl.gstatic.com https://www.gstatic.com https://px.ads.linkedin.com https://www.linkedin.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://px.ads.linkedin.com https://www.linkedin.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

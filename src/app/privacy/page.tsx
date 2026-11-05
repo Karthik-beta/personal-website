@@ -16,12 +16,12 @@ export default function Privacy() {
   return (
     <main id="content" className="py-16 lg:py-24">
       <Container>
-        <MarginGrid margin="Updated 31 Oct 2026">
+        <MarginGrid margin="Updated 5 Nov 2026">
           <div className="grid max-w-[65ch] gap-4">
             <h1 className="text-3xl font-semibold stretch-heading">Privacy</h1>
             <p className="text-lg">
-              I use two simple analytics tools to learn which pages and projects people find useful,
-              so I can keep improving the site. I never sell this data or use it for ads.
+              I use three analytics tools to learn which pages and projects people find useful, so I
+              can keep improving the site. I never sell this data or use it for ads.
             </p>
 
             <h2 className="mt-6 text-xl font-semibold stretch-heading">Google Analytics</h2>
@@ -38,6 +38,19 @@ export default function Privacy() {
               <TextLink href="https://policies.google.com/technologies/partner-sites">
                 partner-sites policy
               </TextLink>
+              .
+            </p>
+
+            <h2 className="mt-6 text-xl font-semibold stretch-heading">LinkedIn Insight Tag</h2>
+            <p>
+              LinkedIn&rsquo;s tag uses cookies to show me, in total, what kinds of companies,
+              industries and job titles the site&rsquo;s visitors have. It never shows me individual
+              visitors. You can turn it off in your{" "}
+              <TextLink href="https://www.linkedin.com/psettings/guest-controls/retargeting-opt-out">
+                LinkedIn ad settings
+              </TextLink>
+              , and LinkedIn explains how it uses this data in its{" "}
+              <TextLink href="https://www.linkedin.com/legal/cookie-policy">cookie policy</TextLink>
               .
             </p>
 
