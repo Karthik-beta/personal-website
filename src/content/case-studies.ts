@@ -1,6 +1,4 @@
 import type { StaticImageData } from "next/image";
-import ariaAssetDark from "../../assets/screenshots/aria/asset-management-dark.png";
-import ariaAssetLight from "../../assets/screenshots/aria/asset-management.png";
 import ariaInventoryDark from "../../assets/screenshots/aria/inventory-management-dark.png";
 import ariaInventoryLight from "../../assets/screenshots/aria/inventory-management.png";
 import blinkqlDark from "../../assets/screenshots/blinkql/workbench-dark.png";
@@ -11,6 +9,7 @@ import overnightDark from "../../assets/screenshots/workclock/overnight-shift-da
 import overnightLight from "../../assets/screenshots/workclock/overnight-shift-light.svg";
 import weekDark from "../../assets/screenshots/workclock/week-strip-dark.svg";
 import weekLight from "../../assets/screenshots/workclock/week-strip-light.svg";
+import type { ClipSource } from "@/components/site/clip";
 
 // Every statement here comes from Karthik's answers (Phase 1–5), the resume, or the
 // projects' own READMEs. Don't add claims without a source.
@@ -23,6 +22,18 @@ export type CaseFigure =
       alt: string;
       caption: string;
       unoptimized?: boolean;
+    }
+  | {
+      kind: "video";
+      /** Names the recording for GA's `video_play` event. */
+      id: string;
+      light: ClipSource;
+      dark?: ClipSource;
+      /** Says what the recording shows, for screen readers. */
+      label: string;
+      caption: string;
+      width: number;
+      height: number;
     }
   | { kind: "placeholder"; label: string };
 
@@ -46,6 +57,25 @@ export type CaseStudy = {
 };
 
 const gh = (repo: string) => `https://github.com/Karthik-beta/${repo}`;
+const clip = (theme: "light" | "dark"): ClipSource => ({
+  webm: `/work/aria-flow-${theme}.webm`,
+  mp4: `/work/aria-flow-${theme}.mp4`,
+  poster: `/work/aria-flow-${theme}.webp`,
+});
+
+/** The Aria recording: the case study's first figure, and the picture on the home Work list. */
+export const ariaFlow = {
+  kind: "video",
+  id: "aria-flow",
+  light: clip("light"),
+  dark: clip("dark"),
+  label:
+    "Aria’s Asset Dashboard, then the Asset Depreciations and Balances report. Its start date moves from 1 January to 1 April, and the period depreciation recalculates from ₹8,84,770 to ₹6,36,468.",
+  caption:
+    "From the Asset Management dashboard to the depreciation report, which recalculates when its start date moves to 1 April, the start of India’s financial year. Recorded from Aria’s production build. Demo data.",
+  width: 1920,
+  height: 1080,
+} satisfies CaseFigure;
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -56,7 +86,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Co-founder and the only engineer, Pivotr",
     when: { label: "June 2025 – September 2026", from: "2025-06", to: "2026-09" },
     published: "2026-10-27",
-    updated: "2026-10-27",
+    updated: "2026-11-05",
     stack: [
       "TypeScript",
       "NestJS",
@@ -84,14 +114,7 @@ export const caseStudies: CaseStudy[] = [
         "Built inventory proofs of concept around prospective customers’ real workflows.",
       ],
       figures: [
-        {
-          kind: "image",
-          src: ariaAssetLight,
-          darkSrc: ariaAssetDark,
-          alt: "Aria’s Asset Dashboard: summary cards for total asset value (₹58 lakh), active assets (11), maintenance due (3) and pending adjustments (1), a monthly depreciation trend chart, and a donut chart of 14 assets by status.",
-          caption:
-            "The Asset Management dashboard: asset value, depreciation, maintenance and status on one screen. Demo data.",
-        },
+        ariaFlow,
         {
           kind: "image",
           src: ariaInventoryLight,
@@ -117,7 +140,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Sole developer",
     when: { label: "October 2026", from: "2026-10" },
     published: "2026-10-27",
-    updated: "2026-10-27",
+    updated: "2026-11-05",
     stack: [
       "TypeScript",
       "Bun",
@@ -180,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Author and maintainer",
     when: { label: "October 2026", from: "2026-10" },
     published: "2026-10-27",
-    updated: "2026-10-27",
+    updated: "2026-11-05",
     stack: ["Rust", "jiff", "Python (PyO3)", "WebAssembly", "TypeScript"],
     links: [
       { href: "https://workclock.karthik.nz/docs/", label: "Read the docs" },
@@ -239,7 +262,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Creator and maintainer",
     when: { label: "October 2026 – now", from: "2026-10" },
     published: "2026-10-27",
-    updated: "2026-10-27",
+    updated: "2026-11-05",
     stack: [
       "TypeScript",
       "React",
@@ -290,6 +313,10 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 export type Slug = "aria" | "job-matcher" | "workclock" | "blinkql";
+
+/** The case study a home Work row links to, if any. */
+export const caseStudyAt = (href: string | undefined) =>
+  caseStudies.find((study) => `/work/${study.slug}` === href);
 
 export function getCaseStudy(slug: Slug): CaseStudy {
   const study = caseStudies.find((item) => item.slug === slug);

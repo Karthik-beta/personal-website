@@ -12,6 +12,7 @@ import {
   reviewTime,
   stars,
 } from "@/lib/open-source/words";
+import { readingLabel, readingMinutes } from "@/lib/reading-time";
 import { site } from "@/lib/site";
 
 // Markdown versions of the pages, for AI assistants and agents (docs/design/14-agent-access.md).
@@ -208,7 +209,7 @@ function caseSection(title: string, section: CaseSection) {
     ...(section.paragraphs ?? []),
     section.points?.map((point) => `- ${point}`).join("\n"),
     ...(section.figures ?? []).map((figure) =>
-      figure.kind === "image" ? `_${figure.caption}_` : undefined,
+      figure.kind === "placeholder" ? undefined : `_${figure.caption}_`,
     ),
   ).trimEnd();
 }
@@ -220,6 +221,7 @@ async function caseStudyMarkdown(study: CaseStudy) {
     [
       `- **Role:** ${study.role}`,
       `- **When:** ${study.when.label}`,
+      `- ${readingLabel(readingMinutes(study))}`,
       `- **Stack:** ${study.stack.join(", ")}`,
       `- **Links:** ${links(study.links)}`,
     ].join("\n"),
