@@ -7,7 +7,7 @@ import { track } from "@/lib/track";
 
 // Two analytics tools, both production only, both only on the real domain: Vercel's
 // per-deployment addresses (*.vercel.app) serve the same build and would otherwise show up as
-// extra hosts in the dashboards.
+// extra hosts in the dashboards. A browser that has visited `?notrack` loads neither (ADR 0030).
 // - Cloudflare Web Analytics (ADR 0011): cookie-free visit counts and real-visitor speed data.
 // - Google Tag Manager (ADR 0028), which loads Google Analytics 4 (ADR 0015) and the X pixel
 //   (ADR 0029). Enhanced measurement (set in the GA property) records page views on client-side
@@ -18,6 +18,30 @@ const cfToken = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 const siteHost = new URL(site.url).hostname;
 const subscribe = () => () => {};
+
+// Karthik's own browsers opt out of analytics (ADR 0030): `?notrack` on any page remembers the
+// choice in this browser, `?track` clears it. The parameter is then removed from the address
+// bar. Worked out once per page load. If storage is blocked, tracking stays on.
+const optOutKey = "karthik.nz:notrack";
+let optedOut: boolean | undefined;
+
+function isOptedOut() {
+  if (optedOut !== undefined) return optedOut;
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.has("notrack")) localStorage.setItem(optOutKey, "1");
+    if (url.searchParams.has("track")) localStorage.removeItem(optOutKey);
+    if (url.searchParams.has("notrack") || url.searchParams.has("track")) {
+      url.searchParams.delete("notrack");
+      url.searchParams.delete("track");
+      window.history.replaceState(window.history.state, "", url);
+    }
+    optedOut = localStorage.getItem(optOutKey) === "1";
+  } catch {
+    optedOut = false;
+  }
+  return optedOut;
+}
 
 // Sends an event for clicks on email links, the resume, and anything marked `data-track`.
 function trackClick(event: MouseEvent) {
@@ -47,12 +71,12 @@ function trackPlay(event: Event) {
 }
 
 export function Analytics() {
-  const onSiteHost = useSyncExternalStore(
+  const trackable = useSyncExternalStore(
     subscribe,
-    () => window.location.hostname === siteHost,
+    () => window.location.hostname === siteHost && !isOptedOut(),
     () => false,
   );
-  const enabled = process.env.NODE_ENV === "production" && onSiteHost;
+  const enabled = process.env.NODE_ENV === "production" && trackable;
 
   useEffect(() => {
     if (!enabled || !gtmId) return;
