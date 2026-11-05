@@ -22,6 +22,10 @@ and couldn't tell which ad visitors went on to read, open the resume or get in t
   script) and the hosts it reports to: `analytics.x.com`, `analytics.twitter.com` and `t.co`.
   These were read from `uwt.js` itself.
 - **In GTM**, one X tag loads the pixel on All Pages. The duplicate copy is removed.
+- **Two X conversion events** (both type Custom, created in X Events Manager) are sent from GTM
+  on the site's existing data-layer events: "Resume viewed" (`tw-ri4iu-rik1z`) on
+  `resume_open` or `resume_download`, and "Contact" (`tw-ri4iu-rik21`) on `email_click` or
+  `email_copy`. X can then report which ad clicks led to a resume view or contact.
 - **`/privacy`** gains an "X (Twitter) pixel" section with a link to X's ad preferences. The
   intro no longer says the data is never used for ads, because the X pixel exists to measure
   ads.
