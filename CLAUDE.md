@@ -71,6 +71,7 @@ file fully before doing anything in this repo.
 | [0027](docs/decisions/0027-leading-readers-into-case-studies.md) | Aria recording on the home Work list; reading times; "Keep reading" ends; GA events for case-study opens, reads, plays         |
 | [0028](docs/decisions/0028-google-tag-manager.md)                | GTM container (`NEXT_PUBLIC_GTM_ID`) replaces gtag.js and loads GA4; strict CSP lists each tag's hosts                         |
 | [0029](docs/decisions/0029-x-pixel.md)                           | X pixel (`ri4iu`) allowed in the CSP and disclosed on `/privacy`; LinkedIn Insight Tag dropped; Apollo stays blocked           |
+| [0030](docs/decisions/0030-owner-opt-out.md)                     | `?notrack` on any page stops all analytics in that browser (localStorage); `?track` turns it back on                           |
 
 ## Conventions
 
@@ -110,7 +111,8 @@ file fully before doing anything in this repo.
 - **Analytics (ADR 0028):** Google Tag Manager loads GA4 and the X pixel (ADR 0029); the
   container ID is `NEXT_PUBLIC_GTM_ID` in Vercel. Events go through `track()` in
   `src/lib/track.ts`. A new `data-track` name must also be added to the GA4 Event trigger's regex
-  in GTM, and a new GTM tag's hosts to the CSP.
+  in GTM, and a new GTM tag's hosts to the CSP. Karthik's browsers opt out with `?notrack`
+  (ADR 0030).
 - **Case studies:** content in `src/content/case-studies.ts`; one static route per study in
   `src/app/work/<slug>/` (not a `[slug]` route: with Cache Components it can't return a real 404).
 - **Shared UI:** `src/components/ui/` (button, text link, container), `src/components/site/`.

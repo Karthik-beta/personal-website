@@ -37,6 +37,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0027: Leading readers into the case studies](decisions/0027-leading-readers-into-case-studies.md)
 - [0028: Google Tag Manager loads Google Analytics and LinkedIn](decisions/0028-google-tag-manager.md)
 - [0029: The X pixel runs on karthik.nz; the LinkedIn tag is dropped](decisions/0029-x-pixel.md)
+- [0030: Karthik's own visits opt out with `?notrack`](decisions/0030-owner-opt-out.md)
 
 ## Research (local only, gitignored)
 
