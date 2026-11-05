@@ -188,8 +188,11 @@ both.
 **Google Analytics 4** (free, [ADR 0015](../decisions/0015-google-analytics.md)), for clicks and
 behaviour.
 
-- Loaded the same way as the Cloudflare beacon: production only, on karthik.nz only, after the page
-  is interactive, with the measurement ID in `NEXT_PUBLIC_GA_ID`.
+- Loaded through Google Tag Manager ([ADR 0028](../decisions/0028-google-tag-manager.md)), the
+  same way as the Cloudflare beacon: production only, on karthik.nz only, after the page is
+  interactive, with the container ID in `NEXT_PUBLIC_GTM_ID`. GTM also loads the LinkedIn Insight
+  Tag. Events go to the data layer through `src/lib/track.ts`, and one GA4 Event tag in GTM
+  forwards them.
 - Enhanced measurement records page views (including client-side navigation), outbound clicks,
   scrolling and PDF opens. The site adds `resume_open` (a link to `/resume`), `resume_download`, `email_click` and
   `email_copy`; any element

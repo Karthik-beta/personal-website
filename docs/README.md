@@ -22,7 +22,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0012: Brand assets generated in code](decisions/0012-assets-generated-in-code.md)
 - [0013: Search visibility and security headers](decisions/0013-search-and-security-headers.md)
 - [0014: The resume opens in a new tab](decisions/0014-resume-opens-in-new-tab.md) (superseded by 0016)
-- [0015: Google Analytics for clicks and behaviour](decisions/0015-google-analytics.md)
+- [0015: Google Analytics for clicks and behaviour](decisions/0015-google-analytics.md) (loading updated by 0028)
 - [0016: The resume is a page, with evidence beside each line](decisions/0016-resume-as-a-page.md)
 - [0017: An open-source page with live data](decisions/0017-open-source-page.md)
 - [0018: Contributions as a status ledger; activity from 1 October](decisions/0018-contributions-ledger-and-activity.md)
@@ -35,6 +35,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0025: "Ask your AI about me" links](decisions/0025-ask-your-ai.md)
 - [0026: Quoting a recommendation in the story](decisions/0026-quoting-a-recommendation.md)
 - [0027: Leading readers into the case studies](decisions/0027-leading-readers-into-case-studies.md)
+- [0028: Google Tag Manager loads Google Analytics and LinkedIn](decisions/0028-google-tag-manager.md)
 
 ## Research (local only, gitignored)
 

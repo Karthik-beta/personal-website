@@ -1,6 +1,6 @@
 # 0015: Google Analytics for clicks and behaviour
 
-- Status: Accepted
+- Status: Accepted; how GA is loaded is updated by [0028](0028-google-tag-manager.md)
 - Date: 2026-10-31
 
 ## Context
