@@ -1,5 +1,6 @@
 // The home page's words. Facts only from the approved story and the projects' own READMEs. The
 // components in src/components/home render them, and /index.md is built from them.
+import { ariaFlow } from "@/content/case-studies";
 
 /** A sentence that opens with a bold run: "**30+ customer deployments** across two companies". */
 export type Lead = { strong: string; rest: string };
@@ -29,6 +30,8 @@ export type Project = {
   summary: string;
   stack: string[];
   links: { href: string; label: string }[];
+  /** A recording shown under the row (Aria only, ADR 0027). */
+  clip?: typeof ariaFlow;
 };
 
 const gh = (repo: string) => `https://github.com/Karthik-beta/${repo}`;
@@ -135,6 +138,7 @@ export const home = {
         title: "Aria (Pivotr)",
         href: "/work/aria",
         years: "2025 – 2026",
+        clip: ariaFlow,
         summary:
           "The asset and inventory modules of a modular B2B ERP, built from data model to deployment. The Asset Management module went through 12 customer deployments.",
         stack: ["TypeScript", "NestJS", "tRPC", "Prisma", "PostgreSQL", "Next.js", "Docker"],

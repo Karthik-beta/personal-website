@@ -1,6 +1,9 @@
+import { Clip } from "@/components/site/clip";
 import { ProjectEntry } from "@/components/site/project-entry";
 import { Container } from "@/components/ui/container";
+import { caseStudyAt } from "@/content/case-studies";
 import { home } from "@/content/home";
+import { readingLabel, readingMinutes } from "@/lib/reading-time";
 import { MarginGrid } from "./margin-grid";
 
 export function Work() {
@@ -17,11 +20,30 @@ export function Work() {
           </div>
         </MarginGrid>
         <div className="grid">
-          {work.projects.map(({ years, ...project }) => (
-            <MarginGrid key={project.title} margin={years} className="border-t border-rule py-6">
-              <ProjectEntry {...project} framed={false} />
-            </MarginGrid>
-          ))}
+          {work.projects.map(({ years, clip, ...project }) => {
+            const study = caseStudyAt(project.href);
+            const minutes = study && readingMinutes(study);
+            return (
+              <MarginGrid
+                key={project.title}
+                margin={
+                  <span className="grid">
+                    <span>{years}</span>
+                    {minutes && <span>{readingLabel(minutes)}</span>}
+                  </span>
+                }
+                className="border-t border-rule py-6"
+              >
+                <ProjectEntry
+                  {...project}
+                  media={clip && <Clip {...clip} caption={undefined} />}
+                  readingMinutes={minutes}
+                  placement="home_work"
+                  framed={false}
+                />
+              </MarginGrid>
+            );
+          })}
         </div>
       </Container>
     </section>
