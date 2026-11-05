@@ -5,14 +5,16 @@ import { type ComponentType, useEffect, useState } from "react";
 import { buttonClasses } from "@/components/ui/button";
 import { MenuLabel } from "./menu-label";
 
-// The Base UI dialog is only needed on phones, and only once someone opens the menu, so its
-// code isn't part of the initial page load (docs/design/11-performance-and-seo.md).
+// The Base UI dialog is only needed on phones, so its code isn't part of the initial page load
+// (docs/design/11-performance-and-seo.md): it loads once the page is idle, or on the first tap.
 //
 // Not React.lazy: lazy() starts its own import on first render and suspends even when the code is
 // already downloaded, and React then holds the Suspense reveal for ~300 ms. Keeping the loaded
 // component here lets a tap render it in the same frame.
-let loadedDialog: ComponentType | null = null;
-let loading: Promise<ComponentType> | null = null;
+type DialogComponent = ComponentType<{ defaultOpen?: boolean }>;
+
+let loadedDialog: DialogComponent | null = null;
+let loading: Promise<DialogComponent> | null = null;
 
 function loadDialog() {
   loading ??= import("./mobile-menu-dialog")
@@ -36,30 +38,44 @@ function MenuButton(props: React.ComponentProps<"button">) {
 }
 
 export function MobileMenu() {
-  const [Dialog, setDialog] = useState<ComponentType | null>(null);
+  const [dialog, setDialog] = useState<{ Dialog: DialogComponent; open: boolean } | null>(null);
   const [waiting, setWaiting] = useState(false);
 
-  // On phones there's no hover to warm the menu up, so fetch it once the page is idle.
+  // On phones there's no hover to warm the menu up, so once the page is idle, fetch it and mount it
+  // closed. Mounting it costs a few hundred milliseconds on a mid-range phone: done here, a tap
+  // only has to open it.
   useEffect(() => {
     if (!window.matchMedia("(max-width: 47.99rem)").matches) return;
+    let cancelled = false;
+    const mount = () =>
+      void loadDialog().then(
+        (Dialog) => !cancelled && setDialog((current) => current ?? { Dialog, open: false }),
+        () => {},
+      );
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(preload, { timeout: 3000 });
-      return () => cancelIdleCallback(id);
+      const id = requestIdleCallback(mount, { timeout: 3000 });
+      return () => {
+        cancelled = true;
+        cancelIdleCallback(id);
+      };
     }
-    const id = setTimeout(preload, 1500);
-    return () => clearTimeout(id);
+    const id = setTimeout(mount, 1500);
+    return () => {
+      cancelled = true;
+      clearTimeout(id);
+    };
   }, []);
 
-  if (Dialog) return <Dialog />;
+  if (dialog) return <dialog.Dialog defaultOpen={dialog.open} />;
 
   function open() {
     if (loadedDialog) {
-      setDialog(() => loadedDialog);
+      setDialog({ Dialog: loadedDialog, open: true });
       return;
     }
     setWaiting(true);
     loadDialog().then(
-      (component) => setDialog(() => component),
+      (Dialog) => setDialog({ Dialog, open: true }),
       () => setWaiting(false),
     );
   }

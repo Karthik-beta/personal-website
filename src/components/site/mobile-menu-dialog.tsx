@@ -1,21 +1,49 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
-import { Menu, X } from "lucide-react";
+import { LoaderCircle, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { buttonClasses } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 import { nav, navCurrent } from "@/lib/site";
 import { MenuLabel } from "./menu-label";
 
-/** Loaded on demand by <MobileMenu>; opens immediately on first mount. */
-export default function MobileMenuDialog() {
-  const [open, setOpen] = useState(true);
+/**
+ * Loaded on demand by <MobileMenu>: mounted closed once the phone is idle, or open straight away
+ * if someone taps the menu before then.
+ */
+export default function MobileMenuDialog({ defaultOpen = false }: { defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const [pending, setPending] = useState<string | null>(null);
   const pathname = usePathname();
 
+  // A tap on a link to another page keeps the menu open, with that link marked as loading, until
+  // the new page is in place. Closing at once left the old page on screen for a second or two on
+  // slower phones, which read as a tap that hadn't worked.
+  const [shownPath, setShownPath] = useState(pathname);
+  if (pathname !== shownPath) {
+    setShownPath(pathname);
+    setOpen(false);
+    setPending(null);
+  }
+
+  function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    // Same page (a section of it): nothing to wait for, so close and let it scroll.
+    if (new URL(href, window.location.href).pathname === pathname) setOpen(false);
+    else setPending(href);
+  }
+
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setPending(null);
+      }}
+    >
       <Dialog.Trigger className={buttonClasses("quiet", "md:hidden")}>
         {open ? (
           <X aria-hidden size={18} strokeWidth={1.75} />
@@ -30,18 +58,35 @@ export default function MobileMenuDialog() {
           <Dialog.Title className="sr-only">Site menu</Dialog.Title>
           <nav aria-label="Main">
             <ul>
-              {nav.map((item) => (
-                <li key={item.href} className="border-b border-rule last:border-b-0">
-                  <Link
-                    href={item.href}
-                    aria-current={navCurrent(item.href, pathname)}
-                    onClick={() => setOpen(false)}
-                    className="flex min-h-14 items-center text-xl font-semibold stretch-title decoration-2 underline-offset-[0.25em] aria-[current]:underline"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {nav.map((item) => {
+                const loading = pending === item.href;
+                return (
+                  <li key={item.href} className="border-b border-rule last:border-b-0">
+                    <Link
+                      href={item.href}
+                      aria-current={navCurrent(item.href, pathname)}
+                      aria-busy={loading || undefined}
+                      onClick={(event) => onLinkClick(event, item.href)}
+                      className={cn(
+                        "flex min-h-14 items-center justify-between gap-4 text-xl font-semibold stretch-title decoration-2 underline-offset-[0.25em] aria-[current]:underline",
+                        loading && "underline",
+                      )}
+                    >
+                      {item.label}
+                      {/* Always rendered, so showing it doesn't move anything. */}
+                      <LoaderCircle
+                        aria-hidden
+                        size={20}
+                        strokeWidth={1.75}
+                        className={cn(
+                          "shrink-0 text-muted transition-opacity motion-safe:animate-spin",
+                          loading ? "opacity-100" : "opacity-0",
+                        )}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </Dialog.Popup>
