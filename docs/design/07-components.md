@@ -96,10 +96,33 @@ Read the case study      Code on GitHub
 - The title links to the case study. The whole row isn't one giant link, so each link reads
   clearly to screen readers.
 - Hover on the title link: underline thickens. No lift, no shadow.
+- A row with a case study shows "N min read" under its years in the margin, and its link reads
+  "Read the case study, N min" (ADR 0027).
+- Aria's row, and only Aria's, carries the Aria recording (see Clip) between the stack and the
+  links, at most `max-w-3xl` wide. One picture on the list, on the strongest story.
+
+## Clip
+
+A screen recording in a `<figure>`, with the same `surface` background, `rule` border and 8 px
+radius as Figure. A light and a dark take swap with the theme, like Figure's `darkSrc`.
+
+- Plays only when the visitor presses play: native controls, muted, looping, `playsInline`. No
+  autoplay (design 09: nothing moves on its own).
+- `preload="none"` with a poster frame, so the page weighs the same until play. AV1 WebM first,
+  H.264 MP4 as the fallback.
+- `aria-label` says what happens in the recording; the caption says where it came from.
+- `data-track-video` names it for GA's `video_play` event.
 
 ## Case-study meta
 
-A `<dl>` like the facts row: Role, When, Stack, Links.
+A `<dl>` like the facts row: Role, When, Stack, Links. The time margin beside it holds the dates
+and "N min read".
+
+## Keep reading (end of a case study)
+
+The other three case studies, next first, as rows like the Work list: the title link and its
+reading time on one line, the summary in `muted` under it, `rule` lines between rows. Then "Read
+the resume" and "Get in touch". It replaces the single "Next case study" link (ADR 0027).
 
 ## Figure
 

@@ -68,6 +68,7 @@ file fully before doing anything in this repo.
 | [0024](docs/decisions/0024-mcp-registry-listing.md)              | MCP Registry listing `nz.karthik/karthik-parameshwara`, proven by `/.well-known/mcp-registry-auth`; `bun run mcp:registry`     |
 | [0025](docs/decisions/0025-ask-your-ai.md)                       | "Ask your AI" links (ChatGPT, Claude, Perplexity) with a prefilled prompt, on Contact and `/resume`; no client JS              |
 | [0026](docs/decisions/0026-quoting-a-recommendation.md)          | Two sentences of Prashanth's LinkedIn recommendation in the Pivotr chapter, credited and linked; separate look from own quotes |
+| [0027](docs/decisions/0027-leading-readers-into-case-studies.md) | Aria recording on the home Work list; reading times; "Keep reading" ends; GA events for case-study opens, reads, plays         |
 
 ## Conventions
 
@@ -128,6 +129,12 @@ file fully before doing anything in this repo.
 - **"Ask your AI" links (ADR 0025):** assistants and MCP install details in `src/lib/ask-ai.ts`,
   words and prompts in `src/content/ask-ai.ts`, rendered by `src/components/site/ask-ai.tsx` on
   Contact and `/resume`. Server components only: keep it free of client JavaScript.
+- **Case-study reach (ADR 0027):** reading time in `src/lib/reading-time.ts`; "Keep reading" in
+  `src/components/case-study/case-study-page.tsx`; the Aria recording is `ariaFlow` in
+  `src/content/case-studies.ts`, files in `public/work/`, rendered by
+  `src/components/site/clip.tsx`. GA events: `data-track` + `data-track-placement` on links,
+  `src/components/site/track-view.tsx` for reads, `data-track-video` for plays. Re-record the clip
+  only from Aria's production demo, with no customer names or factory screens in frame.
 - **MCP Registry (ADR 0024):** `server.json` at the root; publish with `bun run mcp:registry` after
   the deploy is live. The private key is `~/.mcp-registry/karthik-nz-ed25519.pem` on Karthik's PC,
   never in the repo. Raise `version` in `server.json` for every update.

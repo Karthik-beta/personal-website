@@ -34,6 +34,7 @@ One short file per approved decision. See [decisions/README.md](decisions/README
 - [0024: Listing the MCP server in the official MCP Registry](decisions/0024-mcp-registry-listing.md)
 - [0025: "Ask your AI about me" links](decisions/0025-ask-your-ai.md)
 - [0026: Quoting a recommendation in the story](decisions/0026-quoting-a-recommendation.md)
+- [0027: Leading readers into the case studies](decisions/0027-leading-readers-into-case-studies.md)
 
 ## Research (local only, gitignored)
 
