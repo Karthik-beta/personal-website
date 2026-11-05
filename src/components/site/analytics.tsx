@@ -9,8 +9,8 @@ import { track } from "@/lib/track";
 // per-deployment addresses (*.vercel.app) serve the same build and would otherwise show up as
 // extra hosts in the dashboards.
 // - Cloudflare Web Analytics (ADR 0011): cookie-free visit counts and real-visitor speed data.
-// - Google Tag Manager (ADR 0028), which loads Google Analytics 4 (ADR 0015) and the LinkedIn
-//   Insight Tag. Enhanced measurement (set in the GA property) records page views on client-side
+// - Google Tag Manager (ADR 0028), which loads Google Analytics 4 (ADR 0015) and the X pixel
+//   (ADR 0029). Enhanced measurement (set in the GA property) records page views on client-side
 //   navigation, outbound clicks, scrolling and PDF opens; the listeners below add the events it
 //   can't see: clicks on email links, the resume and anything marked `data-track` (with
 //   `data-track-placement` for where on the page), and plays of any `<video data-track-video>`.

@@ -20,8 +20,9 @@ export default function Privacy() {
           <div className="grid max-w-[65ch] gap-4">
             <h1 className="text-3xl font-semibold stretch-heading">Privacy</h1>
             <p className="text-lg">
-              I use three analytics tools to learn which pages and projects people find useful, so I
-              can keep improving the site. I never sell this data or use it for ads.
+              I use three analytics tools to learn which pages and projects people find useful, and
+              which posts and ads bring them here, so I can keep improving the site. I never sell
+              this data.
             </p>
 
             <h2 className="mt-6 text-xl font-semibold stretch-heading">Google Analytics</h2>
@@ -41,17 +42,14 @@ export default function Privacy() {
               .
             </p>
 
-            <h2 className="mt-6 text-xl font-semibold stretch-heading">LinkedIn Insight Tag</h2>
+            <h2 className="mt-6 text-xl font-semibold stretch-heading">X (Twitter) pixel</h2>
             <p>
-              LinkedIn&rsquo;s tag uses cookies to show me, in total, what kinds of companies,
-              industries and job titles the site&rsquo;s visitors have. It never shows me individual
-              visitors. You can turn it off in your{" "}
-              <TextLink href="https://www.linkedin.com/psettings/guest-controls/retargeting-opt-out">
-                LinkedIn ad settings
-              </TextLink>
-              , and LinkedIn explains how it uses this data in its{" "}
-              <TextLink href="https://www.linkedin.com/legal/cookie-policy">cookie policy</TextLink>
-              .
+              X&rsquo;s pixel uses cookies to tell me whether people who came from my posts or ads
+              on X went on to read the site, open the resume or get in touch. X may also use it to
+              choose which ads to show you. You can turn that off in your{" "}
+              <TextLink href="https://x.com/settings/ads_preferences">X ad preferences</TextLink>,
+              and X explains how it uses this data in its{" "}
+              <TextLink href="https://x.com/en/privacy">privacy policy</TextLink>.
             </p>
 
             <h2 className="mt-6 text-xl font-semibold stretch-heading">Cloudflare Web Analytics</h2>

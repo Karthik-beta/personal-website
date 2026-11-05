@@ -12,16 +12,16 @@ const isDev = process.env.NODE_ENV === "development";
 // - Google: the hosts Google lists for GTM and a GA4 tag, plus www.google.com, which the tag also
 //   sends each hit to. tagmanager.google.com, the gstatic hosts and Google Fonts are for GTM's
 //   preview mode only.
-// - LinkedIn Insight Tag: snap.licdn.com serves it; it reports to px.ads.linkedin.com, which can
-//   redirect to www.linkedin.com.
+// - X (Twitter) pixel (ADR 0029): static.ads-twitter.com serves uwt.js; it reports to
+//   analytics.x.com, analytics.twitter.com and t.co.
 // A new tag in GTM from any other host is blocked until its hosts are added here.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com https://www.googletagmanager.com https://tagmanager.google.com https://snap.licdn.com`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com https://www.googletagmanager.com https://tagmanager.google.com https://static.ads-twitter.com`,
   "style-src 'self' 'unsafe-inline' https://tagmanager.google.com https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com https://ssl.gstatic.com https://www.gstatic.com https://px.ads.linkedin.com https://www.linkedin.com",
+  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com https://ssl.gstatic.com https://www.gstatic.com https://analytics.x.com https://analytics.twitter.com https://t.co",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://px.ads.linkedin.com https://www.linkedin.com",
+  "connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://analytics.x.com https://analytics.twitter.com https://t.co",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
